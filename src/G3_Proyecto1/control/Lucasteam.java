@@ -25,17 +25,17 @@ public class Lucasteam {
             switch (Datos.recogeInt()) {
                 case 1:
                     //IMPORTAR LISTADO DE JUEGOS
-                    services.setListado();
+                    //services.setListado();
                     break;
 
                 case 2:
                     //LISTAR TODOS LOS JUEGOS
-                    services.listarJuegos();
+                    //services.listarJuegos();
                     break;
 
                 case 3:
                     //FILTRAR POR GENERO PLATAFORMA
-                    services.filtrarByGenrePlatform();
+                    //services.filtrarByGenrePlatform();
                     break;
 
                 case 4:
