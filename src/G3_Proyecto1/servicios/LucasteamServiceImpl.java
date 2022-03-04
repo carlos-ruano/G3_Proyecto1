@@ -18,10 +18,20 @@ public class LucasteamServiceImpl implements LucasteamService {
 	public void listarJuegos() {
 		coleccionJuegos.listarJuegos();
 	}
+	@Override
+	public Juego getByRank(int rank) {
+		
+		return coleccionJuegos.getByRank(rank);
+	}
 
 	@Override
-	public void filtrarByGenrePlatform() {
-		coleccionJuegos.filtrarByGenrePlatform();
+	public void filtrarByPlatform(String platform) {
+		coleccionJuegos.filtrarByPlatform(platform);
+	}
+	
+	@Override 
+	public void filtrarByGenre(String genre) {
+		coleccionJuegos.filtrarByGenre(genre);
 	}
 
 	@Override
