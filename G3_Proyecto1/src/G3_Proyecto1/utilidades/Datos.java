@@ -1,4 +1,4 @@
-package proyecto1_lucatic.utilidades;
+package G3_Proyecto1.utilidades;
 
 /**
  *

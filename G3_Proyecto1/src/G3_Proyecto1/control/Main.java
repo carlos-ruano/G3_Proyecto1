@@ -1,4 +1,4 @@
-package proyecto1_lucatic.control;
+package G3_Proyecto1.control;
 
 
 public class Main {

@@ -1,4 +1,4 @@
-package proyecto1_lucatic.excepciones;
+package G3_Proyecto1.excepciones;
 
 public class ColeccionJuegoException extends Exception {
 

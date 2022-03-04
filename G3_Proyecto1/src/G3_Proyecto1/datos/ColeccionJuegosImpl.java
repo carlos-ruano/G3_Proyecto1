@@ -1,4 +1,4 @@
-package proyecto1_lucatic.datos;
+package G3_Proyecto1.datos;
 
 public class ColeccionJuegosImpl implements ColeccionJuegos {
 

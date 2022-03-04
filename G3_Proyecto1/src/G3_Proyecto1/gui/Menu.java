@@ -1,4 +1,4 @@
-package proyecto1_lucatic.gui;
+package G3_Proyecto1.gui;
 
 /**
  *
