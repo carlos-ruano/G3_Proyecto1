@@ -20,45 +20,22 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	@Override
-	public void filtrarByPlatform(String platform) {
-		try {
-			for(Juego j : coleccionJuegos.listado)
-			{
-				if(j.getPlatform().name() == platform)
-				{
-					System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
-									+", año de publicación: "+j.getYear()+", editor: "+j.getPublisher()
-									+", su ranking es: "+j.getRank());
-				}
-			}
-		} catch (ColeccionJuegosException e) {
-			
-		}
-		
-		
-	}
-	
-	@Override
-	public void filtrarByPlatform(String genre) {
-		for(Juego j : coleccionJuegos.listado)
-		{
-			if(j.getPlatform().name() == platform)
-			{
-				System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
-								+", año de publicación: "+j.getYear()+", editor: "+j.getPublisher());
-			}
-		}
-		
+	public void filtrarByGenrePlatform() {
+		coleccionJuegos.filtrarByGenrePlatform();
 	}
 
 	@Override
 	public boolean addJuego() throws ColeccionJuegosException {
-		return false;
+
+		Juego juego = new Juego();
+		juego.createJuego();
+		return this.addJuego(juego);
 	}
 
 	@Override
-	public boolean addJuego(Juego J) throws ColeccionJuegosException {
-		return false;
+	public boolean addJuego(Juego juego) throws ColeccionJuegosException {
+		//return coleccionJuegos.addJuego(juego,(int)coleccionJuegos.getLastRank());
+		return coleccionJuegos.addJuego(juego);
 	}
 
 }
