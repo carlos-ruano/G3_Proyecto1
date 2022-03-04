@@ -1,5 +1,8 @@
 package G3_Proyecto1.modelos;
 
+
+import G3_Proyecto1.utilidades.Datos;
+
 public class Juego {
 
 	private int rank;
@@ -61,7 +64,24 @@ public class Juego {
 		return "Juego [rank=" + rank + ", name=" + name + ", platform=" + platform + ", year=" + year + ", genre="
 				+ genre + ", publisher=" + publisher + "]";
 	}
+	public void createJuego() {
+		try {
+			//ranking para hacer pruebas
+			this.rank = Datos.recogeInt("Introduce el numero de ranking");
+            this.name = Datos.recogeString("Introduce el nombre del juego");
+            EnumPlatform.Informe2();
+            this.platform = EnumPlatform.dimeCategoria(Datos.recogeInt());
+            this.year = Datos.recogeInt("Introduce el año");
+            EnumGenre.Informe2();
+            this.genre = EnumGenre.dimeCategoria(Datos.recogeInt());
+            this.publisher = Datos.recogeString("Introduce el nombre del editor");
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
+		
+	}
 	
 	
 	
-}
+

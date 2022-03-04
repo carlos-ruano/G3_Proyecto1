@@ -21,20 +21,21 @@ public class LucasteamServiceImpl implements LucasteamService {
 
 	@Override
 	public void filtrarByGenrePlatform() {
-		// TODO Auto-generated method stub
-		
+		coleccionJuegos.filtrarByGenrePlatform();
 	}
 
 	@Override
 	public boolean addJuego() throws ColeccionJuegosException {
-		// TODO Auto-generated method stub
-		return false;
+
+		Juego juego = new Juego();
+		juego.createJuego();
+		return this.addJuego(juego);
 	}
 
 	@Override
-	public boolean addJuego(Juego J) throws ColeccionJuegosException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean addJuego(Juego juego) throws ColeccionJuegosException {
+		//return coleccionJuegos.addJuego(juego,(int)coleccionJuegos.getLastRank());
+		return coleccionJuegos.addJuego(juego);
 	}
 
 }
