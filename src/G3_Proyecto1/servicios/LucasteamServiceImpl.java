@@ -22,11 +22,11 @@ public class LucasteamServiceImpl implements LucasteamService {
 	@Override
 	public void filtrarByGenrePlatform() {
 		coleccionJuegos.filtrarByGenrePlatform();
-		
 	}
 
 	@Override
 	public boolean addJuego() throws ColeccionJuegosException {
+
 		Juego juego = new Juego();
 		juego.createJuego();
 		return this.addJuego(juego);

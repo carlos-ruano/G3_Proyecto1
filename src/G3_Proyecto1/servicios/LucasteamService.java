@@ -7,7 +7,8 @@ public interface LucasteamService {
 	
 	public void setListado();
 	public void listarJuegos();
-	public void filtrarByGenrePlatform();
+	public void filtrarByPlatform(String genre);
+	public void filtrarByGenre(String platfrom);
 	public boolean addJuego() throws ColeccionJuegosException;
 	public boolean addJuego(Juego J) throws ColeccionJuegosException;
 }
