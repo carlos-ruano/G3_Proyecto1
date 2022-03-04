@@ -5,7 +5,7 @@ import G3_Proyecto1.modelos.Juego;
 
 public interface LucasteamService {
 	
-	public void setListado();
+	public void setListado(String nombreFichero);
 	public void listarJuegos();
 	public void filtrarByPlatform(String genre);
 	public void filtrarByGenre(String platfrom);
