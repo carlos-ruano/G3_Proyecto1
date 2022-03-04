@@ -3,6 +3,7 @@ package G3_Proyecto1.datos;
 import java.util.HashSet;
 import java.util.Set;
 
+import G3_Proyecto1.excepciones.ColeccionJuegosException;
 import G3_Proyecto1.modelos.Juego;
 
 
@@ -54,16 +55,49 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			
 			System.out.println("Este juego no existe o la lista esta vacía."); 
 			
-		}
-
-		
+		}	
 	}
 
 	@Override
 	public Juego getByRank(int rank) {
-		
+		if(!listado.isEmpty()) {
+			for(Juego j : listado) {
+				if(j.getRank()==rank) return j;
+			}
+		}
 		return null;
 	} 
+	
+	public void filtrarByPlatform(String platform) {
+		if(!listado.isEmpty()) {
+			for(Juego j : listado)
+			{
+				if(j.getPlatform().name() == platform)
+				{
+					System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
+									+", año de publicación: "+j.getYear()+", editor: "+j.getPublisher()
+									+", su ranking es: "+j.getRank());
+				}
+			}
+		}
+	}
+	
+	public void filtrarByGenre(String genre) {
+		if(!listado.isEmpty()) {
+			for(Juego j : listado)
+			{
+				if(j.getGenre().name() == genre)
+				{
+					System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
+									+", año de publicación: "+j.getYear()+", editor: "+j.getPublisher()
+									+", su ranking es: "+j.getRank());
+				}
+			}
+		}
+	}
+		
+		
+	
 	
 	
 
