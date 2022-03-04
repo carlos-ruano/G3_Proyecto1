@@ -40,7 +40,7 @@ public class Lucasteam {
 
                 case 4:
                     //DAR DE ALTA UN JUEGO
-                    //services.addJuego();
+                    services.addJuego();
                     break;
 
                 case 0:
