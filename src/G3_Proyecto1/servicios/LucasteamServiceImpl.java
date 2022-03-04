@@ -20,20 +20,44 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	@Override
-	public void filtrarByGenrePlatform() {
-		// TODO Auto-generated method stub
+	public void filtrarByPlatform(String platform) {
+		try {
+			for(Juego j : coleccionJuegos.listado)
+			{
+				if(j.getPlatform().name() == platform)
+				{
+					System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
+									+", año de publicación: "+j.getYear()+", editor: "+j.getPublisher()
+									+", su ranking es: "+j.getRank());
+				}
+			}
+		} catch (ColeccionJuegosException e) {
+			
+		}
+		
+		
+	}
+	
+	@Override
+	public void filtrarByPlatform(String genre) {
+		for(Juego j : coleccionJuegos.listado)
+		{
+			if(j.getPlatform().name() == platform)
+			{
+				System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
+								+", año de publicación: "+j.getYear()+", editor: "+j.getPublisher());
+			}
+		}
 		
 	}
 
 	@Override
 	public boolean addJuego() throws ColeccionJuegosException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean addJuego(Juego J) throws ColeccionJuegosException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
