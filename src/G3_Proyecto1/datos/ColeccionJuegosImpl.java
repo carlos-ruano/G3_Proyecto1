@@ -74,7 +74,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		if(!listado.isEmpty()) {
 			for(Juego j : listado)
 			{
-				if(j.getPlatform().name() == platform)
+				if(j.getPlatform().name().compareToIgnoreCase(platform)==0)
 				{
 					System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
 									+", año de publicación: "+j.getYear()+", editor: "+j.getPublisher()
@@ -88,7 +88,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		if(!listado.isEmpty()) {
 			for(Juego j : listado)
 			{
-				if(j.getGenre().name() == genre)
+				if(j.getGenre().name().compareToIgnoreCase(genre)==0)
 				{
 					System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
 									+", año de publicación: "+j.getYear()+", editor: "+j.getPublisher()
@@ -97,6 +97,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			}
 		}
 	}
+	 
 		
 		
 	
