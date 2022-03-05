@@ -5,6 +5,7 @@ import java.util.Set;
 
 import G3_Proyecto1.excepciones.ColeccionJuegosException;
 import G3_Proyecto1.modelos.Juego;
+import G3_Proyecto1.utilidades.OperarCSV;
 
 
 public class ColeccionJuegosImpl implements ColeccionJuegos {
@@ -23,9 +24,10 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public Set<Juego> getListado() {
 		return listado;
 	}
-
-	public void setListado(Set<Juego> listado) {
-		this.listado = listado;
+	
+	public void setListado(String nombreFichero) {
+		// Llamamos a util.OperarCSV y nos devuelve el listado completo del CSV
+		this.listado = OperarCSV.readCSV(nombreFichero);
 	}
 
 	@Override
@@ -67,7 +69,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 		return null;
 	} 
-	
+	@Override
 	public void filtrarByPlatform(String platform) {
 		if(!listado.isEmpty()) {
 			for(Juego j : listado)
@@ -81,7 +83,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			}
 		}
 	}
-	
+	@Override
 	public void filtrarByGenre(String genre) {
 		if(!listado.isEmpty()) {
 			for(Juego j : listado)
