@@ -5,9 +5,11 @@ import java.util.Set;
 
 import G3_Proyecto1.excepciones.ColeccionJuegosException;
 import G3_Proyecto1.modelos.Juego;
+import G3_Proyecto1.utilidades.OperarCSV;
 
 
 public class ColeccionJuegosImpl implements ColeccionJuegos {
+	
 	
 	private Set <Juego> listado = new HashSet <Juego> ();
 	
@@ -23,25 +25,50 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public Set<Juego> getListado() {
 		return listado;
 	}
-
 	public void setListado(Set<Juego> listado) {
 		this.listado = listado;
 	}
-
+	
+	@Override
+	public void importarListado(String nombreFichero) {
+		// Llamamos a util.OperarCSV y nos devuelve el listado completo del CSV
+		this.listado = OperarCSV.readCSV(nombreFichero);
+	}
+	
+	@Override
+	public void mostrarListado() {
+		if(!listado.isEmpty()) {
+			for(Juego j : listado){
+					System.out.println(j.imprimir());
+			}
+		}
+		
+	}
+	
+	@Override
+	public void filtrarByGenre(String genre) {
+		if(!listado.isEmpty()) 
+		{
+			for(Juego j : listado)
+			{
+				if(j.getGenre().name().compareToIgnoreCase(genre)==0){
+					System.out.println(j.imprimir());
+				}
+			}
+		}
+	}
+	
+	@Override
+	public boolean addJuego(Juego juego) {
+		return listado.add(juego);
+	}
+	
 	@Override
 	public String toString() {
 		return "ColeccionJuegosImpl [listado=" + listado + "]";
 	}
-	
 
-	@Override
-	public void addJuego(Juego juego) {
-		
-		listado.add(juego);
-		
-	}
-
-
+	/*
 	@Override
 	public void deleteJuego(Juego juego) {
 		
@@ -57,6 +84,8 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			
 		}	
 	}
+	
+	
 
 	@Override
 	public Juego getByRank(int rank) {
@@ -67,12 +96,12 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 		return null;
 	} 
-	
+	@Override
 	public void filtrarByPlatform(String platform) {
 		if(!listado.isEmpty()) {
 			for(Juego j : listado)
 			{
-				if(j.getPlatform().name() == platform)
+				if(j.getPlatform().name().compareToIgnoreCase(platform)==0)
 				{
 					System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
 									+", año de publicación: "+j.getYear()+", editor: "+j.getPublisher()
@@ -82,20 +111,10 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 	}
 	
-	public void filtrarByGenre(String genre) {
-		if(!listado.isEmpty()) {
-			for(Juego j : listado)
-			{
-				if(j.getGenre().name() == genre)
-				{
-					System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
-									+", año de publicación: "+j.getYear()+", editor: "+j.getPublisher()
-									+", su ranking es: "+j.getRank());
-				}
-			}
-		}
-	}
-		
+	*/
+	
+
+	
 		
 	
 	

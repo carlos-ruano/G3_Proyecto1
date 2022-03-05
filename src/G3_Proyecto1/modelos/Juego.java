@@ -64,9 +64,18 @@ public class Juego {
 		return "Juego [rank=" + rank + ", name=" + name + ", platform=" + platform + ", year=" + year + ", genre="
 				+ genre + ", publisher=" + publisher + "]";
 	}
+	
+	public String imprimir() {
+		return "Juego: "+this.getName()+", Genero: "+this.getGenre().name()
+				+", año de publicación: "+this.getYear()+", editor: "+this.getPublisher()
+				+", su ranking es: "+this.getRank();
+	}
+	
+	
 	public void createJuego() {
 		try {
-			//ranking para hacer pruebas
+			//metemos el ranking para hacer pruebas, pero lo que habria que hacer es no pedirselo al usuario,
+			//sino detectar el ultimo numero de ranking en el array y sumarle 1 o algo asi
 			this.rank = Datos.recogeInt("Introduce el numero de ranking");
             this.name = Datos.recogeString("Introduce el nombre del juego");
             EnumPlatform.Informe2();
