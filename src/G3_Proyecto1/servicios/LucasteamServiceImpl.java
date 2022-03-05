@@ -10,8 +10,9 @@ public class LucasteamServiceImpl implements LucasteamService {
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
 
 	@Override
-	public void setListado() {
-		coleccionJuegos.setListado("vgsales.csv");
+	public void setListado(String nombreFichero) {
+		// Hacemos casting porque el metodo no esta en la interface de datos.
+		((ColeccionJuegosImpl) coleccionJuegos).setListado(nombreFichero);
 	}
 
 	@Override
