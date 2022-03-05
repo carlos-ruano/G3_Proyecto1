@@ -1,45 +1,79 @@
 package G3_Proyecto1.utilidades;
 
+import G3_Proyecto1.modelos.EnumGenre;
+import G3_Proyecto1.modelos.EnumPlatform;
+import G3_Proyecto1.modelos.Juego;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
-import java.io.IOException; // Import the IOException class to handle errors
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
 public class OperarCSV {
-	
+
 	private static final String SEPARADOR = "[,]";
-	
-	public static Set<Juego> LeerCSV(String nombreFichero) {
+
+	public static Set<Juego> readCSV(String nombreFichero) {
 
 		Set<Juego> listado = new HashSet<Juego>();
 
 		try {
-			// Abrir el .csv en buffer de lectura
+			// Abrir el .csv en un buffer de lectura
+			File f = new File(nombreFichero);
+			if (f.exists()){
 			BufferedReader bufferLectura = new BufferedReader(new FileReader(nombreFichero));
-
+			bufferLectura.readLine();
 			// Leer una linea del archivo
 			String linea = bufferLectura.readLine();
 
 			while (linea != null || linea == "") {
-				// Sepapar la linea leída con el separador definido previamente
-
+				// Separar la linea leida con el separador definido previamente
 				String[] campos = linea.split(SEPARADOR, 0);
-
-				Juego juego = new Juego(campos[0], campos[1], campos[2], campos[3], campos[4], campos[5]);
+				// Buscamos el enumerado correspondiente en cada linea del .CSV
+				// Separamos los dos unicos casos conflictivos del enumerado
+				
+				EnumPlatform platform = null;
+				if (campos[2].equalsIgnoreCase("3DO")) {
+					EnumPlatform platform1 = EnumPlatform.valueOf("_3DO");
+					platform=platform1;
+				} else if (campos[2].equalsIgnoreCase("3DS")) {
+					EnumPlatform platform1 = EnumPlatform.valueOf("_3DS");
+					platform=platform1;
+				} else if (campos[2].equalsIgnoreCase("2600")) {
+					EnumPlatform platform1 = EnumPlatform.valueOf("_2600");
+					platform=platform1;
+				}else {
+					platform  = EnumPlatform.valueOf(campos[2].toUpperCase());
+				}
+				
+				
+				EnumGenre genre = null;
+				if (campos[4].equalsIgnoreCase("Role-Playing")) {
+					EnumGenre genre1= EnumGenre.valueOf("ROLEPLAYING");
+					genre = genre1;
+				}else {
+					genre = EnumGenre.valueOf(campos[4].toUpperCase());
+				}
+				
+				Juego juego = new Juego(Integer.parseInt(campos[0]), campos[1], platform, Integer.parseInt(campos[3]),
+						genre, campos[5]);
 				listado.add(juego);
+
+				// Volver a leer otra linea del fichero
+				linea = bufferLectura.readLine();
 			}
-
-			// Volver a leer otra línea del fichero
-			linea = bufferLectura.readLine();
-			bufferLectura.close();
-
-		} catch (IOException e) {
+			bufferLectura.close(); // Cerramos el buffer
+			}
+		} catch (IOException | IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
-		
+
 		return listado;
+	}
+
+	public static void writeCSV(Set<Juego> listado) {
+		// Falta desarrollar cuerpo
 	}
 
 }
