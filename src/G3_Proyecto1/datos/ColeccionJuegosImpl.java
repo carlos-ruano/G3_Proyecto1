@@ -69,7 +69,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 		return null;
 	} 
-	
+	@Override
 	public void filtrarByPlatform(String platform) {
 		if(!listado.isEmpty()) {
 			for(Juego j : listado)
@@ -83,7 +83,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			}
 		}
 	}
-	
+	@Override
 	public void filtrarByGenre(String genre) {
 		if(!listado.isEmpty()) {
 			for(Juego j : listado)
