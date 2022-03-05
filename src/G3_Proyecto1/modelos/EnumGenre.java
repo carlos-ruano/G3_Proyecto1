@@ -2,7 +2,7 @@ package G3_Proyecto1.modelos;
 
 public enum EnumGenre {
 
-	ACTION(1), 
+	ACTION(1),  
 	ADVENTURE(2), 
 	FIGHTING(3), 
 	MISC(4), 
