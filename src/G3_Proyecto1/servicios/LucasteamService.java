@@ -9,6 +9,7 @@ public interface LucasteamService {
 	public void listarJuegos();
 	public void filtrarByPlatform(String genre);
 	public void filtrarByGenre(String platfrom);
+	public Juego getByRank(int rank);
 	public boolean addJuego() throws ColeccionJuegosException;
 	public boolean addJuego(Juego J) throws ColeccionJuegosException;
 }

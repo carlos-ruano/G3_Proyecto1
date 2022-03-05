@@ -20,8 +20,8 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 	@Override
 	public Juego getByRank(int rank) {
-		
 		return coleccionJuegos.getByRank(rank);
+		
 	}
 
 	@Override
