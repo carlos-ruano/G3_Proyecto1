@@ -5,10 +5,12 @@ import G3_Proyecto1.modelos.Juego;
 
 public interface LucasteamService {
 	
-	public void setListado();
-	public void listarJuegos();
-	public void filtrarByPlatform(String genre);
-	public void filtrarByGenre(String platfrom);
+	public void importarListado();
+	public void mostrarListado();
+	public void filtrarByGenrePlatform();
+	public void filtrarByGenre();
 	public boolean addJuego() throws ColeccionJuegosException;
 	public boolean addJuego(Juego J) throws ColeccionJuegosException;
+	//public void filtrarByPlatform();
+	//public Juego getByRank(int rank);
 }
