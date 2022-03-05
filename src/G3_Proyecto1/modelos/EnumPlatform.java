@@ -58,7 +58,7 @@ public enum EnumPlatform {
         	EnumPlatform.values = EnumPlatform.values();
         }
         //System.out.println("--> " + Categorias.values[val]);
-        return EnumPlatform.values[val];
+        return EnumPlatform.values[val-1];
     }
     
     public static void Informe1() {
