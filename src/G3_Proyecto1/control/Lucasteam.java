@@ -35,7 +35,7 @@ public class Lucasteam {
 
                 case 3:
                     //FILTRAR POR GENERO PLATAFORMA (servicio ya te lo da)
-                    //services.filtrarByGenrePlatform();
+                    services.filtrarByGenrePlatform();
                     break;
                     
                 case 4:

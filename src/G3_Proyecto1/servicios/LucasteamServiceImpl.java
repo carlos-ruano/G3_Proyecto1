@@ -15,7 +15,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	@Override
 	public void importarListado() {
 		// Hacemos casting porque el metodo no esta en la interface de datos.
-		((ColeccionJuegosImpl) coleccionJuegos).importarListado("vgsales2.csv");
+		((ColeccionJuegosImpl) coleccionJuegos).importarListado("vgsales.csv");
 	}
 
 	@Override
