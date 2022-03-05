@@ -66,9 +66,10 @@ public class Juego {
 	}
 	
 	public String imprimir() {
-		return "Juego: "+this.getName()+", Genero: "+this.getGenre().name()
-				+", año de publicación: "+this.getYear()+", editor: "+this.getPublisher()
-				+", su ranking es: "+this.getRank();
+		return this.getRank()+": "+this.getName()+", Platform: "
+				+this.getPlatform().name()+", Año: "
+				+this.getYear()+", Género: "+this.getGenre().name()
+				+", Editor: "+this.getPublisher();
 	}
 	
 	

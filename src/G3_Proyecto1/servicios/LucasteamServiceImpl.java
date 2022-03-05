@@ -16,6 +16,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	public void importarListado() {
 		// Hacemos casting porque el metodo no esta en la interface de datos.
 		((ColeccionJuegosImpl) coleccionJuegos).importarListado("vgsales.csv");
+		System.out.println("Listado importado ");
 	}
 
 	@Override
@@ -31,6 +32,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	
 	@Override 
 	public void filtrarByGenre() {
+		System.out.println("Seleccione el número de género a buscar:");
 		EnumGenre.Informe2();
         try {
 			this.genre = EnumGenre.dimeCategoria(Datos.recogeInt());
