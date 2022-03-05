@@ -34,7 +34,8 @@ public enum EnumPlatform {
 	WS(28), 
 	X360(29), 
 	XB(30), 
-	XONE(31);
+	XONE(31),
+	_2600(32);
 	
 	private final int codigo;
     private static final int size = EnumPlatform.values().length;
