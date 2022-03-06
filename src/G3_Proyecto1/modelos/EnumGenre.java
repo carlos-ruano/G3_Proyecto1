@@ -36,7 +36,7 @@ public enum EnumGenre {
         	EnumGenre.values = EnumGenre.values();
         }
         //System.out.println("--> " + Categorias.values[val]);
-        return EnumGenre.values[val];
+        return EnumGenre.values[val-1];
     }
     
     public static void Informe1() {

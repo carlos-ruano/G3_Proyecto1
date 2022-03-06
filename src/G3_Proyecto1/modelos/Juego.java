@@ -8,13 +8,13 @@ public class Juego {
 	private int rank;
 	private String name;
 	private EnumPlatform platform;
-	private int year;
+	private String year;
 	private EnumGenre genre; //Cambiar en UML tiene puesto que es clase String
 	private String publisher;
 	public Juego() {
 		super();
 	}
-	public Juego(int rank, String name, EnumPlatform platform, int year, EnumGenre genre, String publisher) {
+	public Juego(int rank, String name, EnumPlatform platform, String year, EnumGenre genre, String publisher) {
 		super();
 		this.rank = rank;
 		this.name = name;
@@ -41,10 +41,10 @@ public class Juego {
 	public void setPlatform(EnumPlatform platform) {
 		this.platform = platform;
 	}
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 	public EnumGenre getGenre() {
@@ -66,9 +66,10 @@ public class Juego {
 	}
 	
 	public String imprimir() {
-		return "Juego: "+this.getName()+", Genero: "+this.getGenre().name()
-				+", año de publicación: "+this.getYear()+", editor: "+this.getPublisher()
-				+", su ranking es: "+this.getRank();
+		return this.getRank()+": "+this.getName()+", Platform: "
+				+this.getPlatform().name()+", Año: "
+				+this.getYear()+", Género: "+this.getGenre().name()
+				+", Editor: "+this.getPublisher();
 	}
 	
 	
@@ -80,7 +81,7 @@ public class Juego {
             this.name = Datos.recogeString("Introduce el nombre del juego");
             EnumPlatform.Informe2();
             this.platform = EnumPlatform.dimeCategoria(Datos.recogeInt());
-            this.year = Datos.recogeInt("Introduce el año");
+            this.year = String.valueOf(Datos.recogeInt("Introduce el año"));
             EnumGenre.Informe2();
             this.genre = EnumGenre.dimeCategoria(Datos.recogeInt());
             this.publisher = Datos.recogeString("Introduce el nombre del editor");

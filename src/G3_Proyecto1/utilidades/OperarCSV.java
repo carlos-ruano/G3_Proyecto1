@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class OperarCSV {
 
-	private static final String SEPARADOR = "[,]";
+	private static final String SEPARADOR = ",(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"; // Ignora los juegos con entrecomillados conflictivos
 
 	public static Set<Juego> readCSV(String nombreFichero) {
 
@@ -56,7 +56,7 @@ public class OperarCSV {
 					genre = EnumGenre.valueOf(campos[4].toUpperCase());
 				}
 				
-				Juego juego = new Juego(Integer.parseInt(campos[0]), campos[1], platform, Integer.parseInt(campos[3]),
+				Juego juego = new Juego(Integer.parseInt(campos[0]), campos[1], platform, campos[3],
 						genre, campos[5]);
 				listado.add(juego);
 
