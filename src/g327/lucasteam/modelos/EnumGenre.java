@@ -1,4 +1,4 @@
-package G3_Proyecto1.modelos;
+package g327.lucasteam.modelos;
 
 public enum EnumGenre {
 

@@ -1,4 +1,4 @@
-package G3_Proyecto1.gui;
+package g327.lucasteam.gui;
 
 /**
  *
