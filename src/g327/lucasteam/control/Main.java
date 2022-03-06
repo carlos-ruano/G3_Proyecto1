@@ -1,4 +1,4 @@
-package G3_Proyecto1.control;
+package g327.lucasteam.control;
 
 
 public class Main {

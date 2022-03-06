@@ -1,6 +1,6 @@
-package G3_Proyecto1.datos;
+package g327.lucasteam.datos;
 
-import G3_Proyecto1.modelos.Juego;
+import g327.lucasteam.modelos.Juego;
 
 public interface ColeccionJuegos {
 	
