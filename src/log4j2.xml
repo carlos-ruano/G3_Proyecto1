@@ -18,7 +18,7 @@
         </Console>
     </Appenders>
     <Loggers>
-     
+     	<!-- Restriccion del logger para g327.lucasteam.control -->
         <!-- Restriccion del logger para g327.lucasteam.control -->
         <Logger name="g327.lucasteam.control" level="debug" additivity="false">
 			<appender-ref ref="console" level="debug" />
