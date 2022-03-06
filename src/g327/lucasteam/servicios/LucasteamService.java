@@ -1,7 +1,7 @@
-package G3_Proyecto1.servicios;
+package g327.lucasteam.servicios;
 
-import G3_Proyecto1.excepciones.ColeccionJuegosException;
-import G3_Proyecto1.modelos.Juego;
+import g327.lucasteam.excepciones.ColeccionJuegosException;
+import g327.lucasteam.modelos.Juego;
 
 public interface LucasteamService {
 	

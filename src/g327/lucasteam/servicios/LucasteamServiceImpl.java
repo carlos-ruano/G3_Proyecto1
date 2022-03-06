@@ -1,11 +1,11 @@
-package G3_Proyecto1.servicios;
+package g327.lucasteam.servicios;
 
-import G3_Proyecto1.datos.ColeccionJuegos;
-import G3_Proyecto1.datos.ColeccionJuegosImpl;
-import G3_Proyecto1.excepciones.ColeccionJuegosException;
-import G3_Proyecto1.modelos.EnumGenre;
-import G3_Proyecto1.modelos.Juego;
-import G3_Proyecto1.utilidades.Datos;
+import g327.lucasteam.datos.ColeccionJuegos;
+import g327.lucasteam.datos.ColeccionJuegosImpl;
+import g327.lucasteam.excepciones.ColeccionJuegosException;
+import g327.lucasteam.modelos.EnumGenre;
+import g327.lucasteam.modelos.Juego;
+import g327.lucasteam.utilidades.Datos;
 
 public class LucasteamServiceImpl implements LucasteamService {
 	

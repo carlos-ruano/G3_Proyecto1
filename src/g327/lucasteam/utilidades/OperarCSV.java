@@ -1,14 +1,15 @@
-package G3_Proyecto1.utilidades;
+package g327.lucasteam.utilidades;
 
-import G3_Proyecto1.modelos.EnumGenre;
-import G3_Proyecto1.modelos.EnumPlatform;
-import G3_Proyecto1.modelos.Juego;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+
+import g327.lucasteam.modelos.EnumGenre;
+import g327.lucasteam.modelos.EnumPlatform;
+import g327.lucasteam.modelos.Juego;
 
 public class OperarCSV {
 
