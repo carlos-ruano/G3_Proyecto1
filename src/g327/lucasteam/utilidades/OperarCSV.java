@@ -1,8 +1,5 @@
-package G3_Proyecto1.utilidades;
+package g327.lucasteam.utilidades;
 
-import G3_Proyecto1.modelos.EnumGenre;
-import G3_Proyecto1.modelos.EnumPlatform;
-import G3_Proyecto1.modelos.Juego;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,10 +7,30 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import g327.lucasteam.modelos.EnumGenre;
+import g327.lucasteam.modelos.EnumPlatform;
+import g327.lucasteam.modelos.Juego;
+
+/**
+ * Mediante esta clase se conseguirá leer los '<b>.CSV</b>' del proyecto y sobreescribir cualquier otro '<b>.CSV</b>'.
+ * @see  <a href="https://github.com/carlos-ruano/G3_Proyecto1">
+ *      GitHub G3_Proyecto1</a>
+ * @author Equipo 3
+ * @version 0.1
+ *
+ */
+
 public class OperarCSV {
 
-	private static final String SEPARADOR = "[,]";
+	private static final String SEPARADOR = ",(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"; // Ignora los juegos con entrecomillados conflictivos
 
+	/**
+	 * Mediante esta función se consigue leer un archivo '<b>.CSV</b>' mediante la adición de los parámetros a los atributos de los objetos
+	 * "Juego" instanciados hasta terminar todas las líneas e introduciéndolos en un listado de tipo '<b>Set</b>'.
+	 * @param nombreFichero
+	 *			Se pasa el nombre del fichero deseado por parámetro.
+	 * @return Una colección de juegos de tipo '<b>Set</b>'.
+	 */
 	public static Set<Juego> readCSV(String nombreFichero) {
 
 		Set<Juego> listado = new HashSet<Juego>();
@@ -56,7 +73,7 @@ public class OperarCSV {
 					genre = EnumGenre.valueOf(campos[4].toUpperCase());
 				}
 				
-				Juego juego = new Juego(Integer.parseInt(campos[0]), campos[1], platform, Integer.parseInt(campos[3]),
+				Juego juego = new Juego(Integer.parseInt(campos[0]), campos[1], platform, campos[3],
 						genre, campos[5]);
 				listado.add(juego);
 
@@ -72,6 +89,15 @@ public class OperarCSV {
 		return listado;
 	}
 
+	/**
+	 * Tras proceder a introducir un juego nuevo en la lista, modificar alguno existente y/o precargar el archivo .CSV, se
+	 * finaliza con una sobrescritura del archivo .csv deseado.
+	 * @param listado
+	 * 			Se pasa por parámetro la lista cargada/editada.
+	 * @param nombreFichero
+	 * 			Se le pasa el nombre deaseado para crear el nuevo '<b>.CSV</b>'.
+	 * @throws IOException Si se produce una excepción de Entrada/Salida.
+	 */
 	public static void writeCSV(Set<Juego> listado) {
 		// Falta desarrollar cuerpo
 	}

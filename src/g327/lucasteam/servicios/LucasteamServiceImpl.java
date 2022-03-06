@@ -1,12 +1,14 @@
-package G3_Proyecto1.servicios;
+package g327.lucasteam.servicios;
 
-import G3_Proyecto1.datos.ColeccionJuegos;
-import G3_Proyecto1.datos.ColeccionJuegosImpl;
-import G3_Proyecto1.excepciones.ColeccionJuegosException;
-import G3_Proyecto1.modelos.EnumGenre;
-import G3_Proyecto1.modelos.Juego;
-import G3_Proyecto1.utilidades.Datos;
+import g327.lucasteam.datos.ColeccionJuegos;
+import g327.lucasteam.datos.ColeccionJuegosImpl;
+import g327.lucasteam.excepciones.ColeccionJuegosException;
+import g327.lucasteam.modelos.EnumGenre;
+import g327.lucasteam.modelos.Juego;
+import g327.lucasteam.utilidades.Datos;
+import lombok.extern.java.Log;
 
+@Log // Invocamos al logger de log4j2
 public class LucasteamServiceImpl implements LucasteamService {
 	
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
@@ -15,7 +17,9 @@ public class LucasteamServiceImpl implements LucasteamService {
 	@Override
 	public void importarListado() {
 		// Hacemos casting porque el metodo no esta en la interface de datos.
-		((ColeccionJuegosImpl) coleccionJuegos).importarListado("vgsales2.csv");
+		String nombreArchivo = "vgsales.csv";
+		((ColeccionJuegosImpl) coleccionJuegos).importarListado(nombreArchivo);
+		log.info("Listado importado del archivo "+nombreArchivo); // Hacemos loggin .info al importar listado,
 	}
 
 	@Override
@@ -31,6 +35,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	
 	@Override 
 	public void filtrarByGenre() {
+		System.out.println("Seleccione el número de género a buscar:");
 		EnumGenre.Informe2();
         try {
 			this.genre = EnumGenre.dimeCategoria(Datos.recogeInt());
