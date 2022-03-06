@@ -1,9 +1,9 @@
-package G3_Proyecto1.control;
+package g327.lucasteam.control;
 
-import G3_Proyecto1.servicios.LucasteamService;
-import G3_Proyecto1.servicios.LucasteamServiceImpl;
-import G3_Proyecto1.utilidades.Datos;
-import G3_Proyecto1.gui.Menu;
+import g327.lucasteam.gui.Menu;
+import g327.lucasteam.servicios.LucasteamService;
+import g327.lucasteam.servicios.LucasteamServiceImpl;
+import g327.lucasteam.utilidades.Datos;
 public class Lucasteam {
 	
 	private LucasteamService services = new LucasteamServiceImpl();

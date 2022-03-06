@@ -1,4 +1,4 @@
-package G3_Proyecto1.utilidades.tests;
+package g327.lucasteam.utilidades.tests;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 import org.junit.jupiter.api.Test;
 
-import G3_Proyecto1.utilidades.Datos;
+import g327.lucasteam.utilidades.Datos;
 
 class TestDatos {
 

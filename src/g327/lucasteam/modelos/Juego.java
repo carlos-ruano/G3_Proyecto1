@@ -1,9 +1,9 @@
-package G3_Proyecto1.modelos;
+package g327.lucasteam.modelos;
 
+import g327.lucasteam.utilidades.Datos;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import G3_Proyecto1.utilidades.Datos;
 
 public@Data @NoArgsConstructor @AllArgsConstructor class Juego {
 

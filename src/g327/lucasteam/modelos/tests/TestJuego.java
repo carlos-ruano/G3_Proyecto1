@@ -1,4 +1,4 @@
-package G3_Proyecto1.modelos.tests;
+package g327.lucasteam.modelos.tests;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,9 +6,9 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import G3_Proyecto1.modelos.EnumGenre;
-import G3_Proyecto1.modelos.EnumPlatform;
-import G3_Proyecto1.modelos.Juego;
+import g327.lucasteam.modelos.EnumGenre;
+import g327.lucasteam.modelos.EnumPlatform;
+import g327.lucasteam.modelos.Juego;
 
 class TestJuego {
 	
