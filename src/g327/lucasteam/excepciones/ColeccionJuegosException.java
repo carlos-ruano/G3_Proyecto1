@@ -1,4 +1,4 @@
-package G3_Proyecto1.excepciones;
+package g327.lucasteam.excepciones;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

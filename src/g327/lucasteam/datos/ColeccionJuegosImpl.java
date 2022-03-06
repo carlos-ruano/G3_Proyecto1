@@ -1,11 +1,11 @@
-package G3_Proyecto1.datos;
+package g327.lucasteam.datos;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import G3_Proyecto1.excepciones.ColeccionJuegosException;
-import G3_Proyecto1.modelos.Juego;
-import G3_Proyecto1.utilidades.OperarCSV;
+import g327.lucasteam.excepciones.ColeccionJuegosException;
+import g327.lucasteam.modelos.Juego;
+import g327.lucasteam.utilidades.OperarCSV;
 
 
 public class ColeccionJuegosImpl implements ColeccionJuegos {
@@ -39,7 +39,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public void mostrarListado() {
 		if(!listado.isEmpty()) {
 			for(Juego j : listado){
-					System.out.println(j.imprimir());
+					System.out.println(j);
 			}
 		}
 		
