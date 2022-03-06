@@ -1,14 +1,13 @@
 package g327.lucasteam.excepciones;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 public class ColeccionJuegosException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	private Level level;
+	// private Level level;
 
 	public ColeccionJuegosException() {
 	}
@@ -24,15 +23,15 @@ public class ColeccionJuegosException extends Exception {
 	public ColeccionJuegosException(String message, Throwable cause) {
 		super(message, cause);
 	}
-	
+
 	// 1: ERROR
 	// 2: WARNING
 	// 3: INFO
 	public ColeccionJuegosException(String message, int tipo) {
 		super(message);
-		setLevel(tipo);
-	}	
-
+		//setLevel(tipo);
+	}
+	/*
 	public void setLevel(int tipo) {
 
 		switch (tipo) {
@@ -50,10 +49,12 @@ public class ColeccionJuegosException extends Exception {
 			break;
 		}
 	}
+	*/
 
 	@Override
 	public String toString() {
-		Logger.getLogger(ColeccionJuegosException.class.getName()).log(level, null, super.getMessage());
+		// Logger.getLogger(ColeccionJuegosException.class.getName()).log(level, null,
+		// super.getMessage());
 		return super.getMessage();
 	}
 

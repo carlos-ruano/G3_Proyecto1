@@ -6,9 +6,9 @@ import g327.lucasteam.excepciones.ColeccionJuegosException;
 import g327.lucasteam.modelos.EnumGenre;
 import g327.lucasteam.modelos.Juego;
 import g327.lucasteam.utilidades.Datos;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 
-@Log // Invocamos al logger de log4j2
+@Log4j2
 public class LucasteamServiceImpl implements LucasteamService {
 	
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
@@ -19,7 +19,6 @@ public class LucasteamServiceImpl implements LucasteamService {
 		// Hacemos casting porque el metodo no esta en la interface de datos.
 		String nombreArchivo = "vgsales.csv";
 		((ColeccionJuegosImpl) coleccionJuegos).importarListado(nombreArchivo);
-		log.info("Listado importado del archivo "+nombreArchivo); // Hacemos loggin .info al importar listado,
 	}
 
 	@Override
@@ -40,8 +39,7 @@ public class LucasteamServiceImpl implements LucasteamService {
         try {
 			this.genre = EnumGenre.dimeCategoria(Datos.recogeInt());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		coleccionJuegos.filtrarByGenre(genre.name());
 	}

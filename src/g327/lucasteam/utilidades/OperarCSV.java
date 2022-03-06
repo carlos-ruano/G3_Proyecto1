@@ -10,6 +10,7 @@ import java.util.Set;
 import g327.lucasteam.modelos.EnumGenre;
 import g327.lucasteam.modelos.EnumPlatform;
 import g327.lucasteam.modelos.Juego;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Mediante esta clase se conseguirá leer los '<b>.CSV</b>' del proyecto y sobreescribir cualquier otro '<b>.CSV</b>'.
@@ -20,6 +21,7 @@ import g327.lucasteam.modelos.Juego;
  *
  */
 
+@Log4j2
 public class OperarCSV {
 
 	private static final String SEPARADOR = ",(?=(?:[^\\\"]*\\\"[^\\\"]*\\\")*[^\\\"]*$)"; // Ignora los juegos con entrecomillados conflictivos
@@ -82,8 +84,19 @@ public class OperarCSV {
 			}
 			bufferLectura.close(); // Cerramos el buffer
 			}
-		} catch (IOException | IllegalArgumentException | ArrayIndexOutOfBoundsException e) {
-			e.printStackTrace();
+			else {
+				log.error("El archivo '"+nombreFichero+"' no existe, revise el nombre de nuevo.");
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+		finally {
+			if(listado.isEmpty()) {
+				log.warn("No se ha podido importar ningún juego."); // Si el Set está vacío
+			}
+			else {
+				log.info("El archivo '"+nombreFichero+"' ha sido importado correctamente"); // Si el Set no está vacío
+			}
 		}
 
 		return listado;
@@ -95,7 +108,7 @@ public class OperarCSV {
 	 * @param listado
 	 * 			Se pasa por parámetro la lista cargada/editada.
 	 * @param nombreFichero
-	 * 			Se le pasa el nombre deaseado para crear el nuevo '<b>.CSV</b>'.
+	 * 			Se le pasa el nombre deseado para crear el nuevo '<b>.CSV</b>'.
 	 * @throws IOException Si se produce una excepción de Entrada/Salida.
 	 */
 	public static void writeCSV(Set<Juego> listado) {
