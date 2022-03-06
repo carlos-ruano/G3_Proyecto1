@@ -39,7 +39,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public void mostrarListado() {
 		if(!listado.isEmpty()) {
 			for(Juego j : listado){
-					System.out.println(j.imprimir());
+					System.out.println(j);
 			}
 		}
 		
