@@ -6,7 +6,9 @@ import g327.lucasteam.excepciones.ColeccionJuegosException;
 import g327.lucasteam.modelos.EnumGenre;
 import g327.lucasteam.modelos.Juego;
 import g327.lucasteam.utilidades.Datos;
+import lombok.extern.java.Log;
 
+@Log // Invocamos al logger de log4j2
 public class LucasteamServiceImpl implements LucasteamService {
 	
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
@@ -15,8 +17,9 @@ public class LucasteamServiceImpl implements LucasteamService {
 	@Override
 	public void importarListado() {
 		// Hacemos casting porque el metodo no esta en la interface de datos.
-		((ColeccionJuegosImpl) coleccionJuegos).importarListado("vgsales.csv");
-		System.out.println("Listado importado ");
+		String nombreArchivo = "vgsales.csv";
+		((ColeccionJuegosImpl) coleccionJuegos).importarListado(nombreArchivo);
+		log.info("Listado importado del archivo "+nombreArchivo); // Hacemos loggin .info al importar listado,
 	}
 
 	@Override
