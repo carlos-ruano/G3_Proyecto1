@@ -35,4 +35,22 @@ public class Menu {
 		System.out.print(">> ");
 
 	}
+	
+	public static void mostrarMenuEdit() {
+		System.out.println(" ");
+		System.out.println(" LUCASTEAM");
+		System.out.println(" ");
+		System.out.println("************************************************");
+		System.out.println("*  Por favor, escoge una opcion: ");
+		System.out.println("*    1.-Cambiar el Rank");
+		System.out.println("*    2.-Cambiar el Nombre");
+		System.out.println("*    3.-Cambiar la Plataforma");
+		System.out.println("*    4.-Cambiar el Año");
+		System.out.println("*    5.-Cambiar el Genero");
+		System.out.println("*    6.-Cambiar la Editora");
+		System.out.println("*    0.-Terminar editar Juego");
+		System.out.println("************************************************");
+		System.out.println(" ");
+		System.out.print(">> ");
+	}
 }
