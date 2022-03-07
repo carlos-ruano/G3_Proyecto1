@@ -72,8 +72,6 @@ class TestColeccionJuegosImpl {
 		//Then:
 		assertThat(x).isEqualTo(16598);
 		assertThat(x).isNotEqualTo(0);
-		
-
 	}
 	
 	@Test
