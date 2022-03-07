@@ -22,6 +22,8 @@ public interface LucasteamService {
 
 	public void filtrarByGenre();
 	
+	public void getListaPublisher();
+
 	public void buscarJuegoByName();
 	
 	public boolean addJuego() throws ColeccionJuegosException;

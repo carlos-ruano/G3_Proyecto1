@@ -90,12 +90,35 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
+	 * Mediante el uso de esta función se llama a a la capa datos para
+	 * que genere la lista de editores si repetir por medio de un Set y
+	 * se devuelve para imprimirlas por pantalla, contabilizando el total
+	 * de editores únicos en el archivo .CSV
+	 * 
+	 * @throws Exception
+	 */
+	public void getListaPublisher() {
+		int i = 0;
+		
+		try {
+			for (String publisher : coleccionJuegos.getListaPublisher()) {
+					System.out.println(publisher);
+					i++;
+			}
+			log.info("Hay un total de "+i+" editores listados");
+			
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+	}
+	
+	/**
 	 * Mediante esta funcion se sobreescribe el metodo addJuego para añadirlo a la
 	 * coleccion juego
 	 * 
 	 * @param juego Se pasa el valor de juego a añadir a la coleccion
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para aï¿½adirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
 	 *         coleccion
 	 */
 	@Override
