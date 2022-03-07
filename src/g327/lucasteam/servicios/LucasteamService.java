@@ -21,10 +21,13 @@ public interface LucasteamService {
 	public void filtrarByGenrePlatform();
 
 	public void filtrarByGenre();
-
+	
+	public void buscarJuegoByName();
+	
 	public boolean addJuego() throws ColeccionJuegosException;
-
+	
 	public boolean addJuego(Juego J) throws ColeccionJuegosException;
+	public boolean deleteJuego() throws ColeccionJuegosException;
 	// public void filtrarByPlatform();
 	// public Juego getByRank(int rank);
 }

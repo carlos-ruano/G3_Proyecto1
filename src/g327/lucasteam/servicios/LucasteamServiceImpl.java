@@ -113,6 +113,39 @@ public class LucasteamServiceImpl implements LucasteamService {
 		// return coleccionJuegos.addJuego(juego,(int)coleccionJuegos.getLastRank());
 		return coleccionJuegos.addJuego(juego);
 	}
+	@Override
+	public void buscarJuegoByName() {
+		try {
+			String name = Datos.recogeString("¿Cual es el nombre del juego que desea buscar?");
+			if(name=="" || name==null) {
+				throw new ColeccionJuegosException("Error en el nombre entrado!");
+			}else {
+				coleccionJuegos.buscarJuegoByName(name);
+			}
+		} catch (ColeccionJuegosException e) {
+			// TODO: handle exception
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public boolean deleteJuego() {
+		boolean estado = false;
+		try {
+			int rank = Datos.recogeInt("¿Cual es el numero de rank del juego que desea borrar?");
+			if(rank<0 || rank>16598)
+				throw new ColeccionJuegosException("El numero de rank que ústed ha elegido no existe");
+			else {
+				estado = coleccionJuegos.deleteJuego(rank);
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return estado;
+	}
 	/*
 	 * @Override public Juego getByRank(int rank) { return
 	 * coleccionJuegos.getByRank(rank);
