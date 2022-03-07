@@ -32,18 +32,18 @@ public @Data @NoArgsConstructor @AllArgsConstructor @Log4j2 class Juego {
 	}
 
 	/**
-	 * Mediante esta función se imprime por pantalla los datos del objeto Juego
+	 * Mediante esta funcion se imprime por pantalla los datos del objeto Juego
 	 */
 	public String imprimir() {
-		return this.getRank() + ": " + this.getName() + ", Platform: " + this.getPlatform().name() + ", Año: "
-				+ this.getYear() + ", Género: " + this.getGenre().name() + ", Editor: " + this.getPublisher();
+		return this.getRank() + ": " + this.getName() + ", Platform: " + this.getPlatform().name() + ", Ano: "
+				+ this.getYear() + ", Genero: " + this.getGenre().name() + ", Editor: " + this.getPublisher();
 	}
 
 	/**
-	 * Mediante esta función recogemos los datos que llevara Juego, preguntando por
+	 * Mediante esta funcion recogemos los datos que llevara Juego, preguntando por
 	 * consola y recogiendolos.
 	 * 
-	 * @param nombreFichero Se pasa el nombre del fichero deseado por parámetro.
+	 * @param nombreFichero Se pasa el nombre del fichero deseado por parametro.
 	 * @exception recogemos los errores que dan por consola
 	 */
 	public void createJuego() {
@@ -58,7 +58,7 @@ public @Data @NoArgsConstructor @AllArgsConstructor @Log4j2 class Juego {
 				this.name = Datos.recogeString("Introduce el nombre del juego");
 				EnumPlatform.Informe2();
 				this.platform = EnumPlatform.dimeCategoria(Datos.recogeInt());
-				this.year = String.valueOf(Datos.recogeInt("Introduce el año"));
+				this.year = String.valueOf(Datos.recogeInt("Introduce el ano"));
 				EnumGenre.Informe2();
 				this.genre = EnumGenre.dimeCategoria(Datos.recogeInt());
 				this.publisher = Datos.recogeString("Introduce el nombre del editor");
