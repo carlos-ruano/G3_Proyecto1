@@ -185,7 +185,40 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public String toString() {
 		return "ColeccionJuegosImpl [listado=" + listado + "]";
 	}
-
+	@Override
+	public void buscarJuegoByName(String name) {
+		try {
+			if(listado.isEmpty())
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
+			else {
+				for(Juego j : listado) {
+					if(j.getName().contains(name)) {
+						System.out.println(j);
+					}
+				}
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		}
+		
+	}
+	@Override
+	public boolean deleteJuego(int rank) {
+		boolean estado = false;
+		try {
+			for(Juego j : listado) {
+				if(j.getRank()==rank)
+					estado= listado.remove(j);
+				else {
+					throw new ColeccionJuegosException("La lista no contiene ningun juego con este numero de rank");
+				}
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		}
+		return estado;
+	}
+	
 	/*
 	 * @Override public void deleteJuego(Juego juego) {
 	 * 
