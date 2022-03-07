@@ -128,6 +128,39 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
+	 * Mediante este metodo iteramos la coleccion listado para sacar por consola los
+	 * objetos. juegos con el editor dado
+	 * 
+	 * @param publisher Se pasa el nombre del editor deseado por parametro.
+	 */
+	@Override
+	public void filtrarByPublisher(String publisher) {
+
+		try {
+			if (!listado.isEmpty()) {
+
+				for (Juego j : listado) {
+
+					if (j.getPlatform().name().compareToIgnoreCase(publisher) == 0) {
+
+						testListado.add(j);
+						System.out.println(j.imprimir());
+
+					}
+
+				}
+
+			} else {
+
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
+
+			}
+		} catch (ColeccionJuegosException e) {
+
+			log.warn(e.getMessage());
+
+		}
+
 	 * Metodo para editar el juego que quieras.
 	 * 
 	 * @param rank   Se el id del juego que esta en la coleccion Juegos.

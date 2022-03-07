@@ -4,6 +4,7 @@ import g327.lucasteam.datos.ColeccionJuegos;
 import g327.lucasteam.datos.ColeccionJuegosImpl;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
 import g327.lucasteam.modelos.EnumGenre;
+import g327.lucasteam.modelos.EnumPlatform;
 import g327.lucasteam.modelos.Juego;
 import g327.lucasteam.utilidades.Datos;
 import lombok.extern.log4j.Log4j2;
@@ -23,9 +24,10 @@ public class LucasteamServiceImpl implements LucasteamService {
 
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
 	private EnumGenre genre;
+	private String publisher;
 
 	/**
-	 * Mediante esta funcion aï¿½aden los datos recogidos en operarCSV y se aï¿½aden a
+	 * Mediante esta funcion añaden los datos recogidos en operarCSV y se añaden a
 	 * la  coleccion de juegos
 	 */
 	@Override
@@ -76,7 +78,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 * juego
 	 * 
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para aï¿½adirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
 	 *         coleccion
 	 */
 	@Override
@@ -88,10 +90,10 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta funcion se sobreescribe el metodo addJuego para aï¿½adirlo a la
+	 * Mediante esta funcion se sobreescribe el metodo addJuego para añadirlo a la
 	 * coleccion juego
 	 * 
-	 * @param juego Se pasa el valor de juego a aï¿½adir a la coleccion
+	 * @param juego Se pasa el valor de juego a añadir a la coleccion
 	 * @throws Exception
 	 * @return addJuego(juego) El juego que pasaron por teclado para aï¿½adirlo a la
 	 *         coleccion
@@ -101,6 +103,43 @@ public class LucasteamServiceImpl implements LucasteamService {
 		// return coleccionJuegos.addJuego(juego,(int)coleccionJuegos.getLastRank());
 		return coleccionJuegos.addJuego(juego);
 	}
+
+	/**
+	 * Mediante esta funcion se recoge el String introducido por el usuario, para luego
+	 * imprimir la coleccion de juegos que solo contengan ese publisher.
+	 * 
+	 * @exception Recoge los errores de impresion.
+	 */
+
+	@Override
+	public void filtrarByPublisher() {
+
+		System.out.println("Introduce el nombre del editor:");
+				
+		try {
+			this.publisher = Datos.recogeString();
+		} catch (Exception e) {
+
+			log.error(e.getMessage());
+
+		}
+
+		coleccionJuegos.filtrarByPublisher(publisher);
+
+	}
+
+	/**
+	 * Mediante esta funcion se imprime por consola la coleccion de juegos donde
+	 * contengan el publisher Nintendo.
+	 */
+
+	@Override
+	public void filtrarByPublisherNintendo() {
+
+		coleccionJuegos.filtrarByPublisher("Nintendo");
+
+	}
+
 	@Override
 	public boolean updateJuego(int rank) {
 		return coleccionJuegos.updateJuego(rank);

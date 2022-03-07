@@ -28,6 +28,10 @@ public interface LucasteamService {
 	
 	public boolean addJuego(Juego J) throws ColeccionJuegosException;
 	
+	public void filtrarByPublisher();
+	
+	public void filtrarByPublisherNintendo();
+
 	public boolean updateJuego(int rank);
   
 	public boolean deleteJuego() throws ColeccionJuegosException;

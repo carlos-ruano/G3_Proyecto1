@@ -20,6 +20,8 @@ public interface ColeccionJuegos {
 	public void filtrarByGenre(String genre);
 	
 	public boolean addJuego(Juego juego);
+
+	public void filtrarByPublisher(String publisher);
   
 	public boolean updateJuego(int rank);
   
