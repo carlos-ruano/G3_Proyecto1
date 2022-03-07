@@ -1,5 +1,6 @@
-package g327.lucasteam.datos;
+		package g327.lucasteam.datos;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,16 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	
 	
 	private Set <Juego> listado = new HashSet <Juego> ();
+	private ArrayList<Juego> testListado = new ArrayList<Juego>();
 	
+	public ArrayList<Juego> getTestListado() {
+		return testListado;
+	}
+
+	public void setTestListado(ArrayList<Juego> testListado) {
+		this.testListado = testListado;
+	}
+
 	public ColeccionJuegosImpl() {
 		super();
 	}
@@ -52,6 +62,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			for(Juego j : listado)
 			{
 				if(j.getGenre().name().compareToIgnoreCase(genre)==0){
+					testListado.add(j);
 					System.out.println(j.imprimir());
 				}
 			}
