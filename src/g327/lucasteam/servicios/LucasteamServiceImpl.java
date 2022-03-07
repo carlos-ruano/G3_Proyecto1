@@ -20,6 +20,16 @@ import g327.lucasteam.modelos.Juego;
 import g327.lucasteam.utilidades.Datos;
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Mediante esta clase se administra lo pedido por control, se lo envia a datos
+ * o lo hace service.
+ * 
+ * @see <a href="https://github.com/carlos-ruano/G3_Proyecto1"> GitHub
+ *      G3_Proyecto1</a>
+ * @author Equipo 3
+ * @version 0.1
+ *
+ */
 @Log4j2
 public class LucasteamServiceImpl implements LucasteamService {
 
@@ -27,7 +37,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	private EnumGenre genre;
 
 	/**
-	 * Mediante esta función añaden los datos recogidos en operarCSV y se añaden a
+	 * Mediante esta funcion a�aden los datos recogidos en operarCSV y se a�aden a
 	 * la . coleccion de juegos
 	 */
 	@Override
@@ -38,7 +48,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta función se imprime por consola la coleccion de juegos
+	 * Mediante esta funcion se imprime por consola la coleccion de juegos
 	 */
 	@Override
 	public void mostrarListado() {
@@ -46,7 +56,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta función se imprime por consola la coleccion de juegos donde
+	 * Mediante esta funcion se imprime por consola la coleccion de juegos donde
 	 * contengan el enumerado de Genero Plataform
 	 */
 	@Override
@@ -55,7 +65,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta función se imprime por consola los enumerados de Genero y se
+	 * Mediante esta funcion se imprime por consola los enumerados de Genero y se
 	 * recoge para luego imprimir la coleccion de juegos que solo contengan ese
 	 * enumerado
 	 * 
@@ -63,7 +73,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 */
 	@Override
 	public void filtrarByGenre() {
-		System.out.println("Seleccione el número de género a buscar:");
+		System.out.println("Seleccione el numero de genero a buscar:");
 		EnumGenre.Informe2();
 		try {
 			this.genre = EnumGenre.dimeCategoria(Datos.recogeInt());
@@ -74,11 +84,11 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta función se sobreescribe el metodo addJuego para crear el objeto
+	 * Mediante esta funcion se sobreescribe el metodo addJuego para crear el objeto
 	 * juego
 	 * 
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para a�adirlo a la
 	 *         coleccion
 	 */
 	@Override
@@ -90,12 +100,12 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta función se sobreescribe el metodo addJuego para añadirlo a la
+	 * Mediante esta funcion se sobreescribe el metodo addJuego para a�adirlo a la
 	 * coleccion juego
 	 * 
-	 * @param juego Se pasa el valor de juego a añadir a la coleccion
+	 * @param juego Se pasa el valor de juego a a�adir a la coleccion
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para a�adirlo a la
 	 *         coleccion
 	 */
 	@Override
