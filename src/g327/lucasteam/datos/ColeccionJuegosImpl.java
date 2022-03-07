@@ -1,4 +1,4 @@
-		package g327.lucasteam.datos;
+package g327.lucasteam.datos;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -9,18 +9,19 @@ import g327.lucasteam.utilidades.OperarCSV;
 import lombok.extern.log4j.Log4j2;
 
 /**
- * Mediante esta clase manejaremos y almacenaremos los datos que nos llegan por consola o el csv.
- * @see  <a href="https://github.com/carlos-ruano/G3_Proyecto1">
- *      GitHub G3_Proyecto1</a>
+ * Mediante esta clase manejaremos y almacenaremos los datos que nos llegan por
+ * consola o el csv.
+ * 
+ * @see <a href="https://github.com/carlos-ruano/G3_Proyecto1"> GitHub
+ *      G3_Proyecto1</a>
  * @author Equipo 3
  * @version 0.1
  *
  */
 @Log4j2
 public class ColeccionJuegosImpl implements ColeccionJuegos {
-	
-	
-	private Set <Juego> listado = new HashSet <Juego> ();
+
+	private Set<Juego> listado = new HashSet<Juego>();
 	private ArrayList<Juego> testListado = new ArrayList<Juego>();
 
 	public ColeccionJuegosImpl() {
@@ -28,7 +29,8 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
-	 * Mediante este metodo generamos una coleccion de los datos recogidos en listado.
+	 * Mediante este metodo generamos una coleccion de los datos recogidos en
+	 * listado.
 	 * 
 	 * @param listado Se pasa por parametro la lista
 	 */
@@ -44,8 +46,8 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public void setListado(Set<Juego> listado) {
 		this.listado = listado;
 	}
-  
-  public ArrayList<Juego> getTestListado() {
+
+	public ArrayList<Juego> getTestListado() {
 		return testListado;
 	}
 
@@ -86,7 +88,8 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			log.warn(e.toString());
 		}
 	}
-  /**
+
+	/**
 	 * Mediante este metodo iteramos la coleccion listado para sacar por consola los
 	 * objetos. juegos con el genre dado
 	 * 
@@ -99,7 +102,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			if (!listado.isEmpty()) {
 				for (Juego j : listado) {
 					if (j.getGenre().name().compareToIgnoreCase(genre) == 0) {
-            testListado.add(j);
+						testListado.add(j);
 						System.out.println(j.imprimir());
 					}
 				}
@@ -107,7 +110,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
-			log.warn(e.getMessage()); // Si el Set esta¡ vacio
+			log.warn(e.getMessage()); // Si el Set estaï¿½ vacio
 		}
 	}
 
@@ -121,6 +124,42 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	@Override
 	public boolean addJuego(Juego juego) {
 		return listado.add(juego);
+	}
+
+	/**
+	 * Mediante este metodo iteramos la coleccion listado para sacar por consola los
+	 * objetos. juegos con el editor dado
+	 * 
+	 * @param publisher Se pasa el nombre del editor deseado por parametro.
+	 */
+	@Override
+	public void filtrarByPublisher(String publisher) {
+
+		try {
+			if (!listado.isEmpty()) {
+
+				for (Juego j : listado) {
+
+					if (j.getPlatform().name().compareToIgnoreCase(publisher) == 0) {
+
+						testListado.add(j);
+						System.out.println(j.imprimir());
+
+					}
+
+				}
+
+			} else {
+
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
+
+			}
+		} catch (ColeccionJuegosException e) {
+
+			log.warn(e.getMessage());
+
+		}
+
 	}
 
 	/**

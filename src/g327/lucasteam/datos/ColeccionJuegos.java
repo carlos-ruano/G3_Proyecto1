@@ -20,8 +20,7 @@ public interface ColeccionJuegos {
 	public void filtrarByGenre(String genre);
 
 	public boolean addJuego(Juego juego);
-	// public void deleteJuego(Juego juego);
-	// public Juego getByRank(int rank);
-	// public void filtrarByPlatform(String platform) ;
+
+	public void filtrarByPublisher(String publisher);
 
 }
