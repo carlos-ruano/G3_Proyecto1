@@ -136,6 +136,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 */
 	public boolean updateJuego(int rank) {
 		boolean estado = false;
+		
 		try {
 			switch (Datos.recogeInt()) {
 			case 1: {
