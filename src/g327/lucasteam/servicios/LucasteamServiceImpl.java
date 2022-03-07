@@ -1,17 +1,5 @@
 package g327.lucasteam.servicios;
 
-import java.lang.annotation.Retention;
-
-/**
- * Mediante esta clase se conseguirá leer los '<b>.CSV</b>' del proyecto y
- * sobreescribir cualquier otro '<b>.CSV</b>'.
- * 
- * @see <a href="https://github.com/carlos-ruano/G3_Proyecto1"> GitHub
- *      G3_Proyecto1</a>
- * @author Equipo 3
- * @version 0.1
- *
- */
 import g327.lucasteam.datos.ColeccionJuegos;
 import g327.lucasteam.datos.ColeccionJuegosImpl;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
@@ -37,8 +25,8 @@ public class LucasteamServiceImpl implements LucasteamService {
 	private EnumGenre genre;
 
 	/**
-	 * Mediante esta funcion a�aden los datos recogidos en operarCSV y se a�aden a
-	 * la . coleccion de juegos
+	 * Mediante esta funcion aï¿½aden los datos recogidos en operarCSV y se aï¿½aden a
+	 * la  coleccion de juegos
 	 */
 	@Override
 	public void importarListado() {
@@ -88,7 +76,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 * juego
 	 * 
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para a�adirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para aï¿½adirlo a la
 	 *         coleccion
 	 */
 	@Override
@@ -100,18 +88,55 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta funcion se sobreescribe el metodo addJuego para a�adirlo a la
+	 * Mediante esta funcion se sobreescribe el metodo addJuego para aï¿½adirlo a la
 	 * coleccion juego
 	 * 
-	 * @param juego Se pasa el valor de juego a a�adir a la coleccion
+	 * @param juego Se pasa el valor de juego a aï¿½adir a la coleccion
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para a�adirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para aï¿½adirlo a la
 	 *         coleccion
 	 */
 	@Override
 	public boolean addJuego(Juego juego) throws ColeccionJuegosException {
 		// return coleccionJuegos.addJuego(juego,(int)coleccionJuegos.getLastRank());
 		return coleccionJuegos.addJuego(juego);
+	}
+	@Override
+	public boolean updateJuego(int rank) {
+		return coleccionJuegos.updateJuego(rank);
+  }
+	@Override
+	public void buscarJuegoByName() {
+		try {
+			String name = Datos.recogeString("¿Cual es el nombre del juego que desea buscar?");
+			if(name=="" || name==null) {
+				throw new ColeccionJuegosException("Error en el nombre entrado!");
+			}else {
+				coleccionJuegos.buscarJuegoByName(name);
+			}
+		} catch (ColeccionJuegosException e) {
+			// TODO: handle exception
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public boolean deleteJuego() {
+		boolean estado = false;
+		try {
+			int rank = Datos.recogeInt("¿Cual es el numero de rank del juego que desea borrar?");
+			if(rank<0 || rank>16598)
+				throw new ColeccionJuegosException("El numero de rank que ústed ha elegido no existe");
+			else {
+				estado = coleccionJuegos.deleteJuego(rank);
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return estado;
 	}
 	/*
 	 * @Override public Juego getByRank(int rank) { return
