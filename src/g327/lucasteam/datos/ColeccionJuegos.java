@@ -29,7 +29,7 @@ public interface ColeccionJuegos {
   
 	public boolean updateJuego(int rank);
   
-	public void buscarJuegoByName(String name);
+	public boolean buscarJuegoByName(String name);
   
 	public boolean deleteJuego(int rank);
 	

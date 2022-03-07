@@ -24,17 +24,17 @@ public interface LucasteamService {
 	
 	public void getListaPublisher();
 
-	public void buscarJuegoByName();
+	public boolean buscarJuegoByName();
 	
 	public boolean addJuego() throws ColeccionJuegosException;
 	
 	public boolean addJuego(Juego J) throws ColeccionJuegosException;
 	
+	public boolean updateJuego();
+  
 	public void filtrarByPublisher();
 	
 	public void filtrarByPublisherNintendo();
-
-	public boolean updateJuego(int rank);
   
 	public boolean deleteJuego() throws ColeccionJuegosException;
 	

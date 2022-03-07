@@ -49,7 +49,7 @@ class TestColeccionJuegosImpl {
 	@Test
 	void testImportarListado() {
 		
-		// Comprobar si todos los juegos est�n importados.
+		// Comprobar si todos los juegos estï¿½n importados.
 		
 		//Given:
 		CJ = new ColeccionJuegosImpl();
@@ -81,7 +81,7 @@ class TestColeccionJuegosImpl {
 	@Test
 	void testFiltrarByGenre() {
 		
-		// Comprobar que se filtra correctamente dado un g�nero en concreto. En este caso, el g�nero 'PLATFORM'.
+		// Comprobar que se filtra correctamente dado un gï¿½nero en concreto. En este caso, el gï¿½nero 'PLATFORM'.
 		
 		//Given:
 		CJ.importarListado("vgsales.csv");
@@ -98,7 +98,7 @@ class TestColeccionJuegosImpl {
 	@Test
 	void testAddJuego() {
 		
-		// Comprobar que el juego a�adido no es nulo y que se a�ade correctamente.
+		// Comprobar que el juego aï¿½adido no es nulo y que se aï¿½ade correctamente.
 		
 		//Given:
 		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1989",EnumGenre.PUZZLE,"Nintendo");
@@ -112,7 +112,7 @@ class TestColeccionJuegosImpl {
 	@Test
 	void testAddJuego2() {
 		
-		// Asegurar que una lista vac�a funciona.
+		// Asegurar que una lista vacï¿½a funciona.
 		
 		//Given:
 		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1989",EnumGenre.PUZZLE,"Nintendo");
@@ -127,21 +127,21 @@ class TestColeccionJuegosImpl {
 	@Test
 	void testAddJuego3() {
 		
-		// Comprobar que no se a�ade un juego posterior al a�o 1958.
+		// Comprobar que no se aï¿½ade un juego posterior al aï¿½o 1958.
 		
 		//Given:
 		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1957",EnumGenre.PUZZLE,"Nintendo");
 		//When:
 		if (Integer.parseInt(j.getYear()) < 1958) {
 			
-			System.out.println("El primer juego sali� en 1958, y por tanto el a�o es inv�lido.");
+			System.out.println("El primer juego saliï¿½ en 1958, y por tanto el aï¿½o es invï¿½lido.");
 			
 		} else {
 			
 		//Then:
 			
 			assertThat(CJ.addJuego(j)).isEqualTo(true);
-			System.out.println("Juego a�adido correctamente.");
+			System.out.println("Juego aï¿½adido correctamente.");
 
 			
 		}
@@ -153,7 +153,7 @@ class TestColeccionJuegosImpl {
 	@Test
 	void testAddJuego4() {
 		
-		// Comprobar que un juego se a�ade con una plataforma que no existe.
+		// Comprobar que un juego se aï¿½ade con una plataforma que no existe.
 		
 		//Given:
 		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1957",EnumGenre.PUZZLE,"Nintendo");
@@ -169,7 +169,7 @@ class TestColeccionJuegosImpl {
 					
 		if (!LG.contains(j.getGenre().name()) || !LP.contains(j.getPlatform().name())) {
 			
-			System.out.println("El g�nero o la platafarma no existen.");
+			System.out.println("El gï¿½nero o la platafarma no existen.");
 			fail("Not yet implemented");
 			
 		} else {
@@ -177,7 +177,7 @@ class TestColeccionJuegosImpl {
 		//Then:
 			
 			assertThat(CJ.addJuego(j)).isEqualTo(true);
-			System.out.println("Juego a�adido correctamente.");
+			System.out.println("Juego aï¿½adido correctamente.");
 
 			
 		}
@@ -236,6 +236,10 @@ class TestColeccionJuegosImpl {
 		
 	}
 	
+	void testUpdateJuego() {
+		
+	}
+  
 	@Test
 	void testDeleteJuegoOK() {
 		//:Given
@@ -258,7 +262,7 @@ class TestColeccionJuegosImpl {
 	}
 	
 	@Test
-	void testFiltrarByA�oOK() {
+	void testFiltrarByAñoOK() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		CJ.filtrarByAnoPar(true);
@@ -267,7 +271,7 @@ class TestColeccionJuegosImpl {
 	}
 	
 	@Test
-	void testFiltrarByA�oKO() {
+	void testFiltrarByAñoKO() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		CJ.filtrarByAnoPar(true);
