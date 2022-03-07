@@ -7,9 +7,12 @@ import g327.lucasteam.modelos.Juego;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.assertj.core.internal.bytebuddy.implementation.bind.annotation.IgnoreForBinding.Verifier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,11 +20,14 @@ import org.junit.jupiter.api.Test;
 class TestColeccionJuegosImpl {
 
 	private ColeccionJuegosImpl CJ;
+	private final PrintStream standardOut = System.out;
+	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		
 		CJ = new ColeccionJuegosImpl();
+		System.setOut(new PrintStream(outputStreamCaptor));
 		
 	}
 	
@@ -186,6 +192,45 @@ class TestColeccionJuegosImpl {
 		
 		assertThat(this).isNotNull();
 		
+	}
+	
+	@Test
+	void testDeleteJuegoOK() {
+		//:Given
+		CJ.importarListado("vgsales.csv");
+		//When:
+		int size = CJ.getListado().size();
+		//Then:
+		assertThat(CJ.deleteJuego(1)).isEqualTo(true);
+		assertThat(CJ.getListado()).hasSize(size-1);
+	}
+	@Test
+	void testDeleteJuegoKO() {
+		//:Given
+		CJ.importarListado("vgsales.csv");
+		//When:
+		int size = CJ.getListado().size();
+		//Then:
+		assertThat(CJ.deleteJuego(-1)).isEqualTo(true);
+		assertThat(CJ.getListado()).hasSize(size-1);
+	}
+	
+	@Test
+	void testFiltrarByAñoOK() {
+		//:Given
+		CJ.importarListado("vgsales.csv");
+		CJ.filtrarByAnoPar(true);
+		//When:
+		assertThat(outputStreamCaptor.toString().trim()).contains("Juego");
+	}
+	
+	@Test
+	void testFiltrarByAñoKO() {
+		//:Given
+		CJ.importarListado("vgsales.csv");
+		CJ.filtrarByAnoPar(true);
+		//When:
+		assertThat(outputStreamCaptor.toString().trim()).contains("null");
 	}
 
 }
