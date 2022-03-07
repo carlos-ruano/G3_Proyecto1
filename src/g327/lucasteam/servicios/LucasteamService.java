@@ -21,10 +21,27 @@ public interface LucasteamService {
 	public void filtrarByGenrePlatform();
 
 	public void filtrarByGenre();
+	
+	public void getListaPublisher();
 
+	public boolean buscarJuegoByName();
+	
 	public boolean addJuego() throws ColeccionJuegosException;
-
+	
 	public boolean addJuego(Juego J) throws ColeccionJuegosException;
+	
+	public boolean updateJuego();
+  
+	public void filtrarByPublisher();
+	
+	public void filtrarByPublisherNintendo();
+  
+	public boolean deleteJuego() throws ColeccionJuegosException;
+	
+	public void filtrarBySigloXX();
+  
+	public void filtrarByAnoPar();
+  
 	// public void filtrarByPlatform();
 	// public Juego getByRank(int rank);
 }
