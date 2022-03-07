@@ -1,4 +1,12 @@
-package g327.lucasteam.datos;
+		package g327.lucasteam.datos;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import g327.lucasteam.excepciones.ColeccionJuegosException;
+import g327.lucasteam.modelos.Juego;
+import g327.lucasteam.utilidades.OperarCSV;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Mediante esta clase manejaremos y almacenaremos los datos que nos llegan por consola o el csv.
@@ -8,19 +16,12 @@ package g327.lucasteam.datos;
  * @version 0.1
  *
  */
-
-import java.util.HashSet;
-import java.util.Set;
-
-import g327.lucasteam.excepciones.ColeccionJuegosException;
-import g327.lucasteam.modelos.Juego;
-import g327.lucasteam.utilidades.OperarCSV;
-import lombok.extern.log4j.Log4j2;
-
 @Log4j2
 public class ColeccionJuegosImpl implements ColeccionJuegos {
-
-	private Set<Juego> listado = new HashSet<Juego>();
+	
+	
+	private Set <Juego> listado = new HashSet <Juego> ();
+	private ArrayList<Juego> testListado = new ArrayList<Juego>();
 
 	public ColeccionJuegosImpl() {
 		super();
@@ -36,24 +37,20 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		this.listado = listado;
 	}
 
-	/**
-	 * Mediante este método recogemos toda la informacion de la colecion de juegos
-	 * en listado
-	 * 
-	 * @return La coleccion de juegos tipo '<b>Set<b>'
-	 */
 	public Set<Juego> getListado() {
 		return listado;
 	}
 
-	/**
-	 * Mediante este método modificamos la lista del juegos de la coleccion de
-	 * juegos
-	 * 
-	 * @param listado Se pasa por parámetro la lista cargada para modificarla
-	 */
 	public void setListado(Set<Juego> listado) {
 		this.listado = listado;
+	}
+  
+  public ArrayList<Juego> getTestListado() {
+		return testListado;
+	}
+
+	public void setTestListado(ArrayList<Juego> testListado) {
+		this.testListado = testListado;
 	}
 
 	/**
@@ -83,7 +80,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 					System.out.println(j);
 				}
 			} else {
-				throw new ColeccionJuegosException("Listado vacío, no se ha podido mostrar ningún juego", 2);
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido mostrar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
 			log.warn(e.toString());
@@ -97,15 +94,17 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 */
 	@Override
 	public void filtrarByGenre(String genre) {
+
 		try {
 			if (!listado.isEmpty()) {
 				for (Juego j : listado) {
 					if (j.getGenre().name().compareToIgnoreCase(genre) == 0) {
+            testListado.add(j);
 						System.out.println(j.imprimir());
 					}
 				}
 			} else {
-				throw new ColeccionJuegosException("Listado vacío, no se ha podido importar ningún juego", 2);
+				throw new ColeccionJuegosException("Listado vacío, no se ha podido importar ningún juego");
 			}
 		} catch (ColeccionJuegosException e) {
 			log.warn(e.getMessage()); // Si el Set está vacío

@@ -80,7 +80,7 @@ public class Lucasteam {
 				break;
 
 			default:
-				throw new ColeccionJuegosException("Selección errónea, introduzca una opción existente", 2);
+				throw new ColeccionJuegosException("Selección errónea, introduzca una opción existente");
 			}
 		} catch (Exception e) {
 			log.error(e.toString());
