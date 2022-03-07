@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
 import g327.lucasteam.modelos.Juego;
+import g327.lucasteam.utilidades.Datos;
 import g327.lucasteam.utilidades.OperarCSV;
 import lombok.extern.log4j.Log4j2;
 
@@ -160,6 +161,49 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 
 		}
 
+	 * Metodo para editar el juego que quieras.
+	 * 
+	 * @param rank   Se el id del juego que esta en la coleccion Juegos.
+	 * @param nombre Se pasa el nombre del juego a buscar
+	 * @return Devolvemos listado con el juego actualizado.
+	 */
+	public boolean updateJuego(int rank) {
+		boolean estado = false;
+		
+		try {
+			switch (Datos.recogeInt()) {
+			case 1: {
+
+				yield type;
+			}
+			case 2: {
+
+				yield type;
+			}
+			case 3: {
+
+				yield type;
+			}
+			case 4: {
+
+				yield type;
+			}
+			case 5: {
+
+				yield type;
+			}
+			case 6: {
+
+				yield type;
+			}
+			default:
+				throw new ColeccionJuegosException("Seleccion erronea, introduzca una opcion existente");
+			}
+		} catch (Exception e) {
+			log.error(e.toString());
+		}
+
+		return estado;
 	}
 
 	/**
@@ -174,7 +218,40 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public String toString() {
 		return "ColeccionJuegosImpl [listado=" + listado + "]";
 	}
-
+	@Override
+	public void buscarJuegoByName(String name) {
+		try {
+			if(listado.isEmpty())
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
+			else {
+				for(Juego j : listado) {
+					if(j.getName().contains(name)) {
+						System.out.println(j);
+					}
+				}
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		}
+		
+	}
+	@Override
+	public boolean deleteJuego(int rank) {
+		boolean estado = false;
+		try {
+			for(Juego j : listado) {
+				if(j.getRank()==rank)
+					estado= listado.remove(j);
+				else {
+					throw new ColeccionJuegosException("La lista no contiene ningun juego con este numero de rank");
+				}
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		}
+		return estado;
+	}
+	
 	/*
 	 * @Override public void deleteJuego(Juego juego) {
 	 * 

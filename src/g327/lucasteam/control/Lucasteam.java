@@ -74,6 +74,41 @@ public class Lucasteam {
 				// DAR DE ALTA UN JUEGO
 				services.addJuego();
 				break;
+				
+			case 6:
+				// DAR DE BAJA UN JUEGO
+				services.deleteJuego();
+				break;
+
+			case 7:
+				// MODIFICAR UN JUEGO
+				services.updateJuego();
+				break;
+
+			case 8:
+				// FILTRAR POR EDITOR NINTENDO
+				services.filtrarByPublisherNintendo();
+				break;
+
+			case 9:
+				// LISTADO DE EDITORES
+				services.getListaPublisher();
+				break;
+
+			case 10:
+				// FILTRAR POR JUEGOS DEL SIGLO XX
+				services.filtrarBySigloXX();
+				break;
+				
+			case 11:
+				// FILTRAR POR ANO PAR
+				services.filtrarByAnoPar();
+				break;
+				
+			case 12:
+				// EXPORTAR LISTADO ACTUAL
+				services.exportarListado();
+				break;
 
 			case 0:
 				continuar = salir();
@@ -95,7 +130,7 @@ public class Lucasteam {
 	 * @throws Exception
 	 */
 	private boolean salir() throws Exception {
-		String sino = Datos.recogeString("   ¿Esta seguro?(S/N)");
+		String sino = Datos.recogeString("   ï¿½Esta seguro?(S/N)");
 		return (sino.toUpperCase().charAt(0) != 'S');
 	}
 
