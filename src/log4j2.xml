@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <!-- Usando ..\ se accede a una ruta relativa anterior a donde este el config.-->
+        <Property name="log-path">../logs</Property>
+    </Properties>
+ 
+    <Appenders>
+        <RollingFile name="file-log" fileName="${log-path}/logs-LucaSteam.log" filePattern="${log-path}/logs-LucaSteam-%d{dd-MM-yyyy}.log">
+            <PatternLayout pattern="[%5p] - %c{1}:%L %d{dd-MM-yyyy HH:mm:ss} - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"  modulate="true" />
+            </Policies>
+        </RollingFile>
+ 
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%5p] - %c{1}:%L %d{dd-MM-yyyy HH:mm:ss} - %m%n" />
+        </Console>
+    </Appenders>
+    <Loggers>
+     	<!-- Restriccion del logger para g327.lucasteam.control -->
+        <!-- Restriccion del logger para g327.lucasteam.control -->
+        <Logger name="g327.lucasteam.control" level="debug" additivity="false">
+			<appender-ref ref="console" level="debug" />
+            <appender-ref ref="file-log" level="debug" />
+        </Logger>
+		
+        <!-- Restriccion del logger para g327.lucasteam.datos -->
+        <Logger name="g327.lucasteam.datos" level="debug" additivity="false">
+			<appender-ref ref="console" level="debug" />
+            <appender-ref ref="file-log" level="debug" />
+        </Logger>
+		
+        <!-- Restriccion del logger para g327.lucasteam.excepciones -->
+        <Logger name="g327.lucasteam.excepciones" level="debug" additivity="false">
+			<appender-ref ref="console" level="debug" />
+            <appender-ref ref="file-log" level="debug" />
+        </Logger>
+		
+        <!-- Restriccion del logger para g327.lucasteam.gui -->
+        <Logger name="g327.lucasteam.gui" level="debug" additivity="false">
+			<appender-ref ref="console" level="debug" />
+            <appender-ref ref="file-log" level="debug" />
+        </Logger>
+		
+        <!-- Restriccion del logger para g327.lucasteam.modelos -->
+        <Logger name="g327.lucasteam.modelos" level="debug" additivity="false">
+			<appender-ref ref="console" level="debug" />
+            <appender-ref ref="file-log" level="debug" />
+        </Logger>
+		
+        <!-- Restriccion del logger para g327.lucasteam.servicios -->
+        <Logger name="g327.lucasteam.servicios" level="debug" additivity="false">
+			<appender-ref ref="console" level="debug" />
+            <appender-ref ref="file-log" level="debug" />
+        </Logger>
+		
+        <!-- Restriccion del logger para g327.lucasteam.utilidades -->
+        <Logger name="g327.lucasteam.utilidades" level="debug" additivity="false">
+			<appender-ref ref="console" level="debug" />
+            <appender-ref ref="file-log" level="debug" />
+        </Logger>
+		
+    </Loggers>
+</Configuration>
