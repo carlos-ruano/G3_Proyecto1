@@ -13,7 +13,7 @@ import g327.lucasteam.modelos.Juego;
 import lombok.extern.log4j.Log4j2;
 
 /**
- * Mediante esta clase se conseguirá leer los '<b>.CSV</b>' del proyecto y
+ * Mediante esta clase se conseguira� leer los '<b>.CSV</b>' del proyecto y
  * sobreescribir cualquier otro '<b>.CSV</b>'.
  * 
  * @see <a href="https://github.com/carlos-ruano/G3_Proyecto1"> GitHub
@@ -31,13 +31,13 @@ public class OperarCSV {
 																							// conflictivos
 
 	/**
-	 * Mediante esta función se consigue leer un archivo '<b>.CSV</b>' mediante la
-	 * adición de los parámetros a los atributos de los objetos "Juego" instanciados
-	 * hasta terminar todas las líneas e introduciéndolos en un listado de tipo
+	 * Mediante esta funcion se consigue leer un archivo '<b>.CSV</b>' mediante la
+	 * adicion de los parametros a los atributos de los objetos "Juego" instanciados
+	 * hasta terminar todas las lieas e introduciendolos en un listado de tipo
 	 * '<b>Set</b>'.
 	 * 
-	 * @param nombreFichero Se pasa el nombre del fichero deseado por parámetro.
-	 * @return Una colección de juegos de tipo '<b>Set</b>'.
+	 * @param nombreFichero Se pasa el nombre del fichero deseado por parametro.
+	 * @return Una coleccion de juegos de tipo '<b>Set</b>'.
 	 */
 	public static Set<Juego> readCSV(String nombreFichero) {
 
@@ -88,19 +88,17 @@ public class OperarCSV {
 					linea = bufferLectura.readLine();
 				}
 				bufferLectura.close(); // Cerramos el buffer
-			}
-			else {
-				log.error("El archivo '"+nombreFichero+"' no existe, revise el nombre de nuevo.");
+			} else {
+				log.error("El archivo '" + nombreFichero + "' no existe, revise el nombre de nuevo.");
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());
-		}
-		finally {
-			if(listado.isEmpty()) {
+		} finally {
+			if (listado.isEmpty()) {
 				log.warn("No se ha podido importar ningún juego."); // Si el Set está vacío
-			}
-			else {
-				log.info("El archivo '"+nombreFichero+"' ha sido importado correctamente"); // Si el Set no está vacío
+			} else {
+				log.info("El archivo '" + nombreFichero + "' ha sido importado correctamente"); // Si el Set no está
+																								// vacío
 			}
 		}
 
@@ -112,10 +110,10 @@ public class OperarCSV {
 	 * existente y/o precargar el archivo .CSV, se finaliza con una sobrescritura
 	 * del archivo .csv deseado.
 	 * 
-	 * @param listado       Se pasa por parámetro la lista cargada/editada.
+	 * @param listado       Se pasa por parametro la lista cargada/editada.
 	 * @param nombreFichero Se le pasa el nombre deaseado para crear el nuevo
 	 *                      '<b>.CSV</b>'.
-	 * @throws IOException Si se produce una excepción de Entrada/Salida.
+	 * @throws IOException Si se produce una excepcion de Entrada/Salida.
 	 */
 	public static void writeCSV(Set<Juego> listado) {
 		// Falta desarrollar cuerpo

@@ -28,7 +28,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
-	 * Mediante este método generamos una coleccion de los datos recogidos en listado.
+	 * Mediante este metodo generamos una coleccion de los datos recogidos en listado.
 	 * 
 	 * @param listado Se pasa por parametro la lista
 	 */
@@ -87,10 +87,10 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 	}
   /**
-	 * Mediante este método iteramos la coleccion listado para sacar por consola los
+	 * Mediante este metodo iteramos la coleccion listado para sacar por consola los
 	 * objetos. juegos con el genre dado
 	 * 
-	 * @param genre Se pasa el nombre del genero deseado por parámetro.
+	 * @param genre Se pasa el nombre del genero deseado por parametro.
 	 */
 	@Override
 	public void filtrarByGenre(String genre) {
@@ -104,10 +104,10 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 					}
 				}
 			} else {
-				throw new ColeccionJuegosException("Listado vacío, no se ha podido importar ningún juego");
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
-			log.warn(e.getMessage()); // Si el Set está vacío
+			log.warn(e.getMessage()); // Si el Set esta� vacio
 		}
 	}
 
@@ -124,12 +124,12 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
-	 * Mediante este método estático se devuelve un <i>System.out.println</i> con la
+	 * Mediante este metodo estatico se devuelve un <i>System.out.println</i> con la
 	 * cadena de texto deseada.
 	 * 
 	 * @param msg Se le introduce un mensaje personalizado para pedir la entrada del
 	 *            teclado.
-	 * @return Una colección de juegos de tipo '<b>Set</b>'
+	 * @return Una coleccion de juegos de tipo '<b>Set</b>'
 	 */
 	@Override
 	public String toString() {
@@ -147,7 +147,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * 
 	 * } else {
 	 * 
-	 * System.out.println("Este juego no existe o la lista esta vacía.");
+	 * System.out.println("Este juego no existe o la lista esta vacia.");
 	 * 
 	 * } }
 	 * 
