@@ -93,7 +93,8 @@ class TestColeccionJuegosImpl {
 		
 
 	}
-
+	
+		
 	@Test
 	void testAddJuego() {
 		
@@ -184,6 +185,47 @@ class TestColeccionJuegosImpl {
 
 	}
 	
+	@Test
+	void testFiltrarByPublisherNintendoOK() {
+		
+		// Comprobar que se filtran correctamente solamente los juegos de la editora Nintendo.
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByPublisher("Nintendo");
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getPublisher().contains("Nintendo")).isTrue();
+		
+	}
+	
+	@Test
+	void testFiltrarByPublisherNintendoKO() {
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByPublisher("Nintendo");
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getPublisher().contains("Ubisoft")).isTrue();
+	
+	}
+	
+	@Test
+	void testFiltrarByPublisherNintendoNotNullOK() {
+		
+		// Comprobar que se filtran correctamente solamente los juegos de la editora Nintendo porque no es nulo.
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByPublisher("Nintendo");
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getPublisher().contains("Nintendo")).isNotNull();
+		
+	}
+	
+
 
 	@Test
 	void testToString() {

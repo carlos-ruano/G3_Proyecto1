@@ -47,7 +47,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public void setListado(Set<Juego> listado) {
 		this.listado = listado;
 	}
-  
+
 	public ArrayList<Juego> getTestListado() {
 		return testListado;
 	}
@@ -62,7 +62,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * hasta terminar todas las lineas e introduciendolos en un listado de tipo
 	 * '<b>Set</b>'.
 	 * 
-	 * @param nombreFichero Se pasa el nombre del fichero deseado por parámetro..
+	 * @param nombreFichero Se pasa el nombre del fichero deseado por parÃ¡metro..
 	 */
 	@Override
 	public void importarListado(String nombreFichero) {
@@ -126,16 +126,16 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public boolean addJuego(Juego juego) {
 		return listado.add(juego);
 	}
-	
+
 	/**
 	 * Metodo para listar todos los editores sin duplicidad
 	 * 
 	 * @return Un HashSet de tipo 'String' de todos los editores que existen
 	 */
 	public Set<String> getListaPublisher() {
-		
-		Set <String> listaSet = new HashSet <String> ();
-		
+
+		Set<String> listaSet = new HashSet<String>();
+
 		try {
 			if (!listado.isEmpty()) {
 				for (Juego j : listado) {
@@ -164,7 +164,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 
 				for (Juego j : listado) {
 
-					if (j.getPlatform().name().compareToIgnoreCase(publisher) == 0) {
+					if (j.getPublisher().compareToIgnoreCase(publisher) == 0) {
 
 						testListado.add(j);
 						System.out.println(j.imprimir());
@@ -183,18 +183,18 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			log.warn(e.getMessage());
 
 		}
+		
+	}
 
-	 //* Metodo para editar el juego que quieras.
-	// * 
-	 //* @param rank   Se el id del juego que esta en la coleccion Juegos.
-	// * @param nombre Se pasa el nombre del juego a buscar
-	 //* @return Devolvemos listado con el juego actualizado.
-	 //*/
-			
-			 
+	/** Metodo para editar el juego que quieras.
+	 * 
+	 * @param rank   Se el id del juego que esta en la coleccion Juegos.
+	 * @param nombre Se pasa el nombre del juego a buscar
+	 * @return Devolvemos listado con el juego actualizado.
+	 */
 	public boolean updateJuego(int rank) {
 		boolean estado = false;
-		
+
 		try {
 			switch (Datos.recogeInt()) {
 			case 1: {
@@ -243,11 +243,12 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public String toString() {
 		return "ColeccionJuegosImpl [listado=" + listado + "]";
 	}
+
 	@Override
 	public void buscarJuegoByName(String name) {
 		
 		try {
-			if(listado.isEmpty())
+			if (listado.isEmpty())
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			else {
 				for(Juego j : listado) {
@@ -260,6 +261,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			log.warn(e.getMessage());
 		}
 	}
+
 	@Override
 	public boolean deleteJuego(int rank) {
 		boolean estado = false;
@@ -272,13 +274,14 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 				}
 				estado=listado.remove(j1);
 				if(estado==false)
-					throw new ColeccionJuegosException("El numero de rank que �sted ha elegido no existe"); 
+					throw new ColeccionJuegosException("El numero de rank que ústed ha elegido no existe"); 
 					
 		} catch (Exception e) {
 			log.warn(e.getMessage());
 		}			
 		return estado;
 	}
+  
 	@Override
 	public void filtrarByAnoPar(boolean par) {
 		ArrayList<Integer> years = new ArrayList<Integer>();
@@ -337,7 +340,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * if(!listado.isEmpty()) { for(Juego j : listado) {
 	 * if(j.getPlatform().name().compareToIgnoreCase(platform)==0) {
 	 * System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
-	 * +", año de publicación: "+j.getYear()+", editor: "+j.getPublisher()
+	 * +", aÃ±o de publicaciÃ³n: "+j.getYear()+", editor: "+j.getPublisher()
 	 * +", su ranking es: "+j.getRank()); } } } }
 	 * 
 	 */

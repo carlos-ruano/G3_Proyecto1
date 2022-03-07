@@ -136,11 +136,9 @@ public class LucasteamServiceImpl implements LucasteamService {
 
 	@Override
 	public void filtrarByPublisher() {
-
-		System.out.println("Introduce el nombre del editor:");
 				
 		try {
-			this.publisher = Datos.recogeString();
+			this.publisher = Datos.recogeString("Introduce el nombre del editor:");
 		} catch (Exception e) {
 
 			log.error(e.getMessage());
