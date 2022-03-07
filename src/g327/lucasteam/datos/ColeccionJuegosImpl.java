@@ -65,7 +65,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * hasta terminar todas las lineas e introduciendolos en un listado de tipo
 	 * '<b>Set</b>'.
 	 * 
-	 * @param nombreFichero Se pasa el nombre del fichero deseado por parámetro..
+	 * @param nombreFichero Se pasa el nombre del fichero deseado por parÃ¡metro..
 	 */
 	@Override
 	public void importarListado(String nombreFichero) {
@@ -114,7 +114,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
-			log.warn(e.getMessage()); // Si el Set esta� vacio
+			log.warn(e.getMessage()); // Si el Set esta vacio
 		}
 	}
 
@@ -138,6 +138,64 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		  }  
 		}
 
+	/**
+	 * Metodo para listar todos los editores sin duplicidad
+	 * 
+	 * @return Un HashSet de tipo 'String' de todos los editores que existen
+	 */
+	public Set<String> getListaPublisher() {
+
+		Set<String> listaSet = new HashSet<String>();
+
+		try {
+			if (!listado.isEmpty()) {
+				for (Juego j : listado) {
+					listaSet.add(j.getPublisher());
+				}
+			} else {
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido obtener el Publisher pedido");
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage()); // Si el Set esta vacio
+		}
+		return listaSet;
+	}
+/*
+	/**
+	 * Mediante este metodo iteramos la coleccion listado para sacar por consola los
+	 * objetos. juegos con el editor dado
+	 * 
+	 * @param publisher Se pasa el nombre del editor deseado por parametro.
+	 //*/
+/*	@Override
+	public void filtrarByPublisher(String publisher) {
+
+		try {
+			if (!listado.isEmpty()) {
+
+				for (Juego j : listado) {
+
+					if (j.getPublisher().compareToIgnoreCase(publisher) == 0) {
+
+						testListado.add(j);
+						System.out.println(j.imprimir());
+
+					}
+
+				}
+
+			} else {
+
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
+
+			}
+		} catch (ColeccionJuegosException e) {
+
+			log.warn(e.getMessage());
+
+		}
+	}
+	
 	/**
 	 * Metodo para editar el juego que quieras.
 	 * 
@@ -247,19 +305,90 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public boolean deleteJuego(int rank) {
 		boolean estado = false;
 		try {
-			for (Juego j : listado) {
-				if (j.getRank() == rank)
-					estado = listado.remove(j);
-				else {
-					throw new ColeccionJuegosException("La lista no contiene ningun juego con este numero de rank");
+			Juego j1=null;
+			System.out.println(listado.size());
+				for(Juego j : listado) {
+					if(j.getRank()==rank)
+						j1 = j;	
 				}
+				estado=listado.remove(j1);
+				if(estado==false)
+					throw new ColeccionJuegosException("El numero de rank que ústed ha elegido no existe"); 
+					
+		} catch (Exception e) {
+			log.warn(e.getMessage());
+		}			
+		return estado;
+	}
+  
+	@Override
+	public void filtrarByAnoPar(boolean par) {
+		ArrayList<Integer> years = new ArrayList<Integer>();
+		int i =0;
+		if(par == true)i=1958;
+		else i = 1959;
+		for(int y=i;y<=2000;y=y+2)
+		{
+			years.add(y);
+		}
+		for(Juego j : listado) {
+			try {
+				if(j.getYear().compareToIgnoreCase("N/A")!=0) {
+					int year = Integer.parseInt(j.getYear());
+					if(years.contains(year)) {
+						System.out.println(j);
+					}
+				}else {
+					throw new Exception();
+				}
+			} catch (Exception e) {
+				e.getMessage();
+			}
+			
+		}
+		
+	}
+
+	@Override
+	public void filtrarByPublisher(String publisher) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	/**
+	 * Mediante este metodo estatico se devuelve un <i>System.out.println</i> con la
+	 * los juegos del siglo XX y los mete en un nuevo array listado
+	 * 
+	 * @param anoMax numero de año que se quiere buscar de máximo
+	 * @param anoMin numero de año que se quiere buscar de minimo
+	 */
+	@Override
+	public void filtrarByAno(int anoMax, int anoMin) {
+		try {
+			if (!listado.isEmpty()) {
+				if(!testListado.isEmpty()) {
+					testListado.clear();
+				}
+				int year=0;
+				for (Juego j : listado) {
+					if (j.getYear().compareToIgnoreCase("N/A")!=0) {
+						year = Integer.parseInt(j.getYear());
+						if (year>= anoMin && year <= anoMax) {
+							testListado.add(j);
+							System.out.println(j.imprimir());
+						}
+					}
+				}
+			} else {
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
 			log.warn(e.getMessage());
 		}
-		return estado;
+		
 	}
-
+  
 	/*
 	 * @Override public void deleteJuego(Juego juego) {
 	 * 
@@ -284,7 +413,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * if(!listado.isEmpty()) { for(Juego j : listado) {
 	 * if(j.getPlatform().name().compareToIgnoreCase(platform)==0) {
 	 * System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
-	 * +", año de publicación: "+j.getYear()+", editor: "+j.getPublisher()
+	 * +", aÃ±o de publicaciÃ³n: "+j.getYear()+", editor: "+j.getPublisher()
 	 * +", su ranking es: "+j.getRank()); } } } }
 	 * 
 	 */
