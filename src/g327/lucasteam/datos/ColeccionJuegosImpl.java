@@ -183,10 +183,10 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 			log.warn(e.getMessage());
 
 		}
-		
 	}
-
-	/** Metodo para editar el juego que quieras.
+	
+	/**
+	 * Metodo para editar el juego que quieras.
 	 * 
 	 * @param rank   Se el id del juego que esta en la coleccion Juegos.
 	 * @param nombre Se pasa el nombre del juego a buscar
@@ -315,6 +315,42 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	/**
+	 * Mediante este metodo estatico se devuelve un <i>System.out.println</i> con la
+	 * los juegos del siglo XX y los mete en un nuevo array listado
+	 * 
+	 * @param anoMax numero de año que se quiere buscar de máximo
+	 * @param anoMin numero de año que se quiere buscar de minimo
+	 */
+	@Override
+	public void filtrarByAno(int anoMax, int anoMin) {
+		try {
+			if (!listado.isEmpty()) {
+				if(!testListado.isEmpty()) {
+					testListado.clear();
+				}
+				int year=0;
+				for (Juego j : listado) {
+					if (j.getYear().compareToIgnoreCase("N/A")!=0) {
+						year = Integer.parseInt(j.getYear());
+						if (year>= anoMin && year <= anoMax) {
+							testListado.add(j);
+							System.out.println(j.imprimir());
+						}
+					}
+				}
+			} else {
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		}
+		
+	}
+	
+	
 	
 	/*
 	 * @Override public void deleteJuego(Juego juego) {

@@ -38,6 +38,8 @@ public interface LucasteamService {
   
 	public boolean deleteJuego() throws ColeccionJuegosException;
 	
+	public void filtrarBySigloXX();
+  
 	public void filtrarByAnoPar();
   
 	// public void filtrarByPlatform();

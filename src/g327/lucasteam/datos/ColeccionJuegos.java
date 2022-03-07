@@ -33,7 +33,10 @@ public interface ColeccionJuegos {
   
 	public boolean deleteJuego(int rank);
 	
+	public void filtrarByAno(int anoMax, int anoMin);
+  
 	public void filtrarByAnoPar(boolean par);
+  
 	// public void deleteJuego(Juego juego);
 	// public Juego getByRank(int rank);
 	// public void filtrarByPlatform(String platform) ;
