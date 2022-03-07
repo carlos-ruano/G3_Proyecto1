@@ -35,8 +35,8 @@ public @Data @NoArgsConstructor @AllArgsConstructor @Log4j2 class Juego {
 	 * Mediante esta funcion se imprime por pantalla los datos del objeto Juego
 	 */
 	public String imprimir() {
-		return this.getRank() + ": " + this.getName() + ", Platform: " + this.getPlatform().name() + ", Año: "
-				+ this.getYear() + ", Género: " + this.getGenre().name() + ", Editor: " + this.getPublisher();
+		return this.getRank() + ": " + this.getName() + ", Platform: " + this.getPlatform().name() + ", Ano: "
+				+ this.getYear() + ", Genero: " + this.getGenre().name() + ", Editor: " + this.getPublisher();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public @Data @NoArgsConstructor @AllArgsConstructor @Log4j2 class Juego {
 				this.name = Datos.recogeString("Introduce el nombre del juego");
 				EnumPlatform.Informe2();
 				this.platform = EnumPlatform.dimeCategoria(Datos.recogeInt());
-				this.year = String.valueOf(Datos.recogeInt("Introduce el año"));
+				this.year = String.valueOf(Datos.recogeInt("Introduce el ano"));
 				EnumGenre.Informe2();
 				this.genre = EnumGenre.dimeCategoria(Datos.recogeInt());
 				this.publisher = Datos.recogeString("Introduce el nombre del editor");

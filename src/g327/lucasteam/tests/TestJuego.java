@@ -1,4 +1,4 @@
-package g327.lucasteam.modelos.tests;
+package g327.lucasteam.tests;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -41,7 +41,7 @@ class TestJuego {
 
 	@Test
 	void testImprimirOK() {
-		assertThat(juego.imprimir()).isEqualTo("0: 1, Platform: WII, Año: 1990, Género: PLATFORM, Editor: nintendo");
+		assertThat(juego.imprimir()).isEqualTo("0: 1, Platform: WII, Aï¿½o: 1990, Gï¿½nero: PLATFORM, Editor: nintendo");
 
 	}
 	/*
