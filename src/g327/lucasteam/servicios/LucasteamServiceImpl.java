@@ -38,7 +38,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 
 	/**
 	 * Mediante esta funcion añaden los datos recogidos en operarCSV y se añaden a
-	 * la . coleccion de juegos
+	 * la  coleccion de juegos
 	 */
 	@Override
 	public void importarListado() {
