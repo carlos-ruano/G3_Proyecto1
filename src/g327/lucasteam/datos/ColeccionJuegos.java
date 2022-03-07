@@ -1,5 +1,7 @@
 package g327.lucasteam.datos;
 
+import java.util.Set;
+
 /**
  * Interface de la capa Datos.
  * @see  <a href="https://github.com/carlos-ruano/G3_Proyecto1">
@@ -18,6 +20,8 @@ public interface ColeccionJuegos {
 	public void mostrarListado();
 
 	public void filtrarByGenre(String genre);
+	
+	public Set<String> getListaPublisher();
 
 	public boolean addJuego(Juego juego);
 	// public void deleteJuego(Juego juego);

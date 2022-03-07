@@ -37,7 +37,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	private EnumGenre genre;
 
 	/**
-	 * Mediante esta funcion a�aden los datos recogidos en operarCSV y se a�aden a
+	 * Mediante esta funcion añaden los datos recogidos en operarCSV y se añaden a
 	 * la . coleccion de juegos
 	 */
 	@Override
@@ -88,7 +88,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 * juego
 	 * 
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para a�adirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para a�adirlo a la
 	 *         coleccion
 	 */
 	@Override
@@ -100,12 +100,35 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta funcion se sobreescribe el metodo addJuego para a�adirlo a la
+	 * Mediante el uso de esta función se llama a a la capa datos para
+	 * que genere la lista de editores si repetir por medio de un Set y
+	 * se devuelve para imprimirlas por pantalla, contabilizando el total
+	 * de editores únicos en el archivo .CSV
+	 * 
+	 * @throws Exception
+	 */
+	public void getListaPublisher() {
+		int i = 0;
+		
+		try {
+			for (String publisher : coleccionJuegos.getListaPublisher()) {
+					System.out.println(publisher);
+					i++;
+			}
+			log.info("Hay un total de "+i+" editores listados");
+			
+		} catch (Exception e) {
+			log.error(e.getMessage());
+		}
+	}
+	
+	/**
+	 * Mediante esta funcion se sobreescribe el metodo addJuego para añadirlo a la
 	 * coleccion juego
 	 * 
-	 * @param juego Se pasa el valor de juego a a�adir a la coleccion
+	 * @param juego Se pasa el valor de juego a añadir a la coleccion
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para a�adirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
 	 *         coleccion
 	 */
 	@Override
