@@ -54,9 +54,9 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
-	 * Mediante esta función se consigue leer un archivo '<b>.CSV</b>' mediante la
-	 * adición de los parámetros a los atributos de los objetos "Juego" instanciados
-	 * hasta terminar todas las líneas e introduciéndolos en un listado de tipo
+	 * Mediante esta funcion se consigue leer un archivo '<b>.CSV</b>' mediante la
+	 * adicion de los parametros a los atributos de los objetos "Juego" instanciados
+	 * hasta terminar todas las lineas e introduciendolos en un listado de tipo
 	 * '<b>Set</b>'.
 	 * 
 	 * @param nombreFichero Se pasa el nombre del fichero deseado por parámetro..
@@ -68,7 +68,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
-	 * Mediante este método iteramos la coleccion listado para sacar por consola los
+	 * Mediante este metodo iteramos la coleccion listado para sacar por consola los
 	 * objetos. juegos
 	 * 
 	 */
