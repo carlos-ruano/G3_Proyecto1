@@ -1,10 +1,14 @@
 package g327.lucasteam.utilidades;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import g327.lucasteam.modelos.EnumGenre;
@@ -13,7 +17,7 @@ import g327.lucasteam.modelos.Juego;
 import lombok.extern.log4j.Log4j2;
 
 /**
- * Mediante esta clase se conseguira¡ leer los '<b>.CSV</b>' del proyecto y
+ * Mediante esta clase se conseguiraï¿½ leer los '<b>.CSV</b>' del proyecto y
  * sobreescribir cualquier otro '<b>.CSV</b>'.
  * 
  * @see <a href="https://github.com/carlos-ruano/G3_Proyecto1"> GitHub
@@ -115,8 +119,34 @@ public class OperarCSV {
 	 *                      '<b>.CSV</b>'.
 	 * @throws IOException Si se produce una excepcion de Entrada/Salida.
 	 */
-	public static void writeCSV(Set<Juego> listado) {
-		// Falta desarrollar cuerpo
+	public static void writeCSV(String nombreFichero, Set<Juego> listado) {
+		String extension = ".csv"; // Se puede cambiar a cualquier extensiÃ³n
+		try {
+		File fout = new File(nombreFichero+extension);
+		if (!fout.exists()) {
+			log.info("Se ha creado el archivo '"+nombreFichero+extension);
+		}
+		
+		FileOutputStream fos = new FileOutputStream(fout);
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+	 
+		Iterator<Juego> itr = listado.iterator();
+		bw.write("Rank,Name,Platform,Year,Genre,Publisher");
+		bw.newLine();
+		log.debug("Titulos introducidos");
+		
+		
+		while (itr.hasNext()) {
+			Juego juego = (Juego)itr.next();
+			bw.write(juego.getRank()+","+juego.getName()+","+juego.getPlatform()+","+juego.getYear()+","+juego.getGenre()+","+juego.getPublisher());
+			bw.newLine();
+			log.debug("Juego insertado en el .csv");
+		}
+		bw.close(); // Cerramos el Stream de los datos
+		log.info("Archivo sobreescrito");
+		}
+		catch(Exception e) {
+			log.error(e.toString());
+		}
 	}
-
 }

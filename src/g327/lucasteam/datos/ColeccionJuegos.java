@@ -32,6 +32,9 @@ public interface ColeccionJuegos {
 	public void buscarJuegoByName(String name);
   
 	public boolean deleteJuego(int rank);
+	
+	public void exportarListado(String nombreFichero);
+	
 	// public void deleteJuego(Juego juego);
 	// public Juego getByRank(int rank);
 	// public void filtrarByPlatform(String platform) ;
