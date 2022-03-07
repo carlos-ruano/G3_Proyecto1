@@ -82,7 +82,7 @@ public class Lucasteam {
 
 			case 7:
 				// MODIFICAR UN JUEGO
-				services.updateJuego();
+				//services.updateJuego();
 				break;
 
 			case 8:
@@ -97,17 +97,17 @@ public class Lucasteam {
 
 			case 10:
 				// FILTRAR POR JUEGOS DEL SIGLO XX
-				services.filtrarBySigloXX();
+				//services.filtrarBySigloXX();
 				break;
 				
 			case 11:
 				// FILTRAR POR ANO PAR
-				services.filtrarByAnoPar();
+				//services.filtrarByAnoPar();
 				break;
 				
 			case 12:
 				// EXPORTAR LISTADO ACTUAL
-				services.exportarListado();
+				//services.exportarListado();
 				break;
 
 			case 0:
