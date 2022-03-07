@@ -27,7 +27,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	private String publisher;
 
 	/**
-	 * Mediante esta funcion añaden los datos recogidos en operarCSV y se añaden a
+	 * Mediante esta funcion aÃ±aden los datos recogidos en operarCSV y se aÃ±aden a
 	 * la  coleccion de juegos
 	 */
 	@Override
@@ -78,7 +78,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 * juego
 	 * 
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para aÃ±adirlo a la
 	 *         coleccion
 	 */
 	@Override
@@ -90,10 +90,10 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante el uso de esta función se llama a a la capa datos para
+	 * Mediante el uso de esta funciÃ³n se llama a a la capa datos para
 	 * que genere la lista de editores si repetir por medio de un Set y
 	 * se devuelve para imprimirlas por pantalla, contabilizando el total
-	 * de editores únicos en el archivo .CSV
+	 * de editores Ãºnicos en el archivo .CSV
 	 * 
 	 * @throws Exception
 	 */
@@ -113,12 +113,12 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 	
 	/**
-	 * Mediante esta funcion se sobreescribe el metodo addJuego para añadirlo a la
+	 * Mediante esta funcion se sobreescribe el metodo addJuego para aÃ±adirlo a la
 	 * coleccion juego
 	 * 
-	 * @param juego Se pasa el valor de juego a añadir a la coleccion
+	 * @param juego Se pasa el valor de juego a aÃ±adir a la coleccion
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para aÃ±adirlo a la
 	 *         coleccion
 	 */
 	@Override
@@ -136,11 +136,9 @@ public class LucasteamServiceImpl implements LucasteamService {
 
 	@Override
 	public void filtrarByPublisher() {
-
-		System.out.println("Introduce el nombre del editor:");
 				
 		try {
-			this.publisher = Datos.recogeString();
+			this.publisher = Datos.recogeString("Introduce el nombre del editor:");
 		} catch (Exception e) {
 
 			log.error(e.getMessage());
@@ -170,7 +168,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	@Override
 	public void buscarJuegoByName() {
 		try {
-			String name = Datos.recogeString("¿Cual es el nombre del juego que desea buscar?");
+			String name = Datos.recogeString("Â¿Cual es el nombre del juego que desea buscar?");
 			if(name=="" || name==null) {
 				throw new ColeccionJuegosException("Error en el nombre entrado!");
 			}else {
@@ -187,9 +185,13 @@ public class LucasteamServiceImpl implements LucasteamService {
 	public boolean deleteJuego() {
 		boolean estado = false;
 		try {
-			int rank = Datos.recogeInt("¿Cual es el numero de rank del juego que desea borrar?");
+			
+			String name=Datos.recogeString("Que Juego quiere buscar para borrar?");
+			coleccionJuegos.buscarJuegoByName(name);
+			
+			int rank = Datos.recogeInt("Â¿Cual es el numero de rank del juego que desea borrar?");
 			if(rank<0 || rank>16598)
-				throw new ColeccionJuegosException("El numero de rank que ústed ha elegido no existe");
+				throw new ColeccionJuegosException("El numero de rank que Ãºsted ha elegido no existe");
 			else {
 				estado = coleccionJuegos.deleteJuego(rank);
 			}
@@ -202,11 +204,29 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 	
 	/**
-	 * Filtra la coleccion de juegos entre el año 2000 y 1958.
+	 * Filtra la coleccion de juegos entre el aÃ±o 2000 y 1958.
 	 */
 	@Override
 	public void filtrarBySigloXX() {
 		coleccionJuegos.filtrarByAno(2000, 1958);
+  }
+  
+	@Override
+	public void filtrarByAnoPar() {
+		String mensaje="Si quiere filtrar por años pares entre 1\n"
+					+"Si quiere filtrar por años impares entre 2\n";
+		try {
+			int num = Datos.recogeInt(mensaje);
+			if(num == 1 ) coleccionJuegos.filtrarByAnoPar(true);
+			else if(num == 2) coleccionJuegos.filtrarByAnoPar(false);
+			else if (num != 1 && num!=2){
+				throw new ColeccionJuegosException("Error en el numero elegido ");
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	/*
 	 * @Override public Juego getByRank(int rank) { return

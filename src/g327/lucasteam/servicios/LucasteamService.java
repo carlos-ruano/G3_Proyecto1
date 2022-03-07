@@ -40,6 +40,8 @@ public interface LucasteamService {
 	
 	public void filtrarBySigloXX();
   
+	public void filtrarByAnoPar();
+  
 	// public void filtrarByPlatform();
 	// public Juego getByRank(int rank);
 }
