@@ -15,7 +15,9 @@ import java.util.Set;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
 import g327.lucasteam.modelos.Juego;
 import g327.lucasteam.utilidades.OperarCSV;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class ColeccionJuegosImpl implements ColeccionJuegos {
 
 	private Set<Juego> listado = new HashSet<Juego>();
@@ -25,7 +27,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
-	 * Mediante este mÈtodo generamos una coleccion de los datos recogidos en listado.
+	 * Mediante este m√©todo generamos una coleccion de los datos recogidos en listado.
 	 * 
 	 * @param listado Se pasa por parametro la lista
 	 */
@@ -35,7 +37,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
-	 * Mediante este mÈtodo recogemos toda la informacion de la colecion de juegos
+	 * Mediante este m√©todo recogemos toda la informacion de la colecion de juegos
 	 * en listado
 	 * 
 	 * @return La coleccion de juegos tipo '<b>Set<b>'
@@ -45,22 +47,22 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
-	 * Mediante este mÈtodo modificamos la lista del juegos de la coleccion de
+	 * Mediante este m√©todo modificamos la lista del juegos de la coleccion de
 	 * juegos
 	 * 
-	 * @param listado Se pasa por par·metro la lista cargada para modificarla
+	 * @param listado Se pasa por par√°metro la lista cargada para modificarla
 	 */
 	public void setListado(Set<Juego> listado) {
 		this.listado = listado;
 	}
 
 	/**
-	 * Mediante esta funciÛn se consigue leer un archivo '<b>.CSV</b>' mediante la
-	 * adiciÛn de los par·metros a los atributos de los objetos "Juego" instanciados
-	 * hasta terminar todas las lÌneas e introduciÈndolos en un listado de tipo
+	 * Mediante esta funci√≥n se consigue leer un archivo '<b>.CSV</b>' mediante la
+	 * adici√≥n de los par√°metros a los atributos de los objetos "Juego" instanciados
+	 * hasta terminar todas las l√≠neas e introduci√©ndolos en un listado de tipo
 	 * '<b>Set</b>'.
 	 * 
-	 * @param nombreFichero Se pasa el nombre del fichero deseado por par·metro..
+	 * @param nombreFichero Se pasa el nombre del fichero deseado por par√°metro..
 	 */
 	@Override
 	public void importarListado(String nombreFichero) {
@@ -69,34 +71,44 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
-	 * Mediante este mÈtodo iteramos la coleccion listado para sacar por consola los
+	 * Mediante este m√©todo iteramos la coleccion listado para sacar por consola los
 	 * objetos. juegos
 	 * 
 	 */
 	@Override
 	public void mostrarListado() {
-		if (!listado.isEmpty()) {
-			for (Juego j : listado) {
-				System.out.println(j);
+		try {
+			if (!listado.isEmpty()) {
+				for (Juego j : listado) {
+					System.out.println(j);
+				}
+			} else {
+				throw new ColeccionJuegosException("Listado vac√≠o, no se ha podido mostrar ning√∫n juego", 2);
 			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.toString());
 		}
-
 	}
-
-	/**
-	 * Mediante este mÈtodo iteramos la coleccion listado para sacar por consola los
+  /**
+	 * Mediante este m√©todo iteramos la coleccion listado para sacar por consola los
 	 * objetos. juegos con el genre dado
 	 * 
-	 * @param genre Se pasa el nombre del genero deseado por par·metro.
+	 * @param genre Se pasa el nombre del genero deseado por par√°metro.
 	 */
 	@Override
 	public void filtrarByGenre(String genre) {
-		if (!listado.isEmpty()) {
-			for (Juego j : listado) {
-				if (j.getGenre().name().compareToIgnoreCase(genre) == 0) {
-					System.out.println(j.imprimir());
+		try {
+			if (!listado.isEmpty()) {
+				for (Juego j : listado) {
+					if (j.getGenre().name().compareToIgnoreCase(genre) == 0) {
+						System.out.println(j.imprimir());
+					}
 				}
+			} else {
+				throw new ColeccionJuegosException("Listado vac√≠o, no se ha podido importar ning√∫n juego", 2);
 			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage()); // Si el Set est√° vac√≠o
 		}
 	}
 
@@ -113,12 +125,12 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	}
 
 	/**
-	 * Mediante este mÈtodo est·tico se devuelve un <i>System.out.println</i> con la
+	 * Mediante este m√©todo est√°tico se devuelve un <i>System.out.println</i> con la
 	 * cadena de texto deseada.
 	 * 
 	 * @param msg Se le introduce un mensaje personalizado para pedir la entrada del
 	 *            teclado.
-	 * @return Una colecciÛn de juegos de tipo '<b>Set</b>'
+	 * @return Una colecci√≥n de juegos de tipo '<b>Set</b>'
 	 */
 	@Override
 	public String toString() {
@@ -136,7 +148,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * 
 	 * } else {
 	 * 
-	 * System.out.println("Este juego no existe o la lista esta vacÌa.");
+	 * System.out.println("Este juego no existe o la lista esta vac√≠a.");
 	 * 
 	 * } }
 	 * 
@@ -149,7 +161,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * if(!listado.isEmpty()) { for(Juego j : listado) {
 	 * if(j.getPlatform().name().compareToIgnoreCase(platform)==0) {
 	 * System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
-	 * +", aÒo de publicaciÛn: "+j.getYear()+", editor: "+j.getPublisher()
+	 * +", a√±o de publicaci√≥n: "+j.getYear()+", editor: "+j.getPublisher()
 	 * +", su ranking es: "+j.getRank()); } } } }
 	 * 
 	 */

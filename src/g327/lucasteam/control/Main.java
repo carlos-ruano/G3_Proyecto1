@@ -9,7 +9,6 @@ package g327.lucasteam.control;
  * @version 0.1
  *
  */
-
 public class Main {
 
 	public static void main(String[] args) {

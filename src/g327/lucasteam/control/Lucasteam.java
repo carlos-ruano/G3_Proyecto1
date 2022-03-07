@@ -1,9 +1,11 @@
 package g327.lucasteam.control;
 
+import g327.lucasteam.excepciones.ColeccionJuegosException;
 import g327.lucasteam.gui.Menu;
 import g327.lucasteam.servicios.LucasteamService;
 import g327.lucasteam.servicios.LucasteamServiceImpl;
 import g327.lucasteam.utilidades.Datos;
+import lombok.extern.log4j.Log4j2;
 
 /**
  * Mediante esta clase se abre el menu, se llama a servicios y utilidades para.
@@ -15,29 +17,29 @@ import g327.lucasteam.utilidades.Datos;
  * @version 0.1
  *
  */
-
+@Log4j2
 public class Lucasteam {
 
 	private LucasteamService services = new LucasteamServiceImpl();
 
 	/**
-	 * Mediante esta funciÛn abrimos la aplicacion Lucasteam y mostramos un menu, mientras la variable.
+	 * Mediante esta funci√≥n abrimos la aplicacion Lucasteam y mostramos un menu, mientras la variable.
 	 * seguir sea verdadera se seguira mostrando por consola el menu.
 	 * 
 	 * @param seguir sea verdadero, iteramos la clase menu, volviendo a dar una seleccion de opciones.
 	 * @return Devuelve Menu.
 	 */
 	public void abrirLucasteam() {
+		log.info("[Inicio de la sesi√≥n]"); // Hacemos loggin .info al iniciar sesi√≥n
 		boolean seguir = true;
 		do {
 			Menu.mostrarMenu();
 			seguir = this.seleccionOpciones();
 		} while (seguir);
-		System.out.println("   --- Fin de la sesion ---");
+		log.info("[Fin de la sesion]"); // Hacemos loggin .info al terminar la sesi√≥n
 	}
-
-	/**
-	 * Mediante esta funciÛnrecogemos por consola lo elegido por el cliente me diante la clase
+  /**
+	 * Mediante esta funci√≥nrecogemos por consola lo elegido por el cliente me diante la clase
 	 * Datos y el numero del caso en el switch, llamando a los metodos del paquete service.
 	 * 
 	 * @return True para seguir mandando el menu por consola.
@@ -76,24 +78,24 @@ public class Lucasteam {
 			case 0:
 				continuar = salir();
 				break;
+
+			default:
+				throw new ColeccionJuegosException("Selecci√≥n err√≥nea, introduzca una opci√≥n existente", 2);
 			}
 		} catch (Exception e) {
-			System.out.println("error: " + e.toString());
+			log.error(e.toString());
 		}
 		return continuar;
 	}
 
 	/**
-	 * Mediante esta funciÛn se consigue leer un archivo '<b>.CSV</b>' mediante la
-	 * adiciÛn de los par·metros a los atributos de los objetos "Juego" instanciados
-	 * hasta terminar todas las lÌneas e introduciÈndolos en un listado de tipo
-	 * '<b>Set</b>'.
+	 * Esta funci√≥n cierra el bucle del men√∫ en el caso que se marque con una s.
 	 * 
 	 * @return el dato introducido por consola si es diferente a '<b>S<b>'
 	 * @throws Exception
 	 */
 	private boolean salir() throws Exception {
-		String sino = Datos.recogeString("   øEst· seguro?(S/N)");
+		String sino = Datos.recogeString("   ¬øEst√° seguro?(S/N)");
 		return (sino.toUpperCase().charAt(0) != 'S');
 	}
 

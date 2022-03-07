@@ -3,7 +3,7 @@ package g327.lucasteam.servicios;
 import java.lang.annotation.Retention;
 
 /**
- * Mediante esta clase se conseguirá leer los '<b>.CSV</b>' del proyecto y
+ * Mediante esta clase se conseguirÃ¡ leer los '<b>.CSV</b>' del proyecto y
  * sobreescribir cualquier otro '<b>.CSV</b>'.
  * 
  * @see <a href="https://github.com/carlos-ruano/G3_Proyecto1"> GitHub
@@ -18,16 +18,16 @@ import g327.lucasteam.excepciones.ColeccionJuegosException;
 import g327.lucasteam.modelos.EnumGenre;
 import g327.lucasteam.modelos.Juego;
 import g327.lucasteam.utilidades.Datos;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 
-@Log // Invocamos al logger de log4j2
+@Log4j2
 public class LucasteamServiceImpl implements LucasteamService {
 
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
 	private EnumGenre genre;
 
 	/**
-	 * Mediante esta función añaden los datos recogidos en operarCSV y se añaden a
+	 * Mediante esta funciÃ³n aÃ±aden los datos recogidos en operarCSV y se aÃ±aden a
 	 * la . coleccion de juegos
 	 */
 	@Override
@@ -35,11 +35,10 @@ public class LucasteamServiceImpl implements LucasteamService {
 		// Hacemos casting porque el metodo no esta en la interface de datos.
 		String nombreArchivo = "vgsales.csv";
 		((ColeccionJuegosImpl) coleccionJuegos).importarListado(nombreArchivo);
-		log.info("Listado importado del archivo " + nombreArchivo); // Hacemos loggin .info al importar listado,
 	}
 
 	/**
-	 * Mediante esta función se imprime por consola la coleccion de juegos
+	 * Mediante esta funciÃ³n se imprime por consola la coleccion de juegos
 	 */
 	@Override
 	public void mostrarListado() {
@@ -47,7 +46,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta función se imprime por consola la coleccion de juegos donde
+	 * Mediante esta funciÃ³n se imprime por consola la coleccion de juegos donde
 	 * contengan el enumerado de Genero Plataform
 	 */
 	@Override
@@ -56,7 +55,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta función se imprime por consola los enumerados de Genero y se
+	 * Mediante esta funciÃ³n se imprime por consola los enumerados de Genero y se
 	 * recoge para luego imprimir la coleccion de juegos que solo contengan ese
 	 * enumerado
 	 * 
@@ -64,23 +63,22 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 */
 	@Override
 	public void filtrarByGenre() {
-		System.out.println("Seleccione el número de género a buscar:");
+		System.out.println("Seleccione el nÃºmero de gÃ©nero a buscar:");
 		EnumGenre.Informe2();
 		try {
 			this.genre = EnumGenre.dimeCategoria(Datos.recogeInt());
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage());
 		}
 		coleccionJuegos.filtrarByGenre(genre.name());
 	}
 
 	/**
-	 * Mediante esta función se sobreescribe el metodo addJuego para crear el objeto
+	 * Mediante esta funciÃ³n se sobreescribe el metodo addJuego para crear el objeto
 	 * juego
 	 * 
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para aÃ±adirlo a la
 	 *         coleccion
 	 */
 	@Override
@@ -92,12 +90,12 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta función se sobreescribe el metodo addJuego para añadirlo a la
+	 * Mediante esta funciÃ³n se sobreescribe el metodo addJuego para aÃ±adirlo a la
 	 * coleccion juego
 	 * 
-	 * @param juego Se pasa el valor de juego a añadir a la coleccion
+	 * @param juego Se pasa el valor de juego a aÃ±adir a la coleccion
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para aÃ±adirlo a la
 	 *         coleccion
 	 */
 	@Override

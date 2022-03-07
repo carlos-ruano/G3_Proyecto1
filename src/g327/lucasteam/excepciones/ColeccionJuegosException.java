@@ -9,20 +9,17 @@ package g327.lucasteam.excepciones;
  * @version 0.1
  *
  */
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class ColeccionJuegosException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	private Level level;
+	// private Level level;
 
 	public ColeccionJuegosException() {
 	}
 
 	/**
-	 * Mediante esta función construye la excepción con el mensaje de detalle
+	 * Mediante esta funciï¿½n construye la excepciï¿½n con el mensaje de detalle
 	 * especificado
 	 * 
 	 * @param message Se pasa el mensaje del exception.
@@ -32,7 +29,7 @@ public class ColeccionJuegosException extends Exception {
 	}
 
 	/**
-	 * Mediante esta función recogemos la causa del error
+	 * Mediante esta funciï¿½n recogemos la causa del error
 	 * 
 	 * @param cause Se pasa la causa del Throw.
 	 */
@@ -41,7 +38,7 @@ public class ColeccionJuegosException extends Exception {
 	}
 
 	/**
-	 * Mediante esta función construye la excepción con el mensaje de detalle
+	 * Mediante esta funciï¿½n construye la excepciï¿½n con el mensaje de detalle
 	 * especificado y su causa
 	 * 
 	 * @param cause   Se pasa la causa del Throw.
@@ -51,6 +48,7 @@ public class ColeccionJuegosException extends Exception {
 		super(message, cause);
 	}
 
+  /*
 	// 1: ERROR
 	// 2: WARNING
 	// 3: INFO
@@ -59,11 +57,9 @@ public class ColeccionJuegosException extends Exception {
 		setLevel(tipo);
 	}
 
-	/**
-	 * Mediante esta función cambiamos el nivel de gravedad del error
+	 * Mediante esta funciï¿½n cambiamos el nivel de gravedad del error
 	 * 
 	 * @param tipo Se pasa el nivel de error
-	 */
 	public void setLevel(int tipo) {
 
 		switch (tipo) {
@@ -81,10 +77,12 @@ public class ColeccionJuegosException extends Exception {
 			break;
 		}
 	}
+	*/
 
 	@Override
 	public String toString() {
-		Logger.getLogger(ColeccionJuegosException.class.getName()).log(level, null, super.getMessage());
+		// Logger.getLogger(ColeccionJuegosException.class.getName()).log(level, null,
+		// super.getMessage());
 		return super.getMessage();
 	}
 
