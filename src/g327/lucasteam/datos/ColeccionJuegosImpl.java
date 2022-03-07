@@ -80,7 +80,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 					System.out.println(j);
 				}
 			} else {
-				throw new ColeccionJuegosException("Listado vacío, no se ha podido mostrar ningún juego", 2);
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido mostrar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
 			log.warn(e.toString());
@@ -104,7 +104,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 					}
 				}
 			} else {
-				throw new ColeccionJuegosException("Listado vacío, no se ha podido importar ningún juego", 2);
+				throw new ColeccionJuegosException("Listado vacío, no se ha podido importar ningún juego");
 			}
 		} catch (ColeccionJuegosException e) {
 			log.warn(e.getMessage()); // Si el Set está vacío
