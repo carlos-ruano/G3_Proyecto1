@@ -47,7 +47,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public void setListado(Set<Juego> listado) {
 		this.listado = listado;
 	}
-
+  
 	public ArrayList<Juego> getTestListado() {
 		return testListado;
 	}
@@ -111,7 +111,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
-			log.warn(e.getMessage()); // Si el Set esta� vacio
+			log.warn(e.getMessage()); // Si el Set esta vacio
 		}
 	}
 
@@ -125,6 +125,29 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	@Override
 	public boolean addJuego(Juego juego) {
 		return listado.add(juego);
+	}
+	
+	/**
+	 * Metodo para listar todos los editores sin duplicidad
+	 * 
+	 * @return Un HashSet de tipo 'String' de todos los editores que existen
+	 */
+	public Set<String> getListaPublisher() {
+		
+		Set <String> listaSet = new HashSet <String> ();
+		
+		try {
+			if (!listado.isEmpty()) {
+				for (Juego j : listado) {
+					listaSet.add(j.getPublisher());
+				}
+			} else {
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido obtener el Publisher pedido");
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage()); // Si el Set esta vacio
+		}
+		return listaSet;
 	}
 
 	/**
