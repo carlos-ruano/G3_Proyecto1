@@ -185,6 +185,10 @@ public class LucasteamServiceImpl implements LucasteamService {
 	public boolean deleteJuego() {
 		boolean estado = false;
 		try {
+			
+			String name=Datos.recogeString("Que Juego quiere buscar para borrar?");
+			coleccionJuegos.buscarJuegoByName(name);
+			
 			int rank = Datos.recogeInt("Â¿Cual es el numero de rank del juego que desea borrar?");
 			if(rank<0 || rank>16598)
 				throw new ColeccionJuegosException("El numero de rank que Ãºsted ha elegido no existe");
@@ -197,6 +201,24 @@ public class LucasteamServiceImpl implements LucasteamService {
 			e.printStackTrace();
 		}
 		return estado;
+	}
+	@Override
+	public void filtrarByAnoPar() {
+		String mensaje="Si quiere filtrar por años pares entre 1\n"
+					+"Si quiere filtrar por años impares entre 2\n";
+		try {
+			int num = Datos.recogeInt(mensaje);
+			if(num == 1 ) coleccionJuegos.filtrarByAnoPar(true);
+			else if(num == 2) coleccionJuegos.filtrarByAnoPar(false);
+			else if (num != 1 && num!=2){
+				throw new ColeccionJuegosException("Error en el numero elegido ");
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	/*
 	 * @Override public Juego getByRank(int rank) { return
