@@ -23,23 +23,23 @@ public class Lucasteam {
 	private LucasteamService services = new LucasteamServiceImpl();
 
 	/**
-	 * Mediante esta función abrimos la aplicacion Lucasteam y mostramos un menu, mientras la variable.
+	 * Mediante esta funcion abrimos la aplicacion Lucasteam y mostramos un menu, mientras la variable.
 	 * seguir sea verdadera se seguira mostrando por consola el menu.
 	 * 
 	 * @param seguir sea verdadero, iteramos la clase menu, volviendo a dar una seleccion de opciones.
 	 * @return Devuelve Menu.
 	 */
 	public void abrirLucasteam() {
-		log.info("[Inicio de la sesión]"); // Hacemos loggin .info al iniciar sesión
+		log.info("[Inicio de la sesion]"); // Hacemos loggin .info al iniciar sesion
 		boolean seguir = true;
 		do {
 			Menu.mostrarMenu();
 			seguir = this.seleccionOpciones();
 		} while (seguir);
-		log.info("[Fin de la sesion]"); // Hacemos loggin .info al terminar la sesión
+		log.info("[Fin de la sesion]"); // Hacemos loggin .info al terminar la sesion
 	}
   /**
-	 * Mediante esta funciónrecogemos por consola lo elegido por el cliente me diante la clase
+	 * Mediante esta funcion recogemos por consola lo elegido por el cliente me diante la clase
 	 * Datos y el numero del caso en el switch, llamando a los metodos del paquete service.
 	 * 
 	 * @return True para seguir mandando el menu por consola.
@@ -80,7 +80,7 @@ public class Lucasteam {
 				break;
 
 			default:
-				throw new ColeccionJuegosException("Selección errónea, introduzca una opción existente");
+				throw new ColeccionJuegosException("Seleccion erronea, introduzca una opcion existente");
 			}
 		} catch (Exception e) {
 			log.error(e.toString());
@@ -89,13 +89,13 @@ public class Lucasteam {
 	}
 
 	/**
-	 * Esta función cierra el bucle del menú en el caso que se marque con una s.
+	 * Esta funcion cierra el bucle del menu en el caso que se marque con una s.
 	 * 
 	 * @return el dato introducido por consola si es diferente a '<b>S<b>'
 	 * @throws Exception
 	 */
 	private boolean salir() throws Exception {
-		String sino = Datos.recogeString("   ¿Está seguro?(S/N)");
+		String sino = Datos.recogeString("   �Esta seguro?(S/N)");
 		return (sino.toUpperCase().charAt(0) != 'S');
 	}
 

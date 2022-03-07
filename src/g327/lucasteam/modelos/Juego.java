@@ -32,7 +32,7 @@ public @Data @NoArgsConstructor @AllArgsConstructor @Log4j2 class Juego {
 	}
 
 	/**
-	 * Mediante esta función se imprime por pantalla los datos del objeto Juego
+	 * Mediante esta funcion se imprime por pantalla los datos del objeto Juego
 	 */
 	public String imprimir() {
 		return this.getRank() + ": " + this.getName() + ", Platform: " + this.getPlatform().name() + ", Año: "
@@ -40,10 +40,10 @@ public @Data @NoArgsConstructor @AllArgsConstructor @Log4j2 class Juego {
 	}
 
 	/**
-	 * Mediante esta función recogemos los datos que llevara Juego, preguntando por
+	 * Mediante esta funcion recogemos los datos que llevara Juego, preguntando por
 	 * consola y recogiendolos.
 	 * 
-	 * @param nombreFichero Se pasa el nombre del fichero deseado por parámetro.
+	 * @param nombreFichero Se pasa el nombre del fichero deseado por parametro.
 	 * @exception recogemos los errores que dan por consola
 	 */
 	public void createJuego() {
