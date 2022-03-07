@@ -47,7 +47,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public void setListado(Set<Juego> listado) {
 		this.listado = listado;
 	}
-
+  
 	public ArrayList<Juego> getTestListado() {
 		return testListado;
 	}
@@ -111,7 +111,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
-			log.warn(e.getMessage()); // Si el Set esta� vacio
+			log.warn(e.getMessage()); // Si el Set esta vacio
 		}
 	}
 
@@ -126,8 +126,64 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public boolean addJuego(Juego juego) {
 		return listado.add(juego);
 	}
+	
+	/**
+	 * Metodo para listar todos los editores sin duplicidad
+	 * 
+	 * @return Un HashSet de tipo 'String' de todos los editores que existen
+	 */
+	public Set<String> getListaPublisher() {
+		
+		Set <String> listaSet = new HashSet <String> ();
+		
+		try {
+			if (!listado.isEmpty()) {
+				for (Juego j : listado) {
+					listaSet.add(j.getPublisher());
+				}
+			} else {
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido obtener el Publisher pedido");
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage()); // Si el Set esta vacio
+		}
+		return listaSet;
+	}
 
 	/**
+	 * Mediante este metodo iteramos la coleccion listado para sacar por consola los
+	 * objetos. juegos con el editor dado
+	 * 
+	 * @param publisher Se pasa el nombre del editor deseado por parametro.
+	 */
+	@Override
+	public void filtrarByPublisher(String publisher) {
+
+		try {
+			if (!listado.isEmpty()) {
+
+				for (Juego j : listado) {
+
+					if (j.getPlatform().name().compareToIgnoreCase(publisher) == 0) {
+
+						testListado.add(j);
+						System.out.println(j.imprimir());
+
+					}
+
+				}
+
+			} else {
+
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
+
+			}
+		} catch (ColeccionJuegosException e) {
+
+			log.warn(e.getMessage());
+
+		}
+
 	 * Metodo para editar el juego que quieras.
 	 * 
 	 * @param rank   Se el id del juego que esta en la coleccion Juegos.
