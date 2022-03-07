@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
+import g327.lucasteam.gui.Menu;
+import g327.lucasteam.modelos.EnumGenre;
+import g327.lucasteam.modelos.EnumPlatform;
 import g327.lucasteam.modelos.Juego;
 import g327.lucasteam.utilidades.Datos;
 import g327.lucasteam.utilidades.OperarCSV;
@@ -126,46 +129,81 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public boolean addJuego(Juego juego) {
 		return listado.add(juego);
 	}
+	public static boolean isNumeric(String str) { 
+		  try {  
+		    Double.parseDouble(str);  
+		    return true;
+		  } catch(NumberFormatException e){  
+		    return false;  
+		  }  
+		}
 
 	/**
 	 * Metodo para editar el juego que quieras.
 	 * 
 	 * @param rank   Se el id del juego que esta en la coleccion Juegos.
-	 * @param nombre Se pasa el nombre del juego a buscar
+	 * @throws Exception
 	 * @return Devolvemos listado con el juego actualizado.
 	 */
 	public boolean updateJuego(int rank) {
 		boolean estado = false;
-		
+
 		try {
-			switch (Datos.recogeInt()) {
-			case 1: {
+			if (!listado.isEmpty()) {
+				for (Juego j : listado) {
+					if (j.getRank() == rank) {
+						boolean seguir = true;
+						do {
+							Menu.mostrarMenuEdit();
+							String z = Datos.recogeString();
+							if(isNumeric(z)) {
+								rank = Integer.parseInt(z);
+								switch (rank) {
+								case 1: {
+									j.setRank(Datos.recogeInt(j.getRank() + " Este es el rank actual,¿a cual quieres cambiar?"));
+									break;
+								}
+								case 2: {
+									j.setName(Datos.recogeString(j.getName() + " Este es el nombre actual,¿a cual quieres cambiar?"));
+									break;
+								}
+								case 3: {
+									EnumPlatform.Informe2();
+									j.setPlatform(EnumPlatform.dimeCategoria(Datos.recogeInt(j.getPlatform() + " Esta es la Plataforma actual,¿a cual quieres cambiar?")));
+									break;
+								}
+								case 4: {
+									j.setYear(String.valueOf(Datos.recogeInt(j.getYear() + " Este es el Año actual,¿a cual quieres cambiar?")));
+									break;
+								}
+								case 5: {
+									EnumGenre.Informe2();
+									j.setGenre(EnumGenre.dimeCategoria(Datos.recogeInt(j.getGenre() + " Este es el Genero actual,¿a cual quieres cambiar?")));
+									break;
+								}
+								case 6: {
+									j.setPublisher(Datos.recogeString(j.getPublisher() + " Esta es la Editora,¿a cual quieres cambiar?"));
+									break;
+								}
+								case 0:{
+									seguir = false;
+									break;
+								}
+								default:
+									throw new ColeccionJuegosException("Seleccion erronea, introduzca una opcion existente");
+								}
+							}else {
+								throw new ColeccionJuegosException("¡Tienes que introducir un numero!");
+							}
+						}while(seguir);
+					} else {
+						throw new ColeccionJuegosException("No existe un Juego para ese rank, introduzca uno valido");
+					}
+				}
+			} else {
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
+			}
 
-				yield type;
-			}
-			case 2: {
-
-				yield type;
-			}
-			case 3: {
-
-				yield type;
-			}
-			case 4: {
-
-				yield type;
-			}
-			case 5: {
-
-				yield type;
-			}
-			case 6: {
-
-				yield type;
-			}
-			default:
-				throw new ColeccionJuegosException("Seleccion erronea, introduzca una opcion existente");
-			}
 		} catch (Exception e) {
 			log.error(e.toString());
 		}
@@ -185,14 +223,16 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public String toString() {
 		return "ColeccionJuegosImpl [listado=" + listado + "]";
 	}
+
 	@Override
-	public void buscarJuegoByName(String name) {
+	public boolean buscarJuegoByName(String name) {
+		boolean estado = false;
 		try {
-			if(listado.isEmpty())
+			if (listado.isEmpty())
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			else {
-				for(Juego j : listado) {
-					if(j.getName().contains(name)) {
+				for (Juego j : listado) {
+					if (j.getName().toLowerCase().contains(name.toLowerCase())) {
 						System.out.println(j);
 					}
 				}
@@ -200,15 +240,16 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		} catch (ColeccionJuegosException e) {
 			log.warn(e.getMessage());
 		}
-		
+		return estado;
 	}
+
 	@Override
 	public boolean deleteJuego(int rank) {
 		boolean estado = false;
 		try {
-			for(Juego j : listado) {
-				if(j.getRank()==rank)
-					estado= listado.remove(j);
+			for (Juego j : listado) {
+				if (j.getRank() == rank)
+					estado = listado.remove(j);
 				else {
 					throw new ColeccionJuegosException("La lista no contiene ningun juego con este numero de rank");
 				}
@@ -218,7 +259,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 		return estado;
 	}
-	
+
 	/*
 	 * @Override public void deleteJuego(Juego juego) {
 	 * 

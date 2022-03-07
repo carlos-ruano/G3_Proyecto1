@@ -187,5 +187,8 @@ class TestColeccionJuegosImpl {
 		assertThat(this).isNotNull();
 		
 	}
-
+	
+	void testUpdateJuego() {
+		
+	}
 }

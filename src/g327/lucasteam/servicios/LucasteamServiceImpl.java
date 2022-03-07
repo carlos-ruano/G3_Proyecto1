@@ -101,24 +101,51 @@ public class LucasteamServiceImpl implements LucasteamService {
 		// return coleccionJuegos.addJuego(juego,(int)coleccionJuegos.getLastRank());
 		return coleccionJuegos.addJuego(juego);
 	}
+	/**
+	 * Metodo para editar el juego que quieras.
+	 * 
+	 * @param rank   Se el id del juego que esta en la coleccion Juegos.
+	 * @param name	Se recoge el nombre del juego a buscar
+	 * @throws Exception
+	 * @return Devolvemos el juego a modificar
+	 */
 	@Override
-	public boolean updateJuego(int rank) {
-		return coleccionJuegos.updateJuego(rank);
+	public boolean updateJuego() {
+		boolean estado = false;
+		try {
+			String name = Datos.recogeString("¿Cual es el nombre del juego que desea buscar?");
+			if(coleccionJuegos.buscarJuegoByName(name) == true ) {
+				throw new ColeccionJuegosException("Error !") ;
+				
+			}else {
+				int rank = Datos.recogeInt("¿Cual es el numero de rank del juego que desea modificar?");
+				estado = coleccionJuegos.updateJuego(rank);
+			}
+		}catch(ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return estado;
   }
 	@Override
-	public void buscarJuegoByName() {
+	public boolean buscarJuegoByName() {
+		boolean estado = false;
 		try {
 			String name = Datos.recogeString("¿Cual es el nombre del juego que desea buscar?");
 			if(name=="" || name==null) {
 				throw new ColeccionJuegosException("Error en el nombre entrado!");
 			}else {
 				coleccionJuegos.buscarJuegoByName(name);
+				estado = true;
 			}
 		} catch (ColeccionJuegosException e) {
 			// TODO: handle exception
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return estado;
 	}
 	
 	@Override
