@@ -1,8 +1,7 @@
 package g327.lucasteam.servicios;
 
 /**
- * Mediante esta clase se conseguirá leer los '<b>.CSV</b>' del proyecto y
- * sobreescribir cualquier otro '<b>.CSV</b>'.
+ * Interface de Service.
  * 
  * @see <a href="https://github.com/carlos-ruano/G3_Proyecto1"> GitHub
  *      G3_Proyecto1</a>
