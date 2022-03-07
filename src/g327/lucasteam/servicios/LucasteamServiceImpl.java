@@ -200,6 +200,14 @@ public class LucasteamServiceImpl implements LucasteamService {
 		}
 		return estado;
 	}
+	
+	/**
+	 * Filtra la coleccion de juegos entre el año 2000 y 1958.
+	 */
+	@Override
+	public void filtrarBySigloXX() {
+		coleccionJuegos.filtrarByAno(2000, 1958);
+	}
 	/*
 	 * @Override public Juego getByRank(int rank) { return
 	 * coleccionJuegos.getByRank(rank);
