@@ -82,7 +82,7 @@ public class Lucasteam {
 
 			case 7:
 				// MODIFICAR UN JUEGO
-				//services.updateJuego();
+				services.updateJuego();
 				break;
 
 			case 8:
@@ -97,12 +97,12 @@ public class Lucasteam {
 
 			case 10:
 				// FILTRAR POR JUEGOS DEL SIGLO XX
-				//services.filtrarBySigloXX();
+				services.filtrarBySigloXX();
 				break;
 				
 			case 11:
 				// FILTRAR POR ANO PAR
-				//services.filtrarByAnoPar();
+				services.filtrarByAnoPar();
 				break;
 				
 			case 12:
@@ -130,7 +130,7 @@ public class Lucasteam {
 	 * @throws Exception
 	 */
 	private boolean salir() throws Exception {
-		String sino = Datos.recogeString("   �Esta seguro?(S/N)");
+		String sino = Datos.recogeString("---¿Esta seguro?(S/N)---");
 		return (sino.toUpperCase().charAt(0) != 'S');
 	}
 

@@ -4,7 +4,6 @@ import g327.lucasteam.datos.ColeccionJuegos;
 import g327.lucasteam.datos.ColeccionJuegosImpl;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
 import g327.lucasteam.modelos.EnumGenre;
-import g327.lucasteam.modelos.EnumPlatform;
 import g327.lucasteam.modelos.Juego;
 import g327.lucasteam.utilidades.Datos;
 import lombok.extern.log4j.Log4j2;
@@ -135,18 +134,14 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 */
 
 	@Override
-	public void filtrarByPublisher() {
-				
+	public void filtrarByPublisher() {			
 		try {
 			this.publisher = Datos.recogeString("Introduce el nombre del editor:");
 		} catch (Exception e) {
 
 			log.error(e.getMessage());
-
 		}
-
 		coleccionJuegos.filtrarByPublisher(publisher);
-
 	}
 
 	/**
@@ -156,9 +151,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 
 	@Override
 	public void filtrarByPublisherNintendo() {
-
 		coleccionJuegos.filtrarByPublisher("Nintendo");
-
 	}
 
   /**
@@ -201,7 +194,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 				estado = true;
 			}
 		} catch (ColeccionJuegosException e) {
-			// TODO: handle exception
+			log.warn(e.getMessage());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
