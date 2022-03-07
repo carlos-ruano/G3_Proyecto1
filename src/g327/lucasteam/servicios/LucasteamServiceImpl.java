@@ -1,17 +1,5 @@
 package g327.lucasteam.servicios;
 
-import java.lang.annotation.Retention;
-
-/**
- * Mediante esta clase se conseguirÃ¡ leer los '<b>.CSV</b>' del proyecto y
- * sobreescribir cualquier otro '<b>.CSV</b>'.
- * 
- * @see <a href="https://github.com/carlos-ruano/G3_Proyecto1"> GitHub
- *      G3_Proyecto1</a>
- * @author Equipo 3
- * @version 0.1
- *
- */
 import g327.lucasteam.datos.ColeccionJuegos;
 import g327.lucasteam.datos.ColeccionJuegosImpl;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
@@ -37,7 +25,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	private EnumGenre genre;
 
 	/**
-	 * Mediante esta funcion añaden los datos recogidos en operarCSV y se añaden a
+	 * Mediante esta funcion aï¿½aden los datos recogidos en operarCSV y se aï¿½aden a
 	 * la  coleccion de juegos
 	 */
 	@Override
@@ -88,7 +76,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 * juego
 	 * 
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para aï¿½adirlo a la
 	 *         coleccion
 	 */
 	@Override
@@ -100,18 +88,22 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta funcion se sobreescribe el metodo addJuego para añadirlo a la
+	 * Mediante esta funcion se sobreescribe el metodo addJuego para aï¿½adirlo a la
 	 * coleccion juego
 	 * 
-	 * @param juego Se pasa el valor de juego a añadir a la coleccion
+	 * @param juego Se pasa el valor de juego a aï¿½adir a la coleccion
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para aï¿½adirlo a la
 	 *         coleccion
 	 */
 	@Override
 	public boolean addJuego(Juego juego) throws ColeccionJuegosException {
 		// return coleccionJuegos.addJuego(juego,(int)coleccionJuegos.getLastRank());
 		return coleccionJuegos.addJuego(juego);
+	}
+	
+	public boolean updateJuego(int rank) {
+		return coleccionJuegos.updateJuego(rank);
 	}
 	/*
 	 * @Override public Juego getByRank(int rank) { return
