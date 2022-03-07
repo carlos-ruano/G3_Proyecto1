@@ -1,4 +1,4 @@
-package g327.lucasteam.excepciones.tests;
+package g327.lucasteam.tests;
 
 
 
