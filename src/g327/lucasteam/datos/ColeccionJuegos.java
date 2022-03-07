@@ -24,6 +24,14 @@ public interface ColeccionJuegos {
 	public Set<String> getListaPublisher();
 
 	public boolean addJuego(Juego juego);
+
+	public void filtrarByPublisher(String publisher);
+  
+	public boolean updateJuego(int rank);
+  
+	public void buscarJuegoByName(String name);
+  
+	public boolean deleteJuego(int rank);
 	// public void deleteJuego(Juego juego);
 	// public Juego getByRank(int rank);
 	// public void filtrarByPlatform(String platform) ;

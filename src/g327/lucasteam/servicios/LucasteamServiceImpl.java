@@ -1,21 +1,10 @@
 package g327.lucasteam.servicios;
 
-import java.lang.annotation.Retention;
-
-/**
- * Mediante esta clase se conseguirá leer los '<b>.CSV</b>' del proyecto y
- * sobreescribir cualquier otro '<b>.CSV</b>'.
- * 
- * @see <a href="https://github.com/carlos-ruano/G3_Proyecto1"> GitHub
- *      G3_Proyecto1</a>
- * @author Equipo 3
- * @version 0.1
- *
- */
 import g327.lucasteam.datos.ColeccionJuegos;
 import g327.lucasteam.datos.ColeccionJuegosImpl;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
 import g327.lucasteam.modelos.EnumGenre;
+import g327.lucasteam.modelos.EnumPlatform;
 import g327.lucasteam.modelos.Juego;
 import g327.lucasteam.utilidades.Datos;
 import lombok.extern.log4j.Log4j2;
@@ -35,10 +24,11 @@ public class LucasteamServiceImpl implements LucasteamService {
 
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
 	private EnumGenre genre;
+	private String publisher;
 
 	/**
 	 * Mediante esta funcion añaden los datos recogidos en operarCSV y se añaden a
-	 * la . coleccion de juegos
+	 * la  coleccion de juegos
 	 */
 	@Override
 	public void importarListado() {
@@ -88,7 +78,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 * juego
 	 * 
 	 * @throws Exception
-	 * @return addJuego(juego) El juego que pasaron por teclado para a�adirlo a la
+	 * @return addJuego(juego) El juego que pasaron por teclado para añadirlo a la
 	 *         coleccion
 	 */
 	@Override
@@ -135,6 +125,80 @@ public class LucasteamServiceImpl implements LucasteamService {
 	public boolean addJuego(Juego juego) throws ColeccionJuegosException {
 		// return coleccionJuegos.addJuego(juego,(int)coleccionJuegos.getLastRank());
 		return coleccionJuegos.addJuego(juego);
+	}
+
+	/**
+	 * Mediante esta funcion se recoge el String introducido por el usuario, para luego
+	 * imprimir la coleccion de juegos que solo contengan ese publisher.
+	 * 
+	 * @exception Recoge los errores de impresion.
+	 */
+
+	@Override
+	public void filtrarByPublisher() {
+
+		System.out.println("Introduce el nombre del editor:");
+				
+		try {
+			this.publisher = Datos.recogeString();
+		} catch (Exception e) {
+
+			log.error(e.getMessage());
+
+		}
+
+		coleccionJuegos.filtrarByPublisher(publisher);
+
+	}
+
+	/**
+	 * Mediante esta funcion se imprime por consola la coleccion de juegos donde
+	 * contengan el publisher Nintendo.
+	 */
+
+	@Override
+	public void filtrarByPublisherNintendo() {
+
+		coleccionJuegos.filtrarByPublisher("Nintendo");
+
+	}
+
+	@Override
+	public boolean updateJuego(int rank) {
+		return coleccionJuegos.updateJuego(rank);
+  }
+	@Override
+	public void buscarJuegoByName() {
+		try {
+			String name = Datos.recogeString("¿Cual es el nombre del juego que desea buscar?");
+			if(name=="" || name==null) {
+				throw new ColeccionJuegosException("Error en el nombre entrado!");
+			}else {
+				coleccionJuegos.buscarJuegoByName(name);
+			}
+		} catch (ColeccionJuegosException e) {
+			// TODO: handle exception
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public boolean deleteJuego() {
+		boolean estado = false;
+		try {
+			int rank = Datos.recogeInt("¿Cual es el numero de rank del juego que desea borrar?");
+			if(rank<0 || rank>16598)
+				throw new ColeccionJuegosException("El numero de rank que ústed ha elegido no existe");
+			else {
+				estado = coleccionJuegos.deleteJuego(rank);
+			}
+		} catch (ColeccionJuegosException e) {
+			log.warn(e.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return estado;
 	}
 	/*
 	 * @Override public Juego getByRank(int rank) { return
