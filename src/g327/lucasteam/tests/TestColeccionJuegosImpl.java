@@ -10,9 +10,6 @@ import static org.assertj.core.api.Assertions.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Collections;
-
-import org.assertj.core.internal.bytebuddy.implementation.bind.annotation.IgnoreForBinding.Verifier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +17,7 @@ import org.junit.jupiter.api.Test;
 class TestColeccionJuegosImpl {
 
 	private ColeccionJuegosImpl CJ;
+	@SuppressWarnings("unused")
 	private final PrintStream standardOut = System.out;
 	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 	
