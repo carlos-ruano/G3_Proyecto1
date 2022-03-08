@@ -217,7 +217,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 		}
 	}
 
-  }
+  
 	
 	/**
 	 * Mediante este metodo se sobreescribe el metodo buscarJuegoByName de la capa Datos
