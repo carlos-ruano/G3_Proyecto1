@@ -87,12 +87,12 @@ public class Lucasteam {
 
 			case 8:
 				// FILTRAR POR EDITOR NINTENDO
-				//services.filtrarByPublisherNintendo();
+				services.filtrarByPublisherNintendo();
 				break;
 
 			case 9:
 				// LISTADO DE EDITORES
-				//services.getListaPublisher();
+				services.getListaPublisher();
 				break;
 
 			case 10:
