@@ -107,7 +107,7 @@ public class Lucasteam {
 				
 			case 12:
 				// EXPORTAR LISTADO ACTUAL
-				services.exportarListado();
+				//services.exportarListado();
 				break;
 
 			case 0:
@@ -130,7 +130,7 @@ public class Lucasteam {
 	 * @throws Exception
 	 */
 	private boolean salir() throws Exception {
-		String sino = Datos.recogeString("   �Esta seguro?(S/N)");
+		String sino = Datos.recogeString("---¿Esta seguro?(S/N)---");
 		return (sino.toUpperCase().charAt(0) != 'S');
 	}
 

@@ -29,14 +29,18 @@ public interface ColeccionJuegos {
   
 	public boolean updateJuego(int rank);
   
-	public void buscarJuegoByName(String name);
+	public boolean buscarJuegoByName(String name);
   
 	public boolean deleteJuego(int rank);
 	
+	public void filtrarByAno(int anoMax, int anoMin);
+  
+	public void filtrarByAnoPar(boolean par);
+  
 	public void exportarListado(String nombreFichero);
-	
+  
 	// public void deleteJuego(Juego juego);
 	// public Juego getByRank(int rank);
 	// public void filtrarByPlatform(String platform) ;
-
+	
 }

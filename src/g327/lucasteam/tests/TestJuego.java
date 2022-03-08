@@ -41,7 +41,7 @@ class TestJuego {
 
 	@Test
 	void testImprimirOK() {
-		assertThat(juego.imprimir()).isEqualTo("0: 1, Platform: WII, A�o: 1990, G�nero: PLATFORM, Editor: nintendo");
+		assertThat(juego.imprimir()).isEqualTo("0: 1, Platform: WII, Ano: 1990, Genero: PLATFORM, Editor: nintendo");
 
 	}
 	/*
