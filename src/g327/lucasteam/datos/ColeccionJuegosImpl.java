@@ -65,7 +65,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * hasta terminar todas las lineas e introduciendolos en un listado de tipo
 	 * '<b>Set</b>'.
 	 * 
-	 * @param nombreFichero Se pasa el nombre del fichero deseado por parÃ¡metro..
+	 * @param nombreFichero Se pasa el nombre del fichero deseado por parámetro..
 	 */
 	@Override
 	public void importarListado(String nombreFichero) {
@@ -85,7 +85,6 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 				for (Juego j : listado) {
 					System.out.println(j);
 				}
-				log.info("El archivo ha sido mostrado importado correctamente");
 			} else {
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido mostrar ningun juego");
 			}
@@ -111,12 +110,11 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 						System.out.println(j.imprimir());
 					}
 				}
-				log.info("Se ha filtrado por genero "+genre+".");
 			} else {
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
-			log.warn(e.getMessage()); // Si el Set esta vacio
+			log.warn(e.getMessage()); // Si el Set esta� vacio
 		}
 	}
 
@@ -189,14 +187,12 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		} catch (ColeccionJuegosException e) {
 
 			log.warn(e.getMessage());
-
 		}
-	}
 
 	/**
 	 * Metodo para editar el juego que quieras.
 	 * 
-	 * @param rank Se el id del juego que esta en la coleccion Juegos.
+	 * @param rank   Se el id del juego que esta en la coleccion Juegos.
 	 * @throws Exception
 	 * @return Devolvemos listado con el juego actualizado.
 	 */
@@ -211,55 +207,44 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 						do {
 							Menu.mostrarMenuEdit();
 							String z = Datos.recogeString();
-							if (isNumeric(z)) {
+							if(isNumeric(z)) {
 								rank = Integer.parseInt(z);
 								switch (rank) {
 								case 1: {
-									j.setRank(Datos.recogeInt(
-											j.getRank() + " Este es el rank actual,¿a cual quieres cambiar?"));
+									j.setRank(Datos.recogeInt(j.getRank() + " - Este es el rank actual,¿a cual quieres cambiar?"));
 									break;
 								}
 								case 2: {
-									j.setName(Datos.recogeString(
-											j.getName() + " Este es el nombre actual,¿a cual quieres cambiar?"));
+									j.setName(Datos.recogeString(j.getName() + " - Este es el nombre actual,¿a cual quieres cambiar?"));
 									break;
 								}
 								case 3: {
-									EnumPlatform.Informe2();
-									j.setPlatform(EnumPlatform.dimeCategoria(Datos.recogeInt(j.getPlatform()
-											+ " Esta es la Plataforma actual,¿a cual quieres cambiar?")));
+									j.setPlatform(EnumPlatform.dimeCategoria(Datos.recogeInt(j.getPlatform() + " - Esta es la Plataforma actual,¿a cual quieres cambiar?")));
 									break;
 								}
 								case 4: {
-									j.setYear(String.valueOf(Datos.recogeInt(
-											j.getYear() + " Este es el Año actual,¿a cual quieres cambiar?")));
+									j.setYear(String.valueOf(Datos.recogeInt(j.getYear() + " - Este es el Año actual,¿a cual quieres cambiar?")));
 									break;
 								}
 								case 5: {
-									EnumGenre.Informe2();
-									j.setGenre(EnumGenre.dimeCategoria(Datos.recogeInt(
-											j.getGenre() + " Este es el Genero actual,¿a cual quieres cambiar?")));
+									j.setGenre(EnumGenre.dimeCategoria(Datos.recogeInt(j.getGenre() + " - Este es el Genero actual,¿a cual quieres cambiar?")));
 									break;
 								}
 								case 6: {
-									j.setPublisher(Datos.recogeString(
-											j.getPublisher() + " Esta es la Editora,¿a cual quieres cambiar?"));
+									j.setPublisher(Datos.recogeString(j.getPublisher() + " - Esta es la Editora,¿a cual quieres cambiar?"));
 									break;
 								}
-								case 0: {
+								case 0:{
 									seguir = false;
 									break;
 								}
 								default:
-									throw new ColeccionJuegosException(
-											"Seleccion erronea, introduzca una opcion existente");
+									throw new ColeccionJuegosException("Seleccion erronea, introduzca una opcion existente");
 								}
-							} else {
+							}else {
 								throw new ColeccionJuegosException("¡Tienes que introducir un numero!");
 							}
-						} while (seguir);
-						log.info("Se ha modificado el juego:");
-						log.info("j.imprimir");
+						}while(seguir);
 					} else {
 						throw new ColeccionJuegosException("No existe un Juego para ese rank, introduzca uno valido");
 					}
@@ -305,7 +290,6 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 						System.out.println(j);
 					}
 				}
-				log.info("Se ha filtrado por nombre "+name+".");
 			}
 		} catch (ColeccionJuegosException e) {
 			log.warn(e.getMessage());
@@ -324,8 +308,6 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public boolean deleteJuego(int rank) {
 		boolean estado = false;
 		try {
-			Juego j1 = null;
-			System.out.println(listado.size());
 			for (Juego j : listado) {
 				if (j.getRank() == rank)
 					j1 = j;
@@ -400,15 +382,13 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 						}
 					}
 				}
-				log.info("Se ha filtrado por año entre "+anoMax+" y "+ anoMin+".");
-			} else {
-				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
 			log.warn(e.getMessage());
 		}
-
+		return estado;
 	}
+
 	
 	/**
 	 * Metodo para recoger los datos del HashSet y usando un nombre de fichero pedido <br>por el usuario, se guarda un .csv

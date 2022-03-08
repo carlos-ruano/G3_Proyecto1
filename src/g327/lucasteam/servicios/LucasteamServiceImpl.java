@@ -28,7 +28,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 
 	/**
 	 * Mediante esta funcion aÃ±aden los datos recogidos en operarCSV y se aÃ±aden a
-	 * la  coleccion de juegos
+	 * la coleccion de juegos
 	 */
 	@Override
 	public void importarListado() {
@@ -108,29 +108,29 @@ public class LucasteamServiceImpl implements LucasteamService {
 	
 
 	/**
-	 * Mediante el uso de esta funciÃ³n se llama a a la capa datos para
-	 * que genere la lista de editores si repetir por medio de un Set y
-	 * se devuelve para imprimirlas por pantalla, contabilizando el total
-	 * de editores Ãºnicos en el archivo .CSV
+	 * Mediante el uso de esta funciÃ³n se llama a a la capa datos para que genere
+	 * la lista de editores si repetir por medio de un Set y se devuelve para
+	 * imprimirlas por pantalla, contabilizando el total de editores Ãºnicos en el
+	 * archivo .CSV
 	 * 
 	 * @throws Exception
 	 */
 	@Override
 	public void getListaPublisher() {
 		int i = 0;
-		
+
 		try {
 			for (String publisher : coleccionJuegos.getListaPublisher()) {
-					System.out.println(publisher);
-					i++;
+				System.out.println(publisher);
+				i++;
 			}
-			log.info("Hay un total de "+i+" editores listados");
-			
+			log.info("Hay un total de " + i + " editores listados");
+
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * Mediante esta funcion se sobreescribe el metodo addJuego para aÃ±adirlo a la
 	 * coleccion juego
@@ -147,14 +147,14 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
-	 * Mediante esta funcion se recoge el String introducido por el usuario, para luego
-	 * imprimir la coleccion de juegos que solo contengan ese publisher.
+	 * Mediante esta funcion se recoge el String introducido por el usuario, para
+	 * luego imprimir la coleccion de juegos que solo contengan ese publisher.
 	 * 
 	 * @exception Recoge los errores de impresion.
 	 */
 
 	@Override
-	public void filtrarByPublisher() {			
+	public void filtrarByPublisher() {
 		try {
 			this.publisher = Datos.recogeString("Introduce el nombre del editor:");
 		} catch (Exception e) {
@@ -174,11 +174,11 @@ public class LucasteamServiceImpl implements LucasteamService {
 		coleccionJuegos.filtrarByPublisher("Nintendo");
 	}
 
-  /**
+	/**
 	 * Metodo para editar el juego que quieras.
 	 * 
-	 * @param rank   Se el id del juego que esta en la coleccion Juegos.
-	 * @param name	Se recoge el nombre del juego a buscar
+	 * @param rank Se el id del juego que esta en la coleccion Juegos.
+	 * @param name Se recoge el nombre del juego a buscar
 	 * @throws Exception
 	 * @return Devolvemos el juego a modificar
 	 */
@@ -187,20 +187,36 @@ public class LucasteamServiceImpl implements LucasteamService {
 		boolean estado = false;
 		try {
 			String name = Datos.recogeString("¿Cual es el nombre del juego que desea buscar?");
-			if(coleccionJuegos.buscarJuegoByName(name) == true ) {
-				throw new ColeccionJuegosException("Error !") ;
-				
-			}else {
-				int rank = Datos.recogeInt("¿Cual es el numero de rank del juego que desea modificar?");
-				estado = coleccionJuegos.updateJuego(rank);
+			if (coleccionJuegos.buscarJuegoByName(name) == true) {
+				throw new ColeccionJuegosException("Error !");
+
+			} else {
+				String z = Datos.recogeString("¿Cual es el numero de rank del juego que desea modificar?");
+				if (isNumeric(z) != true) {
+					throw new ColeccionJuegosException("Error !");
+				}else {
+					int rank = Integer.parseInt(z);
+					estado = coleccionJuegos.updateJuego(rank);
+				}
 			}
-		}catch(ColeccionJuegosException e) {
+		} catch (ColeccionJuegosException e) {
 			log.warn(e.getMessage());
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return estado;
+	}
+
+	public static boolean isNumeric(String str) {
+		try {
+			Double.parseDouble(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
+	}
+
   }
 	
 	/**
@@ -212,9 +228,9 @@ public class LucasteamServiceImpl implements LucasteamService {
 		boolean estado = false;
 		try {
 			String name = Datos.recogeString("Â¿Cual es el nombre del juego que desea buscar?");
-			if(name=="" || name==null) {
+			if (name == "" || name == null) {
 				throw new ColeccionJuegosException("Error en el nombre entrado!");
-			}else {
+			} else {
 				coleccionJuegos.buscarJuegoByName(name);
 				estado = true;
 			}
@@ -225,6 +241,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 		}
 		return estado;
 	}
+
 	/**
 	 * Mediante este metodo se sobreescribe el metodo deleteJuego de la capa Datos
 	 * para borrar un juego de la lista
@@ -233,12 +250,12 @@ public class LucasteamServiceImpl implements LucasteamService {
 	public boolean deleteJuego() {
 		boolean estado = false;
 		try {
-			
-			String name=Datos.recogeString("Que Juego quiere buscar para borrar?");
+
+			String name = Datos.recogeString("Que Juego quiere buscar para borrar?");
 			coleccionJuegos.buscarJuegoByName(name);
-			
+
 			int rank = Datos.recogeInt("Â¿Cual es el numero de rank del juego que desea borrar?");
-			if(rank<0 || rank>16598)
+			if (rank < 0 || rank > 16598)
 				throw new ColeccionJuegosException("El numero de rank que Ãºsted ha elegido no existe");
 			else {
 				estado = coleccionJuegos.deleteJuego(rank);
@@ -250,7 +267,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 		}
 		return estado;
 	}
-	
+
 	/**
 	 * Se le pide al usuario introducir un nombre para el archivo .csv para llamar después a la capa datos
 	 */
@@ -271,7 +288,8 @@ public class LucasteamServiceImpl implements LucasteamService {
 	@Override
 	public void filtrarBySigloXX() {
 		coleccionJuegos.filtrarByAno(2000, 1958);
-  }
+
+	}
   
   /**
    * Mediante este metodo se sobreescribe el metodo filtrarByA�oPar de la capa Datos
@@ -280,18 +298,19 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 */
 	@Override
 	public void filtrarByAnoPar() {
-		String mensaje="Si quiere filtrar por años pares entre 1\n"
-					+"Si quiere filtrar por años impares entre 2\n";
+		String mensaje = "Si quiere filtrar por años pares entre 1\n" + "Si quiere filtrar por años impares entre 2\n";
 		try {
 			int num = Datos.recogeInt(mensaje);
-			if(num == 1 ) coleccionJuegos.filtrarByAnoPar(true);
-			else if(num == 2) coleccionJuegos.filtrarByAnoPar(false);
-			else if (num != 1 && num!=2){
+			if (num == 1)
+				coleccionJuegos.filtrarByAnoPar(true);
+			else if (num == 2)
+				coleccionJuegos.filtrarByAnoPar(false);
+			else if (num != 1 && num != 2) {
 				throw new ColeccionJuegosException("Error en el numero elegido ");
 			}
 		} catch (ColeccionJuegosException e) {
 			log.warn(e.getMessage());
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
