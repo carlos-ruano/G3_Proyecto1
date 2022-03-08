@@ -9,8 +9,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -106,7 +104,7 @@ class TestColeccionJuegosImpl {
 		//Then:
 		assertThat(j).isNotNull();
 		assertThat(CJ.addJuego(j)).isNotEqualTo(false);
-
+	}
 	
 	@Test
 	void testAddJuego2() {
