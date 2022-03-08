@@ -94,19 +94,7 @@ class TestColeccionJuegosImpl {
 
 	}
 
-	@Test
-	void testAddJuego() {
-		
-		// Comprobar que el juego aï¿½adido no es nulo y que se aï¿½ade correctamente.
-		
-		//Given:
-		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1989",EnumGenre.PUZZLE,"Nintendo");
-		//When:
-		//Then:
-		assertThat(j).isNotNull();
-		assertThat(CJ.addJuego(j)).isNotEqualTo(false);
 
-	}
 	
 	@Test
 	void testAddJuego2() {
@@ -120,82 +108,38 @@ class TestColeccionJuegosImpl {
 		//Then:
 		assertThat(j).isNotNull();
 		assertThat(CJ.getListado()).hasSize(1);
-
 	}
 	
 	@Test
-	void testAddJuego3() {
-		
+	void testAddJuegoOK() {
 		// Comprobar que no se aï¿½ade un juego posterior al aï¿½o 1958.
-		
 		//Given:
-		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1957",EnumGenre.PUZZLE,"Nintendo");
+		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1958",EnumGenre.PUZZLE,"Nintendo");
 		//When:
-		if (Integer.parseInt(j.getYear()) < 1958) {
-			
-			System.out.println("El primer juego saliï¿½ en 1958, y por tanto el aï¿½o es invï¿½lido.");
-			
-		} else {
-			
-		//Then:
-			
+		//Then:	
 			assertThat(CJ.addJuego(j)).isEqualTo(true);
-			System.out.println("Juego aï¿½adido correctamente.");
-
-			
-		}
-
-
-	}
-		
-
-	@Test
-	void testAddJuego4() {
-		
-		// Comprobar que un juego se aï¿½ade con una plataforma que no existe.
-		
-		//Given:
-		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1957",EnumGenre.PUZZLE,"Nintendo");
-		//When:
-		
-		EnumPlatform[] platform = EnumPlatform.class.getEnumConstants();
-		EnumGenre[] genre = EnumGenre.class.getEnumConstants();
-		ArrayList<String> LP = new ArrayList<String>();
-		ArrayList<String> LG = new ArrayList<String>();
-		
-		for(EnumPlatform p : platform)LP.add(p.name());
-		for(EnumGenre g : genre)LG.add(g.name());
-					
-		if (!LG.contains(j.getGenre().name()) || !LP.contains(j.getPlatform().name())) {
-			
-			System.out.println("El gï¿½nero o la platafarma no existen.");
-			fail("Not yet implemented");
-			
-		} else {
-			
-		//Then:
-			
-			assertThat(CJ.addJuego(j)).isEqualTo(true);
-			System.out.println("Juego aï¿½adido correctamente.");
-
-			
-		}
-
-
 	}
 	
-
+	@Test
+	void testAddJuegoKO() {
+		// Comprobar que no se aï¿½ade un juego posterior al aï¿½o 1958.
+		//Given:
+		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1957",EnumGenre.PUZZLE,"Nintendo");
+		//When:
+		//Then:
+			assertThat(CJ.addJuego(j)).isEqualTo(false);
+	}
+	
 	@Test
 	void testToString() {
 		
 		// Verifica que el objeto que va a llamar a toString(), no es nulo.
 		
 		assertThat(this).isNotNull();
-		
 	}
 	
 	@Test
-	void testDeleteJuegoOK() {
+	void testDeberíaBorrarJuegoOK() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		//When:
@@ -205,7 +149,7 @@ class TestColeccionJuegosImpl {
 		assertThat(CJ.getListado()).hasSize(size-1);
 	}
 	@Test
-	void testDeleteJuegoKO() {
+	void testDeberíaBorrarJuegoKO() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		//When:
@@ -216,21 +160,59 @@ class TestColeccionJuegosImpl {
 	}
 	
 	@Test
-	void testFiltrarByAñoOK() {
+	void testDeberíaImprimirListaParesOK() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		CJ.filtrarByAnoPar(true);
 		//When:
-		assertThat(outputStreamCaptor.toString().trim()).contains("Juego");
+		assertThat(outputStreamCaptor.toString().trim()).contains("year=2000");
 	}
 	
 	@Test
-	void testFiltrarByAñoKO() {
+	void testDeberíaImprimirListaParesKO() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		CJ.filtrarByAnoPar(true);
 		//When:
-		assertThat(outputStreamCaptor.toString().trim()).contains("null");
+		assertThat(outputStreamCaptor.toString().trim()).contains("year=1999");
+	}
+	
+	@Test
+	void testDeberíaImprimirListaImparesOK() {
+		//:Given
+		CJ.importarListado("vgsales.csv");
+		CJ.filtrarByAnoPar(false);
+		//When:
+		assertThat(outputStreamCaptor.toString().trim()).contains("year=1999");
+	}
+	@Test
+	void testDeberíaImprimirListaImparesKO() {
+		//:Given
+		CJ.importarListado("vgsales.csv");
+		CJ.filtrarByAnoPar(false);
+		//When:
+		assertThat(outputStreamCaptor.toString().trim()).contains("year=2000");
+	}
+	//Añadir un juego a una lista vacia y verificar si devuelve lo mismo con el 
+	// 	el metodo BuscarByName()
+	@Test
+	void testBuscarByNameCaseSensitiveOk() {
+		//:Given
+		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1959",EnumGenre.PUZZLE,"Nintendo");
+		CJ.addJuego(j);
+		CJ.buscarJuegoByName("tetris");
+		//When:
+		assertThat(outputStreamCaptor.toString().trim()).contains("Tetris");
+	}
+	
+	@Test
+	void testBuscarByNameCaseSensitiveKO() {
+		//:Given
+		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1959",EnumGenre.PUZZLE,"Nintendo");
+		CJ.addJuego(j);
+		CJ.buscarJuegoByName("Tetris");
+		//When:
+		assertThat(outputStreamCaptor.toString().trim()).contains("mario");
 	}
 
 }

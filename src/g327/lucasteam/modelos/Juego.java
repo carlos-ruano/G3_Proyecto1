@@ -1,5 +1,6 @@
 package g327.lucasteam.modelos;
 
+import g327.lucasteam.excepciones.ColeccionJuegosException;
 /**
  * Creamos la clase Juego con la ayuda de Lombok para crear sus getters and setters, constructores
  * 
@@ -63,6 +64,8 @@ public @Data @NoArgsConstructor @AllArgsConstructor @Log4j2 class Juego {
 				this.genre = EnumGenre.dimeCategoria(Datos.recogeInt());
 				this.publisher = Datos.recogeString("Introduce el nombre del editor");
 				verificacion = false;
+			} catch (ColeccionJuegosException e) {
+				log.warn(e.getMessage());
 			} catch (Exception e) {
 				log.error(e.toString());
 			}

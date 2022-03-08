@@ -1,5 +1,9 @@
 package g327.lucasteam.servicios;
 
+import java.util.ArrayList;
+
+import org.assertj.core.internal.bytebuddy.asm.Advice.This;
+
 import g327.lucasteam.datos.ColeccionJuegos;
 import g327.lucasteam.datos.ColeccionJuegosImpl;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
@@ -83,11 +87,30 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 */
 	@Override
 	public boolean addJuego() throws ColeccionJuegosException {
-
+		boolean estado = false;
 		Juego juego = new Juego();
 		juego.createJuego();
-		return this.addJuego(juego);
+		
+		//verificamos si los enumerados existen y si el año de publicacion es valido
+		try {
+				int year = Integer.parseInt(juego.getYear());
+				if(year < 1958) 
+				{
+					throw new ColeccionJuegosException("Error en el año de publicación del juego");
+				}
+				else {
+					estado = this.addJuego(juego);
+				}
+			}
+			catch (ColeccionJuegosException e) 
+			{
+				log.warn(e.getMessage());
+			}
+		return estado;
 	}
+		
+		
+	
 
 	/**
 	 * Mediante el uso de esta funciÃ³n se llama a a la capa datos para
@@ -167,6 +190,11 @@ public class LucasteamServiceImpl implements LucasteamService {
 	public boolean updateJuego(int rank) {
 		return coleccionJuegos.updateJuego(rank);
   }
+	
+	/**
+	 * Mediante este metodo se sobreescribe el metodo buscarJuegoByName de la capa Datos
+	 * para buscar un juego, con su nombre, en la lista de juegos y imprimirlo 
+	 */
 	@Override
 	public void buscarJuegoByName() {
 		try {
@@ -182,7 +210,10 @@ public class LucasteamServiceImpl implements LucasteamService {
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Mediante este metodo se sobreescribe el metodo deleteJuego de la capa Datos
+	 * para borrar un juego de la lista
+	 */
 	@Override
 	public boolean deleteJuego() {
 		boolean estado = false;
@@ -204,6 +235,12 @@ public class LucasteamServiceImpl implements LucasteamService {
 		}
 		return estado;
 	}
+	
+	/**
+	 * Mediante este metodo se sobreescribe el metodo filtrarByAñoPar de la capa Datos
+	 * para filtrar los juegos publicados en los años pares o impares y imprimirlos
+	 * desde la lista  
+	 */
 	@Override
 	public void filtrarByAnoPar() {
 		String mensaje="Si quiere filtrar por años pares entre 1\n"
