@@ -20,7 +20,7 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 public class LucasteamServiceImpl implements LucasteamService {
-	private static final String nombreArchivo = "vgsales2.csv"; // Nombre del fichero que queremos abrir
+	private static final String nombreArchivo = "vgsales.csv"; // Nombre del fichero que queremos abrir
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
 	private EnumGenre genre;
 	private String publisher;
