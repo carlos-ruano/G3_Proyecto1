@@ -37,6 +37,8 @@ public interface ColeccionJuegos {
   
 	public void filtrarByAnoPar(boolean par);
   
+	public void exportarListado(String nombreFichero);
+  
 	// public void deleteJuego(Juego juego);
 	// public Juego getByRank(int rank);
 	// public void filtrarByPlatform(String platform) ;
