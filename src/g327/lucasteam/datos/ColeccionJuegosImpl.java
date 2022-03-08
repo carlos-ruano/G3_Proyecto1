@@ -129,7 +129,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 */
 	@Override
 	public boolean addJuego(Juego juego) {
-		return listado.add(juego);
+			return listado.add(juego);
 	}
 
 	public static boolean isNumeric(String str) {
@@ -286,7 +286,13 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public String toString() {
 		return "ColeccionJuegosImpl [listado=" + listado + "]";
 	}
-
+	
+	/**
+	 *Metodo para listar los juegos seg�n el nombre
+	 * 
+	 * @param name :el nombre del juego que el usuario desea buscar
+	 * 
+	 */
 	@Override
 	public boolean buscarJuegoByName(String name) {
 		boolean estado = false;
@@ -306,7 +312,14 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 		return estado;
 	}
-
+	
+	/**
+	 * Metodo para borrar un juego de la lista de juegos
+	 * 
+	 * @param rank: Numero de rank 
+	 * @return boolean, true si el juego ha sido eliminado correctamente 
+	 * 					false si el juego no ha sido eliminado
+	 */
 	@Override
 	public boolean deleteJuego(int rank) {
 		boolean estado = false;
@@ -326,7 +339,14 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 		return estado;
 	}
-
+	
+	/**
+	 * Metodo para filtrar los juegos publicados en a�os pares o impares
+	 * 
+	 * @param par, si es true, buscamos los juegos publicados en a�os pares
+	 *           	si es falss, buscamos los juegos publicados en a�os impares
+	 * 
+	 */
 	@Override
 	public void filtrarByAnoPar(boolean par) {
 		ArrayList<Integer> years = new ArrayList<Integer>();
@@ -401,33 +421,4 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		OperarCSV.writeCSV(nombreFichero, listado);
 	}
 	
-	/*
-	 * @Override public void deleteJuego(Juego juego) {
-	 * 
-	 * // Mejorable con un try catch.
-	 * 
-	 * if (!listado.isEmpty()) {
-	 * 
-	 * listado.remove(juego);
-	 * 
-	 * } else {
-	 * 
-	 * System.out.println("Este juego no existe o la lista esta vacia.");
-	 * 
-	 * } }
-	 * 
-	 * 
-	 * 
-	 * @Override public Juego getByRank(int rank) { if(!listado.isEmpty()) {
-	 * for(Juego j : listado) { if(j.getRank()==rank) return j; } } return null; }
-	 * 
-	 * @Override public void filtrarByPlatform(String platform) {
-	 * if(!listado.isEmpty()) { for(Juego j : listado) {
-	 * if(j.getPlatform().name().compareToIgnoreCase(platform)==0) {
-	 * System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
-	 * +", aÃ±o de publicaciÃ³n: "+j.getYear()+", editor: "+j.getPublisher()
-	 * +", su ranking es: "+j.getRank()); } } } }
-	 * 
-	 */
-
 }

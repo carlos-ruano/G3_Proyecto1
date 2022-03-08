@@ -1,5 +1,6 @@
 package g327.lucasteam.servicios;
 
+
 import g327.lucasteam.datos.ColeccionJuegos;
 import g327.lucasteam.datos.ColeccionJuegosImpl;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
@@ -81,11 +82,30 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 */
 	@Override
 	public boolean addJuego() throws ColeccionJuegosException {
-
+		boolean estado = false;
 		Juego juego = new Juego();
 		juego.createJuego();
-		return this.addJuego(juego);
+		
+		//verificamos si los enumerados existen y si el a�o de publicacion es valido
+		try {
+				int year = Integer.parseInt(juego.getYear());
+				if(year < 1958) 
+				{
+					throw new ColeccionJuegosException("Error en el a�o de publicaci�n del juego");
+				}
+				else {
+					estado = this.addJuego(juego);
+				}
+			}
+			catch (ColeccionJuegosException e) 
+			{
+				log.warn(e.getMessage());
+			}
+		return estado;
 	}
+		
+		
+	
 
 	/**
 	 * Mediante el uso de esta funciÃ³n se llama a a la capa datos para
@@ -182,6 +202,11 @@ public class LucasteamServiceImpl implements LucasteamService {
 		
 		return estado;
   }
+	
+	/**
+	 * Mediante este metodo se sobreescribe el metodo buscarJuegoByName de la capa Datos
+	 * para buscar un juego, con su nombre, en la lista de juegos y imprimirlo 
+	 */
 	@Override
 	public boolean buscarJuegoByName() {
 		boolean estado = false;
@@ -200,7 +225,10 @@ public class LucasteamServiceImpl implements LucasteamService {
 		}
 		return estado;
 	}
-	
+	/**
+	 * Mediante este metodo se sobreescribe el metodo deleteJuego de la capa Datos
+	 * para borrar un juego de la lista
+	 */
 	@Override
 	public boolean deleteJuego() {
 		boolean estado = false;
@@ -245,6 +273,11 @@ public class LucasteamServiceImpl implements LucasteamService {
 		coleccionJuegos.filtrarByAno(2000, 1958);
   }
   
+  /**
+   * Mediante este metodo se sobreescribe el metodo filtrarByA�oPar de la capa Datos
+	 * para filtrar los juegos publicados en los a�os pares o impares y imprimirlos
+	 * desde la lista  
+	 */
 	@Override
 	public void filtrarByAnoPar() {
 		String mensaje="Si quiere filtrar por años pares entre 1\n"
@@ -263,13 +296,4 @@ public class LucasteamServiceImpl implements LucasteamService {
 		}
 	}
   
-	/*
-	 * @Override public Juego getByRank(int rank) { return
-	 * coleccionJuegos.getByRank(rank);
-	 * 
-	 * }
-	 * 
-	 * @Override public void filtrarByPlatform(String platform) {
-	 * coleccionJuegos.filtrarByPlatform(platform); }
-	 */
 }
