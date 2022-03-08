@@ -188,6 +188,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 
 			log.warn(e.getMessage());
 		}
+	}
 
 	/**
 	 * Metodo para editar el juego que quieras.
@@ -308,6 +309,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public boolean deleteJuego(int rank) {
 		boolean estado = false;
 		try {
+			Juego j1 = null;
 			for (Juego j : listado) {
 				if (j.getRank() == rank)
 					j1 = j;
@@ -383,12 +385,11 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 					}
 				}
 			}
-		} catch (ColeccionJuegosException e) {
+		} catch (Exception e) {
 			log.warn(e.getMessage());
 		}
-		return estado;
 	}
-
+	
 	
 	/**
 	 * Metodo para recoger los datos del HashSet y usando un nombre de fichero pedido <br>por el usuario, se guarda un .csv
