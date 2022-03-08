@@ -129,7 +129,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 */
 	@Override
 	public boolean addJuego(Juego juego) {
-		return listado.add(juego);
+			return listado.add(juego);
 	}
 
 	public static boolean isNumeric(String str) {
@@ -286,7 +286,13 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public String toString() {
 		return "ColeccionJuegosImpl [listado=" + listado + "]";
 	}
-
+	
+	/**
+	 *Metodo para listar los juegos seg�n el nombre
+	 * 
+	 * @param name :el nombre del juego que el usuario desea buscar
+	 * 
+	 */
 	@Override
 	public boolean buscarJuegoByName(String name) {
 		boolean estado = false;
@@ -306,7 +312,14 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 		return estado;
 	}
-
+	
+	/**
+	 * Metodo para borrar un juego de la lista de juegos
+	 * 
+	 * @param rank: Numero de rank 
+	 * @return boolean, true si el juego ha sido eliminado correctamente 
+	 * 					false si el juego no ha sido eliminado
+	 */
 	@Override
 	public boolean deleteJuego(int rank) {
 		boolean estado = false;
@@ -326,7 +339,14 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 		return estado;
 	}
-
+	
+	/**
+	 * Metodo para filtrar los juegos publicados en a�os pares o impares
+	 * 
+	 * @param par, si es true, buscamos los juegos publicados en a�os pares
+	 *           	si es falss, buscamos los juegos publicados en a�os impares
+	 * 
+	 */
 	@Override
 	public void filtrarByAnoPar(boolean par) {
 		ArrayList<Integer> years = new ArrayList<Integer>();
