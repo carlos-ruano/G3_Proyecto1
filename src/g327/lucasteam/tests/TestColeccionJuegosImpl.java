@@ -334,5 +334,40 @@ class TestColeccionJuegosImpl {
 		//When:
 		assertThat(outputStreamCaptor.toString().trim()).contains("mario");
 	}
-
+	
+	@Test 
+	void testDevuelveAniosExactoOK(){
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByAno(1990,1990);
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getYear().contains("1990")).isTrue();
+	}
+	@Test 
+	void testDevuelveAniosExactoKO(){
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByAno(1990,1990);
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getYear().contains("1991")).isTrue();
+	}
+	
+	@Test 
+	void testDevuelveAniosEnUnRangoOK(){
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByAno(1992,1990);
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getYear().contains("1991")).isTrue();
+	}
+	
+	@Test 
+	void testDevuelveAniosEnUnRangoKO(){
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByAno(1992,1990);
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getYear().contains("1993")).isTrue();
+	}
+	
 }
