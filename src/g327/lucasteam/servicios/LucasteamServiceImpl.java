@@ -1,5 +1,6 @@
 package g327.lucasteam.servicios;
 
+
 import g327.lucasteam.datos.ColeccionJuegos;
 import g327.lucasteam.datos.ColeccionJuegosImpl;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
@@ -20,7 +21,7 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 public class LucasteamServiceImpl implements LucasteamService {
-
+	private static final String nombreArchivo = "vgsales.csv"; // Nombre del fichero que queremos abrir
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
 	private EnumGenre genre;
 	private String publisher;
@@ -32,7 +33,6 @@ public class LucasteamServiceImpl implements LucasteamService {
 	@Override
 	public void importarListado() {
 		// Hacemos casting porque el metodo no esta en la interface de datos.
-		String nombreArchivo = "vgsales.csv";
 		((ColeccionJuegosImpl) coleccionJuegos).importarListado(nombreArchivo);
 	}
 
@@ -82,11 +82,30 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 */
 	@Override
 	public boolean addJuego() throws ColeccionJuegosException {
-
+		boolean estado = false;
 		Juego juego = new Juego();
 		juego.createJuego();
-		return this.addJuego(juego);
+		
+		//verificamos si los enumerados existen y si el a�o de publicacion es valido
+		try {
+				int year = Integer.parseInt(juego.getYear());
+				if(year < 1958) 
+				{
+					throw new ColeccionJuegosException("Error en el a�o de publicaci�n del juego");
+				}
+				else {
+					estado = this.addJuego(juego);
+				}
+			}
+			catch (ColeccionJuegosException e) 
+			{
+				log.warn(e.getMessage());
+			}
+		return estado;
 	}
+		
+		
+	
 
 	/**
 	 * Mediante el uso de esta funciÃ³n se llama a a la capa datos para que genere
@@ -96,6 +115,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 * 
 	 * @throws Exception
 	 */
+	@Override
 	public void getListaPublisher() {
 		int i = 0;
 
@@ -197,6 +217,12 @@ public class LucasteamServiceImpl implements LucasteamService {
 		}
 	}
 
+  }
+	
+	/**
+	 * Mediante este metodo se sobreescribe el metodo buscarJuegoByName de la capa Datos
+	 * para buscar un juego, con su nombre, en la lista de juegos y imprimirlo 
+	 */
 	@Override
 	public boolean buscarJuegoByName() {
 		boolean estado = false;
@@ -216,6 +242,10 @@ public class LucasteamServiceImpl implements LucasteamService {
 		return estado;
 	}
 
+	/**
+	 * Mediante este metodo se sobreescribe el metodo deleteJuego de la capa Datos
+	 * para borrar un juego de la lista
+	 */
 	@Override
 	public boolean deleteJuego() {
 		boolean estado = false;
@@ -239,13 +269,33 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 
 	/**
+	 * Se le pide al usuario introducir un nombre para el archivo .csv para llamar después a la capa datos
+	 */
+	@Override
+	public void exportarListado() {
+		
+		try {
+			coleccionJuegos.exportarListado(Datos.recogeString("Introduzca el nombre del archivo:"));
+		} catch (Exception e) {
+			log.error(e.toString());
+		}
+		
+	}
+  
+	/**
 	 * Filtra la coleccion de juegos entre el aÃ±o 2000 y 1958.
 	 */
 	@Override
 	public void filtrarBySigloXX() {
 		coleccionJuegos.filtrarByAno(2000, 1958);
-	}
 
+	}
+  
+  /**
+   * Mediante este metodo se sobreescribe el metodo filtrarByA�oPar de la capa Datos
+	 * para filtrar los juegos publicados en los a�os pares o impares y imprimirlos
+	 * desde la lista  
+	 */
 	@Override
 	public void filtrarByAnoPar() {
 		String mensaje = "Si quiere filtrar por años pares entre 1\n" + "Si quiere filtrar por años impares entre 2\n";
@@ -264,13 +314,5 @@ public class LucasteamServiceImpl implements LucasteamService {
 			e.printStackTrace();
 		}
 	}
-	/*
-	 * @Override public Juego getByRank(int rank) { return
-	 * coleccionJuegos.getByRank(rank);
-	 * 
-	 * }
-	 * 
-	 * @Override public void filtrarByPlatform(String platform) {
-	 * coleccionJuegos.filtrarByPlatform(platform); }
-	 */
+  
 }

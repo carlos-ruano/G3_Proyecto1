@@ -107,7 +107,7 @@ public class Lucasteam {
 				
 			case 12:
 				// EXPORTAR LISTADO ACTUAL
-				//services.exportarListado();
+				services.exportarListado();
 				break;
 
 			case 0:
