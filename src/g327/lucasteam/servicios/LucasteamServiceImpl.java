@@ -20,7 +20,7 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 public class LucasteamServiceImpl implements LucasteamService {
-
+	private static final String nombreArchivo = "vgsales2.csv"; // Nombre del fichero que queremos abrir
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
 	private EnumGenre genre;
 	private String publisher;
@@ -32,7 +32,6 @@ public class LucasteamServiceImpl implements LucasteamService {
 	@Override
 	public void importarListado() {
 		// Hacemos casting porque el metodo no esta en la interface de datos.
-		String nombreArchivo = "vgsales.csv";
 		((ColeccionJuegosImpl) coleccionJuegos).importarListado(nombreArchivo);
 	}
 
@@ -96,6 +95,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 	 * 
 	 * @throws Exception
 	 */
+	@Override
 	public void getListaPublisher() {
 		int i = 0;
 		
@@ -224,6 +224,20 @@ public class LucasteamServiceImpl implements LucasteamService {
 	}
 	
 	/**
+	 * Se le pide al usuario introducir un nombre para el archivo .csv para llamar después a la capa datos
+	 */
+	@Override
+	public void exportarListado() {
+		
+		try {
+			coleccionJuegos.exportarListado(Datos.recogeString("Introduzca el nombre del archivo:"));
+		} catch (Exception e) {
+			log.error(e.toString());
+		}
+		
+	}
+  
+	/**
 	 * Filtra la coleccion de juegos entre el aÃ±o 2000 y 1958.
 	 */
 	@Override
@@ -248,6 +262,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 			e.printStackTrace();
 		}
 	}
+  
 	/*
 	 * @Override public Juego getByRank(int rank) { return
 	 * coleccionJuegos.getByRank(rank);

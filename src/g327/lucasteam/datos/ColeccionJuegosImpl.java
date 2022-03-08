@@ -146,6 +146,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * 
 	 * @return Un HashSet de tipo 'String' de todos los editores que existen
 	 */
+	@Override
 	public Set<String> getListaPublisher() {
 
 		Set<String> listaSet = new HashSet<String>();
@@ -199,9 +200,9 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * @throws Exception
 	 * @return Devolvemos listado con el juego actualizado.
 	 */
+	
 	public boolean updateJuego(int rank) {
 		boolean estado = false;
-
 		try {
 			if (!listado.isEmpty()) {
 				for (Juego j : listado) {
@@ -270,8 +271,8 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		} catch (Exception e) {
 			log.error(e.toString());
 		}
-
-		return estado;
+		*/
+		return estado; 
 	}
 
 	/**
@@ -389,7 +390,18 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 
 	}
-
+	
+	/**
+	 * Metodo para recoger los datos del HashSet y usando un nombre de fichero pedido <br>por el usuario, se guarda un .csv
+	 * 
+	 * @param nombreFichero Se le pasa un nombre para el .CSV
+	 * @param listado Se recoge el listado importado por el usuario o los juegos ya añadidos...
+	 */
+	@Override
+	public void exportarListado(String nombreFichero) {
+		OperarCSV.writeCSV(nombreFichero, listado);
+	}
+	
 	/*
 	 * @Override public void deleteJuego(Juego juego) {
 	 * 

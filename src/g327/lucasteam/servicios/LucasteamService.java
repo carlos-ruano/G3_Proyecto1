@@ -42,6 +42,8 @@ public interface LucasteamService {
   
 	public void filtrarByAnoPar();
   
+  	public void exportarListado();
+  
 	// public void filtrarByPlatform();
 	// public Juego getByRank(int rank);
 }
