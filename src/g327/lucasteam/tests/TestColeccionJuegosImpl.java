@@ -10,6 +10,8 @@ import static org.assertj.core.api.Assertions.*;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -124,35 +126,25 @@ class TestColeccionJuegosImpl {
 	
 	@Test
 	void testAddJuego3() {
-		
-		// Comprobar que no se aï¿½ade un juego posterior al aï¿½o 1958.
-		
+		// Comprobar que no se aï¿½ade un juego posterior al ano 1958.
 		//Given:
 		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1957",EnumGenre.PUZZLE,"Nintendo");
 		//When:
 		if (Integer.parseInt(j.getYear()) < 1958) {
-			
-			System.out.println("El primer juego saliï¿½ en 1958, y por tanto el aï¿½o es invï¿½lido.");
-			
+			System.out.println("El primer juego salido en 1958, y por tanto el año es inválido.");
 		} else {
 			
 		//Then:
 			
 			assertThat(CJ.addJuego(j)).isEqualTo(true);
-			System.out.println("Juego aï¿½adido correctamente.");
-
-			
+			System.out.println("Juego añadido correctamente.");
 		}
-
-
 	}
 		
 
 	@Test
 	void testAddJuego4() {
-		
-		// Comprobar que un juego se aï¿½ade con una plataforma que no existe.
-		
+		// Comprobar que un juego se añade con una plataforma que no existe.
 		//Given:
 		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1957",EnumGenre.PUZZLE,"Nintendo");
 		//When:
@@ -166,8 +158,7 @@ class TestColeccionJuegosImpl {
 		for(EnumGenre g : genre)LG.add(g.name());
 					
 		if (!LG.contains(j.getGenre().name()) || !LP.contains(j.getPlatform().name())) {
-			
-			System.out.println("El gï¿½nero o la platafarma no existen.");
+			System.out.println("El género o la plataforma no existen.");
 			fail("Not yet implemented");
 			
 		} else {
@@ -234,6 +225,66 @@ class TestColeccionJuegosImpl {
 		
 	}
 	
+	@Test
+	void getListaPublisherNotVoid() {
+		
+		// Comprobar que se filtra correctamente dado un g�nero en concreto. En este caso, el g�nero 'PLATFORM'.
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		//When:
+		Set <String> ListaPrueba = CJ.getListaPublisher();
+		//Then:			
+		assertThat(ListaPrueba.isEmpty()).isFalse();
+
+	}
+	
+	@Test
+	void getListaPublisherNotRepeatedOK() {
+		
+		// Comprobar que tras añadir un juego con un editor ya existente, las
+		//lista de editores sigue inmutable
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		System.out.println("(getListaPublisherNotRepeatedOK) importado");
+		Set<String> lista1 = CJ.getListaPublisher();
+		
+		Juego j1 = new Juego(999999,"Un juego",EnumPlatform.GB,"1980",EnumGenre.PUZZLE,"Nintendo"); // Ya existe Nintendo
+		Juego j2 = new Juego(99999,"Dark Souls",EnumPlatform.PC,"1980",EnumGenre.PUZZLE,"From Software"); // Ya existe Nintendo
+		//When:
+		CJ.addJuego(j1);
+		CJ.addJuego(j2);
+		Set<String> lista2 = CJ.getListaPublisher();
+		
+		//Then:			
+		assertThat(lista1.size()).isEqualTo(lista2.size());
+
+	}
+	
+	@Test
+	void getListaPublisherNotRepeatedKO() {
+		
+		// Comprobar que tras añadir un juego con un editor ya existente, las
+		//lista de editores sigue inmutable
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		System.out.println("(getListaPublisherNotRepeatedKO) importado");
+		Set<String> lista1 = CJ.getListaPublisher();
+		
+		Juego j1 = new Juego(999999,"Un juego",EnumPlatform.GB,"1980",EnumGenre.PUZZLE,"Nintendo"); // Ya existe Nintendo
+		Juego j2 = new Juego(99999,"Dark Souls",EnumPlatform.PC,"1980",EnumGenre.PUZZLE,"Un editor inventado"); // No existe el publisher
+		//When:
+		CJ.addJuego(j1);
+		CJ.addJuego(j2);
+		Set<String> lista2 = CJ.getListaPublisher();
+		
+		//Then:			
+		assertThat(lista1.size()).isNotEqualTo(lista2.size()); // Para que de error hay que cambiarlo a "isEqualTo"
+
+	}
+
 	void testUpdateJuego() {
 		
 	}
