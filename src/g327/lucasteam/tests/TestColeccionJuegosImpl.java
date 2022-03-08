@@ -11,8 +11,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import org.assertj.core.internal.bytebuddy.implementation.bind.annotation.IgnoreForBinding.Verifier;
+import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +19,7 @@ import org.junit.jupiter.api.Test;
 class TestColeccionJuegosImpl {
 
 	private ColeccionJuegosImpl CJ;
+	@SuppressWarnings("unused")
 	private final PrintStream standardOut = System.out;
 	private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 	
@@ -49,7 +49,7 @@ class TestColeccionJuegosImpl {
 	@Test
 	void testImportarListado() {
 		
-		// Comprobar si todos los juegos est�n importados.
+		// Comprobar si todos los juegos estï¿½n importados.
 		
 		//Given:
 		CJ = new ColeccionJuegosImpl();
@@ -81,7 +81,7 @@ class TestColeccionJuegosImpl {
 	@Test
 	void testFiltrarByGenre() {
 		
-		// Comprobar que se filtra correctamente dado un g�nero en concreto. En este caso, el g�nero 'PLATFORM'.
+		// Comprobar que se filtra correctamente dado un gï¿½nero en concreto. En este caso, el gï¿½nero 'PLATFORM'.
 		
 		//Given:
 		CJ.importarListado("vgsales.csv");
@@ -93,13 +93,25 @@ class TestColeccionJuegosImpl {
 		
 
 	}
-
+	
+		
+	@Test
+	void testAddJuego() {
+		
+		// Comprobar que el juego aï¿½adido no es nulo y que se aï¿½ade correctamente.
+		
+		//Given:
+		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1989",EnumGenre.PUZZLE,"Nintendo");
+		//When:
+		//Then:
+		assertThat(j).isNotNull();
+		assertThat(CJ.addJuego(j)).isNotEqualTo(false);
 
 	
 	@Test
 	void testAddJuego2() {
 		
-		// Asegurar que una lista vac�a funciona.
+		// Asegurar que una lista vacï¿½a funciona.
 		
 		//Given:
 		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1989",EnumGenre.PUZZLE,"Nintendo");
@@ -112,17 +124,18 @@ class TestColeccionJuegosImpl {
 	
 	@Test
 	void testAddJuegoOK() {
-		// Comprobar que no se a�ade un juego posterior al a�o 1958.
-		//Given:
+		// Comprobar que no se añade un juego posterior al año 1958.
+  //Given:
 		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1958",EnumGenre.PUZZLE,"Nintendo");
 		//When:
+  
 		//Then:	
 			assertThat(CJ.addJuego(j)).isEqualTo(true);
-	}
+}
 	
 	@Test
 	void testAddJuegoKO() {
-		// Comprobar que no se a�ade un juego posterior al a�o 1958.
+		// Comprobar que no se añade un juego posterior al año 1958.
 		//Given:
 		Juego j = new Juego(6,"Tetris",EnumPlatform.GB,"1957",EnumGenre.PUZZLE,"Nintendo");
 		//When:
@@ -130,6 +143,49 @@ class TestColeccionJuegosImpl {
 			assertThat(CJ.addJuego(j)).isEqualTo(false);
 	}
 	
+
+	
+	@Test
+	void testFiltrarByPublisherNintendoOK() {
+		
+		// Comprobar que se filtran correctamente solamente los juegos de la editora Nintendo.
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByPublisher("Nintendo");
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getPublisher().contains("Nintendo")).isTrue();
+		
+	}
+	
+	@Test
+	void testFiltrarByPublisherNintendoKO() {
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByPublisher("Nintendo");
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getPublisher().contains("Ubisoft")).isTrue();
+	
+	}
+	
+	@Test
+	void testFiltrarByPublisherNintendoNotNullOK() {
+		
+		// Comprobar que se filtran correctamente solamente los juegos de la editora Nintendo porque no es nulo.
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByPublisher("Nintendo");
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getPublisher().contains("Nintendo")).isNotNull();
+		
+	}
+	
+
 	@Test
 	void testToString() {
 		
@@ -137,9 +193,75 @@ class TestColeccionJuegosImpl {
 		
 		assertThat(this).isNotNull();
 	}
+    @Test
+    void getListaPublisherNotVoid() {
+		
+		// Comprobar que se filtra correctamente dado un g�nero en concreto. En este caso, el g�nero 'PLATFORM'.
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		//When:
+		Set <String> ListaPrueba = CJ.getListaPublisher();
+		//Then:			
+		assertThat(ListaPrueba.isEmpty()).isFalse();
+
+	}
 	
 	@Test
-	void testDeber�aBorrarJuegoOK() {
+	void getListaPublisherNotRepeatedOK() {
+		
+		// Comprobar que tras añadir un juego con un editor ya existente, las
+		//lista de editores sigue inmutable
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		System.out.println("(getListaPublisherNotRepeatedOK) importado");
+		Set<String> lista1 = CJ.getListaPublisher();
+		
+		Juego j1 = new Juego(999999,"Un juego",EnumPlatform.GB,"1980",EnumGenre.PUZZLE,"Nintendo"); // Ya existe Nintendo
+		Juego j2 = new Juego(99999,"Dark Souls",EnumPlatform.PC,"1980",EnumGenre.PUZZLE,"From Software"); // Ya existe Nintendo
+		//When:
+		CJ.addJuego(j1);
+		CJ.addJuego(j2);
+		Set<String> lista2 = CJ.getListaPublisher();
+		
+		//Then:			
+		assertThat(lista1.size()).isEqualTo(lista2.size());
+
+	}
+	
+	@Test
+	void getListaPublisherNotRepeatedKO() {
+		
+		// Comprobar que tras añadir un juego con un editor ya existente, las
+		//lista de editores sigue inmutable
+		
+		//Given:
+		CJ.importarListado("vgsales.csv");
+		System.out.println("(getListaPublisherNotRepeatedKO) importado");
+		Set<String> lista1 = CJ.getListaPublisher();
+		
+		Juego j1 = new Juego(999999,"Un juego",EnumPlatform.GB,"1980",EnumGenre.PUZZLE,"Nintendo"); // Ya existe Nintendo
+		Juego j2 = new Juego(99999,"Dark Souls",EnumPlatform.PC,"1980",EnumGenre.PUZZLE,"Un editor inventado"); // No existe el publisher
+		//When:
+		CJ.addJuego(j1);
+		CJ.addJuego(j2);
+		Set<String> lista2 = CJ.getListaPublisher();
+		
+		//Then:			
+		assertThat(lista1.size()).isNotEqualTo(lista2.size()); // Para que de error hay que cambiarlo a "isEqualTo"
+
+	}
+
+	void testUpdateJuego() {
+		
+	}
+	
+
+	
+  
+	@Test
+	void testDeberiaBorrarJuegoOK() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		//When:
@@ -149,7 +271,7 @@ class TestColeccionJuegosImpl {
 		assertThat(CJ.getListado()).hasSize(size-1);
 	}
 	@Test
-	void testDeber�aBorrarJuegoKO() {
+	void testDeberiaBorrarJuegoKO() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		//When:
@@ -160,7 +282,7 @@ class TestColeccionJuegosImpl {
 	}
 	
 	@Test
-	void testDeber�aImprimirListaParesOK() {
+	void testDeberiaImprimirListaParesOK() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		CJ.filtrarByAnoPar(true);
@@ -169,7 +291,7 @@ class TestColeccionJuegosImpl {
 	}
 	
 	@Test
-	void testDeber�aImprimirListaParesKO() {
+	void testDeberiaImprimirListaParesKO() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		CJ.filtrarByAnoPar(true);
@@ -178,7 +300,7 @@ class TestColeccionJuegosImpl {
 	}
 	
 	@Test
-	void testDeber�aImprimirListaImparesOK() {
+	void testDeberiaImprimirListaImparesOK() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		CJ.filtrarByAnoPar(false);
@@ -186,14 +308,14 @@ class TestColeccionJuegosImpl {
 		assertThat(outputStreamCaptor.toString().trim()).contains("year=1999");
 	}
 	@Test
-	void testDeber�aImprimirListaImparesKO() {
+	void testDeberiaImprimirListaImparesKO() {
 		//:Given
 		CJ.importarListado("vgsales.csv");
 		CJ.filtrarByAnoPar(false);
 		//When:
 		assertThat(outputStreamCaptor.toString().trim()).contains("year=2000");
 	}
-	//A�adir un juego a una lista vacia y verificar si devuelve lo mismo con el 
+	//Añadir un juego a una lista vacia y verificar si devuelve lo mismo con el 
 	// 	el metodo BuscarByName()
 	@Test
 	void testBuscarByNameCaseSensitiveOk() {

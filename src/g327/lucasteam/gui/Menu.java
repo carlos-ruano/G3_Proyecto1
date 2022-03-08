@@ -27,12 +27,30 @@ public class Menu {
 		System.out.println("*    8.-Filtrar por editor nintendo");
 		System.out.println("*    9.-Listado de editores");
 		System.out.println("*    10.-Filtrar por juegos del siglo XX");
-		System.out.println("*    11.-Filtrar por juegos de año par");
+		System.out.println("*    11.-Filtrar por juegos de año par o impar");
 		System.out.println("*    12.-Exportar listado actual");
 		System.out.println("*    0.-Terminar sesion");
 		System.out.println("************************************************");
 		System.out.println(" ");
 		System.out.print(">> ");
 
+	}
+	
+	public static void mostrarMenuEdit() {
+		System.out.println(" ");
+		System.out.println(" LUCASTEAM");
+		System.out.println(" ");
+		System.out.println("************************************************");
+		System.out.println("*  Por favor, escoge una opcion: ");
+		System.out.println("*    1.-Cambiar el Rank");
+		System.out.println("*    2.-Cambiar el Nombre");
+		System.out.println("*    3.-Cambiar la Plataforma");
+		System.out.println("*    4.-Cambiar el Año");
+		System.out.println("*    5.-Cambiar el Genero");
+		System.out.println("*    6.-Cambiar la Editora");
+		System.out.println("*    0.-Terminar editar Juego");
+		System.out.println("************************************************");
+		System.out.println(" ");
+		System.out.print(">> ");
 	}
 }
