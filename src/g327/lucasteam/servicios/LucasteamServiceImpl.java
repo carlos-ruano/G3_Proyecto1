@@ -21,19 +21,33 @@ import lombok.extern.log4j.Log4j2;
  */
 @Log4j2
 public class LucasteamServiceImpl implements LucasteamService {
-	private static final String nombreArchivo = "vgsales.csv"; // Nombre del fichero que queremos abrir
+	private static final String NOMBRE_ARCHIVO = "vgsales.csv"; // Nombre del fichero que queremos abrir
 	private ColeccionJuegos coleccionJuegos = new ColeccionJuegosImpl();
 	private EnumGenre genre;
 	private String publisher;
 
 	/**
-	 * Mediante esta funcion aÃ±aden los datos recogidos en operarCSV y se aÃ±aden a
-	 * la  coleccion de juegos
+	 * Mediante esta funcion añaden los datos recogidos en operarCSV y se añaden a
+	 * la  coleccion de juegos. Se le pide al usuario que introduzca un archivo para importar y
+	 * si no existe, se tomará el archivo 'NOMBRE_ARCHIVO' por defecto.
 	 */
 	@Override
 	public void importarListado() {
-		// Hacemos casting porque el metodo no esta en la interface de datos.
-		((ColeccionJuegosImpl) coleccionJuegos).importarListado(nombreArchivo);
+		String archivo;
+		try {
+		  archivo = Datos.recogeString("Introduzca el nombre del archivo a importar:");
+		} catch (Exception e) {
+			log.error(e.toString());
+			archivo="";
+		}
+		if(archivo.isBlank()) {
+		    // Hacemos casting porque el metodo no esta en la interface de datos.
+		    ((ColeccionJuegosImpl) coleccionJuegos).importarListado(NOMBRE_ARCHIVO);
+		}
+		else {
+		    // Hacemos casting porque el metodo no esta en la interface de datos.
+		    ((ColeccionJuegosImpl) coleccionJuegos).importarListado(archivo.trim()+".csv");
+		}
 	}
 
 	/**
