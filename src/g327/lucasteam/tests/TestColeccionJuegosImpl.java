@@ -250,13 +250,6 @@ class TestColeccionJuegosImpl {
 		assertThat(lista1.size()).isNotEqualTo(lista2.size()); // Para que de error hay que cambiarlo a "isEqualTo"
 
 	}
-
-	void testUpdateJuego() {
-		
-	}
-	
-
-	
   
 	@Test
 	void testDeberiaBorrarJuegoOK() {
