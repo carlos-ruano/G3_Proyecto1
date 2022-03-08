@@ -1,8 +1,5 @@
 package g327.lucasteam.servicios;
 
-import java.util.ArrayList;
-
-import org.assertj.core.internal.bytebuddy.asm.Advice.This;
 
 import g327.lucasteam.datos.ColeccionJuegos;
 import g327.lucasteam.datos.ColeccionJuegosImpl;
@@ -254,7 +251,7 @@ public class LucasteamServiceImpl implements LucasteamService {
 		return estado;
 	}
 	
-	
+	/**
 	 * Se le pide al usuario introducir un nombre para el archivo .csv para llamar después a la capa datos
 	 */
 	@Override
@@ -299,13 +296,4 @@ public class LucasteamServiceImpl implements LucasteamService {
 		}
 	}
   
-	/*
-	 * @Override public Juego getByRank(int rank) { return
-	 * coleccionJuegos.getByRank(rank);
-	 * 
-	 * }
-	 * 
-	 * @Override public void filtrarByPlatform(String platform) {
-	 * coleccionJuegos.filtrarByPlatform(platform); }
-	 */
 }

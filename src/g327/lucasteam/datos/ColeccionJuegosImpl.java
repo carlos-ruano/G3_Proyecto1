@@ -421,33 +421,4 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		OperarCSV.writeCSV(nombreFichero, listado);
 	}
 	
-	/*
-	 * @Override public void deleteJuego(Juego juego) {
-	 * 
-	 * // Mejorable con un try catch.
-	 * 
-	 * if (!listado.isEmpty()) {
-	 * 
-	 * listado.remove(juego);
-	 * 
-	 * } else {
-	 * 
-	 * System.out.println("Este juego no existe o la lista esta vacia.");
-	 * 
-	 * } }
-	 * 
-	 * 
-	 * 
-	 * @Override public Juego getByRank(int rank) { if(!listado.isEmpty()) {
-	 * for(Juego j : listado) { if(j.getRank()==rank) return j; } } return null; }
-	 * 
-	 * @Override public void filtrarByPlatform(String platform) {
-	 * if(!listado.isEmpty()) { for(Juego j : listado) {
-	 * if(j.getPlatform().name().compareToIgnoreCase(platform)==0) {
-	 * System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
-	 * +", aÃ±o de publicaciÃ³n: "+j.getYear()+", editor: "+j.getPublisher()
-	 * +", su ranking es: "+j.getRank()); } } } }
-	 * 
-	 */
-
 }
