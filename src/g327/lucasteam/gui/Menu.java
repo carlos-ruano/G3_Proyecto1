@@ -27,7 +27,7 @@ public class Menu {
 		System.out.println("*    8.-Filtrar por editor nintendo");
 		System.out.println("*    9.-Listado de editores");
 		System.out.println("*    10.-Filtrar por juegos del siglo XX");
-		System.out.println("*    11.-Filtrar por juegos de año par");
+		System.out.println("*    11.-Filtrar por juegos de año par o impar");
 		System.out.println("*    12.-Exportar listado actual");
 		System.out.println("*    0.-Terminar sesion");
 		System.out.println("************************************************");
