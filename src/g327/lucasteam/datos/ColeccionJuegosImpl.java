@@ -271,7 +271,6 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		} catch (Exception e) {
 			log.error(e.toString());
 		}
-		*/
 		return estado; 
 	}
 
