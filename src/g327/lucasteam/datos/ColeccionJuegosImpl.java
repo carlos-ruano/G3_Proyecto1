@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import g327.lucasteam.excepciones.ColeccionJuegosException;
+import g327.lucasteam.gui.Menu;
+import g327.lucasteam.modelos.EnumGenre;
+import g327.lucasteam.modelos.EnumPlatform;
 import g327.lucasteam.modelos.Juego;
 import g327.lucasteam.utilidades.Datos;
 import g327.lucasteam.utilidades.OperarCSV;
@@ -62,7 +65,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * hasta terminar todas las lineas e introduciendolos en un listado de tipo
 	 * '<b>Set</b>'.
 	 * 
-	 * @param nombreFichero Se pasa el nombre del fichero deseado por parÃ¡metro..
+	 * @param nombreFichero Se pasa el nombre del fichero deseado por parámetro..
 	 */
 	@Override
 	public void importarListado(String nombreFichero) {
@@ -111,7 +114,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			}
 		} catch (ColeccionJuegosException e) {
-			log.warn(e.getMessage()); // Si el Set esta vacio
+			log.warn(e.getMessage()); // Si el Set esta� vacio
 		}
 	}
 
@@ -124,7 +127,16 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 */
 	@Override
 	public boolean addJuego(Juego juego) {
-		return listado.add(juego);
+			return listado.add(juego);
+	}
+
+	public static boolean isNumeric(String str) {
+		try {
+			Double.parseDouble(str);
+			return true;
+		} catch (NumberFormatException e) {
+			return false;
+		}
 	}
 
 	/**
@@ -132,6 +144,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	 * 
 	 * @return Un HashSet de tipo 'String' de todos los editores que existen
 	 */
+	@Override
 	public Set<String> getListaPublisher() {
 
 		Set<String> listaSet = new HashSet<String>();
@@ -141,6 +154,7 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 				for (Juego j : listado) {
 					listaSet.add(j.getPublisher());
 				}
+				log.info("Se ha obtenido la lista de editoras");
 			} else {
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido obtener el Publisher pedido");
 			}
@@ -149,86 +163,101 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		}
 		return listaSet;
 	}
-/*
+
 	/**
 	 * Mediante este metodo iteramos la coleccion listado para sacar por consola los
 	 * objetos. juegos con el editor dado
 	 * 
 	 * @param publisher Se pasa el nombre del editor deseado por parametro.
-	 //*/
-/*	@Override
+	 */
+	@Override
 	public void filtrarByPublisher(String publisher) {
-
 		try {
 			if (!listado.isEmpty()) {
-
 				for (Juego j : listado) {
-
 					if (j.getPublisher().compareToIgnoreCase(publisher) == 0) {
-
 						testListado.add(j);
 						System.out.println(j.imprimir());
-
 					}
-
 				}
-
+				log.info("Se ha filtrado por editora "+publisher+".");
 			} else {
-
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
-
 			}
 		} catch (ColeccionJuegosException e) {
 
 			log.warn(e.getMessage());
-
 		}
-		
 	}
 
-	/** Metodo para editar el juego que quieras.
+	/**
+	 * Metodo para editar el juego que quieras.
 	 * 
 	 * @param rank   Se el id del juego que esta en la coleccion Juegos.
-	 * @param nombre Se pasa el nombre del juego a buscar
+	 * @throws Exception
 	 * @return Devolvemos listado con el juego actualizado.
 	 */
+	
 	public boolean updateJuego(int rank) {
 		boolean estado = false;
-
 		try {
-			switch (Datos.recogeInt()) {
-			case 1: {
+			if (!listado.isEmpty()) {
+				for (Juego j : listado) {
+					if (j.getRank() == rank) {
+						boolean seguir = true;
+						do {
+							Menu.mostrarMenuEdit();
+							String z = Datos.recogeString();
+							if(isNumeric(z)) {
+								rank = Integer.parseInt(z);
+								switch (rank) {
+								case 1: {
+									j.setRank(Datos.recogeInt(j.getRank() + " - Este es el rank actual,¿a cual quieres cambiar?"));
+									break;
+								}
+								case 2: {
+									j.setName(Datos.recogeString(j.getName() + " - Este es el nombre actual,¿a cual quieres cambiar?"));
+									break;
+								}
+								case 3: {
+									j.setPlatform(EnumPlatform.dimeCategoria(Datos.recogeInt(j.getPlatform() + " - Esta es la Plataforma actual,¿a cual quieres cambiar?")));
+									break;
+								}
+								case 4: {
+									j.setYear(String.valueOf(Datos.recogeInt(j.getYear() + " - Este es el Año actual,¿a cual quieres cambiar?")));
+									break;
+								}
+								case 5: {
+									j.setGenre(EnumGenre.dimeCategoria(Datos.recogeInt(j.getGenre() + " - Este es el Genero actual,¿a cual quieres cambiar?")));
+									break;
+								}
+								case 6: {
+									j.setPublisher(Datos.recogeString(j.getPublisher() + " - Esta es la Editora,¿a cual quieres cambiar?"));
+									break;
+								}
+								case 0:{
+									seguir = false;
+									break;
+								}
+								default:
+									throw new ColeccionJuegosException("Seleccion erronea, introduzca una opcion existente");
+								}
+							}else {
+								throw new ColeccionJuegosException("¡Tienes que introducir un numero!");
+							}
+						}while(seguir);
+					} else {
+						throw new ColeccionJuegosException("No existe un Juego para ese rank, introduzca uno valido");
+					}
+				}
+			} else {
+				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
+			}
 
-				//yield type;
-			}
-			case 2: {
-
-				//yield type;
-			}
-			case 3: {
-
-				//yield type;
-			}
-			case 4: {
-
-				//yield type;
-			}
-			case 5: {
-
-				//yield type;
-			}
-			case 6: {
-
-				//yield type;
-			}
-			default:
-				throw new ColeccionJuegosException("Seleccion erronea, introduzca una opcion existente");
-			}
 		} catch (Exception e) {
 			log.error(e.toString());
 		}
-
-		return estado;
+		return estado; 
 	}
 
 	/**
@@ -243,16 +272,22 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 	public String toString() {
 		return "ColeccionJuegosImpl [listado=" + listado + "]";
 	}
-
+	
+	/**
+	 *Metodo para listar los juegos seg�n el nombre
+	 * 
+	 * @param name :el nombre del juego que el usuario desea buscar
+	 * 
+	 */
 	@Override
-	public void buscarJuegoByName(String name) {
-		
+	public boolean buscarJuegoByName(String name) {
+		boolean estado = false;
 		try {
 			if (listado.isEmpty())
 				throw new ColeccionJuegosException("Listado vacio, no se ha podido importar ningun juego");
 			else {
-				for(Juego j : listado) {
-					if(j.getName().toLowerCase().contains(name.toLowerCase())) {
+				for (Juego j : listado) {
+					if (j.getName().toLowerCase().contains(name.toLowerCase())) {
 						System.out.println(j);
 					}
 				}
@@ -260,89 +295,111 @@ public class ColeccionJuegosImpl implements ColeccionJuegos {
 		} catch (ColeccionJuegosException e) {
 			log.warn(e.getMessage());
 		}
+		return estado;
 	}
-
+	
+	/**
+	 * Metodo para borrar un juego de la lista de juegos
+	 * 
+	 * @param rank: Numero de rank 
+	 * @return boolean, true si el juego ha sido eliminado correctamente 
+	 * 					false si el juego no ha sido eliminado
+	 */
 	@Override
 	public boolean deleteJuego(int rank) {
 		boolean estado = false;
 		try {
-			Juego j1=null;
-			System.out.println(listado.size());
-				for(Juego j : listado) {
-					if(j.getRank()==rank)
-						j1 = j;	
-				}
-				estado=listado.remove(j1);
-				if(estado==false)
-					throw new ColeccionJuegosException("El numero de rank que ústed ha elegido no existe"); 
-					
+			Juego j1 = null;
+			for (Juego j : listado) {
+				if (j.getRank() == rank)
+					j1 = j;
+			}
+			estado = listado.remove(j1);
+			if (estado == false)
+				throw new ColeccionJuegosException("El numero de rank que ústed ha elegido no existe");
+			log.info("Se ha borrado el juego con rango "+rank+".");
 		} catch (Exception e) {
 			log.warn(e.getMessage());
-		}			
+		}
 		return estado;
 	}
-  
+	
+	/**
+	 * Metodo para filtrar los juegos publicados en a�os pares o impares
+	 * 
+	 * @param par, si es true, buscamos los juegos publicados en a�os pares
+	 *           	si es falss, buscamos los juegos publicados en a�os impares
+	 * 
+	 */
 	@Override
 	public void filtrarByAnoPar(boolean par) {
 		ArrayList<Integer> years = new ArrayList<Integer>();
-		int i =0;
-		if(par == true)i=1958;
-		else i = 1959;
-		for(int y=i;y<=2000;y=y+2)
-		{
+		int i = 0;
+		if (par == true)
+			i = 1958;
+		else
+			i = 1959;
+		for (int y = i; y <= 2000; y = y + 2) {
 			years.add(y);
 		}
-		for(Juego j : listado) {
+		for (Juego j : listado) {
 			try {
-				if(j.getYear().compareToIgnoreCase("N/A")!=0) {
+				if (j.getYear().compareToIgnoreCase("N/A") != 0) {
 					int year = Integer.parseInt(j.getYear());
-					if(years.contains(year)) {
+					if (years.contains(year)) {
 						System.out.println(j);
 					}
-				}else {
+				} else {
 					throw new Exception();
 				}
 			} catch (Exception e) {
 				e.getMessage();
 			}
-			
+
 		}
-		
+
 	}
 
+	/**
+	 * Mediante este metodo estatico se devuelve un <i>System.out.println</i> con la
+	 * los juegos del siglo XX y los mete en un nuevo array listado
+	 * 
+	 * @param anoMax numero de año que se quiere buscar de máximo
+	 * @param anoMin numero de año que se quiere buscar de minimo
+	 */
 	@Override
-	public void filtrarByPublisher(String publisher) {
-		// TODO Auto-generated method stub
-		
+	public void filtrarByAno(int anoMax, int anoMin) {
+		try {
+			if (!listado.isEmpty()) {
+				if (!testListado.isEmpty()) {
+					testListado.clear();
+				}
+				int year = 0;
+				for (Juego j : listado) {
+					if (j.getYear().compareToIgnoreCase("N/A") != 0) {
+						year = Integer.parseInt(j.getYear());
+						if (year >= anoMin && year <= anoMax) {
+							testListado.add(j);
+							System.out.println(j.imprimir());
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			log.warn(e.getMessage());
+		}
 	}
 	
-	/*
-	 * @Override public void deleteJuego(Juego juego) {
+	
+	/**
+	 * Metodo para recoger los datos del HashSet y usando un nombre de fichero pedido <br>por el usuario, se guarda un .csv
 	 * 
-	 * // Mejorable con un try catch.
-	 * 
-	 * if (!listado.isEmpty()) {
-	 * 
-	 * listado.remove(juego);
-	 * 
-	 * } else {
-	 * 
-	 * System.out.println("Este juego no existe o la lista esta vacia.");
-	 * 
-	 * } }
-	 * 
-	 * 
-	 * 
-	 * @Override public Juego getByRank(int rank) { if(!listado.isEmpty()) {
-	 * for(Juego j : listado) { if(j.getRank()==rank) return j; } } return null; }
-	 * 
-	 * @Override public void filtrarByPlatform(String platform) {
-	 * if(!listado.isEmpty()) { for(Juego j : listado) {
-	 * if(j.getPlatform().name().compareToIgnoreCase(platform)==0) {
-	 * System.out.println("Juego: "+j.getName()+", Genero: "+j.getGenre().name()
-	 * +", aÃ±o de publicaciÃ³n: "+j.getYear()+", editor: "+j.getPublisher()
-	 * +", su ranking es: "+j.getRank()); } } } }
-	 * 
+	 * @param nombreFichero Se le pasa un nombre para el .CSV
+	 * @param listado Se recoge el listado importado por el usuario o los juegos ya añadidos...
 	 */
-
+	@Override
+	public void exportarListado(String nombreFichero) {
+		OperarCSV.writeCSV(nombreFichero, listado);
+	}
+	
 }
