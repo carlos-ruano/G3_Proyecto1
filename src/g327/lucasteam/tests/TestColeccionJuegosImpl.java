@@ -9,8 +9,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -106,7 +104,7 @@ class TestColeccionJuegosImpl {
 		//Then:
 		assertThat(j).isNotNull();
 		assertThat(CJ.addJuego(j)).isNotEqualTo(false);
-
+	}
 	
 	@Test
 	void testAddJuego2() {
@@ -252,13 +250,6 @@ class TestColeccionJuegosImpl {
 		assertThat(lista1.size()).isNotEqualTo(lista2.size()); // Para que de error hay que cambiarlo a "isEqualTo"
 
 	}
-
-	void testUpdateJuego() {
-		
-	}
-	
-
-	
   
 	@Test
 	void testDeberiaBorrarJuegoOK() {
@@ -336,5 +327,40 @@ class TestColeccionJuegosImpl {
 		//When:
 		assertThat(outputStreamCaptor.toString().trim()).contains("mario");
 	}
-
+	
+	@Test 
+	void testDevuelveAniosExactoOK(){
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByAno(1990,1990);
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getYear().contains("1990")).isTrue();
+	}
+	@Test 
+	void testDevuelveAniosExactoKO(){
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByAno(1990,1990);
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getYear().contains("1991")).isTrue();
+	}
+	
+	@Test 
+	void testDevuelveAniosEnUnRangoOK(){
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByAno(1992,1990);
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getYear().contains("1991")).isTrue();
+	}
+	
+	@Test 
+	void testDevuelveAniosEnUnRangoKO(){
+		CJ.importarListado("vgsales.csv");
+		//When:
+		CJ.filtrarByAno(1992,1990);
+		//Then:		
+		assertThat(CJ.getTestListado().get(0).getYear().contains("1993")).isTrue();
+	}
+	
 }

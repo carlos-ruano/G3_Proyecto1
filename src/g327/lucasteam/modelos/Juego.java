@@ -23,7 +23,7 @@ public @Data @NoArgsConstructor @AllArgsConstructor @Log4j2 class Juego {
 	private String name;
 	private EnumPlatform platform;
 	private String year;
-	private EnumGenre genre; // Cambiar en UML tiene puesto que es clase String
+	private EnumGenre genre; 
 	private String publisher;
 
 	@Override
