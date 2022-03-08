@@ -233,7 +233,7 @@ class TestColeccionJuegosImpl {
 		assertThat(this).isNotNull();
 		
 	}
-	
+	@Test
 	void testUpdateJuego() {
 		
 	}
@@ -276,5 +276,5 @@ class TestColeccionJuegosImpl {
 		//When:
 		assertThat(outputStreamCaptor.toString().trim()).contains("null");
 	}
-
+	
 }
