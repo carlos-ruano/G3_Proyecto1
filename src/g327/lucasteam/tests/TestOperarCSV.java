@@ -9,11 +9,11 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import g327.lucasteam.datos.ColeccionJuegosImpl;
-import g327.lucasteam.utilidades.Datos;
 import g327.lucasteam.utilidades.OperarCSV;
 
 class TestOperarCSV {
 	
+	@SuppressWarnings("unused")
 	private ColeccionJuegosImpl CJ;
 	@SuppressWarnings("unused")
 	private final PrintStream standardOut = System.out;
